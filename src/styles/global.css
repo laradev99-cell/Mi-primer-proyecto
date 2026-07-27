@@ -16,9 +16,12 @@
   --tinta: #12042e;
   --tinta-suave: #1c0842;
 
-  /* ── Acento ── */
-  --acento: #ff2e88;
-  --acento-hover: #ff5aa0;
+  /* ── Acento ──
+     Violeta claro. Sobre fondo oscuro contrasta 6,3:1.
+     En las secciones claras se cambia por el violeta fuerte
+     (ver más abajo), porque el claro no llega al mínimo legible. */
+  --acento: #a87cff;
+  --acento-hover: #bd9bff;
 
   --blanco: #ffffff;
 
@@ -170,11 +173,19 @@ svg {
   color: var(--texto-claro);
 }
 
+/* La etiqueta va en lavanda apagada para que el acento
+   siga siendo lo único que levanta la voz */
 .oscura .etiqueta {
-  color: var(--violeta-400);
+  color: rgba(217, 199, 255, 0.62);
 }
 
-/* Secciones claras */
+/* Secciones claras: el acento se oscurece para seguir siendo legible */
+.clara,
+.lavanda {
+  --acento: #6b2fd6;
+  --acento-hover: #5a25b8;
+}
+
 .clara {
   background: var(--blanco);
 }
@@ -238,18 +249,24 @@ svg {
     box-shadow var(--transicion), color var(--transicion);
 }
 
-/* El acento va sobre el botón principal. Texto en tinta:
-   contraste 5.5:1, muy por encima del mínimo. */
+/* Sobre oscuro: violeta claro con texto en tinta (6,3:1) */
 .boton-acento {
   background: var(--acento);
   color: var(--tinta);
-  box-shadow: 0 10px 34px -12px rgba(255, 46, 136, 0.75);
+  box-shadow: 0 10px 34px -12px rgba(168, 124, 255, 0.7);
 }
 
 .boton-acento:hover {
   background: var(--acento-hover);
   transform: translateY(-3px);
-  box-shadow: 0 18px 44px -14px rgba(255, 46, 136, 0.85);
+  box-shadow: 0 18px 44px -14px rgba(168, 124, 255, 0.8);
+}
+
+/* Sobre claro se invierte: violeta fuerte con texto blanco (7:1) */
+.clara .boton-acento,
+.lavanda .boton-acento {
+  color: var(--blanco);
+  box-shadow: 0 10px 34px -12px rgba(107, 47, 214, 0.6);
 }
 
 .boton-linea {

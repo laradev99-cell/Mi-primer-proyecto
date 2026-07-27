@@ -8,7 +8,9 @@
 // el número en formato internacional sin + ni espacios. Ej: 5491122334455
 // Mientras esté vacío, todos los botones caen al link corto sin mensaje.
 // ─────────────────────────────────────────────────────────────
-export const WHATSAPP_NUMERO = ''; // ← poné tu número acá
+// El 9 después del 54 es el que WhatsApp pide para celulares argentinos.
+// Si algún botón no abre el chat, probá sacándolo: 541123921163
+export const WHATSAPP_NUMERO = '5491123921163';
 export const WHATSAPP_LINK_CORTO = 'https://wa.me/message/RVXNEXMKBJIYC1';
 
 export function whatsapp(mensaje = '') {
@@ -44,7 +46,7 @@ export const redes = {
 };
 
 export const marca = {
-  nombre: 'Naimid.Agencÿ',
+  nombre: 'Naimid.Agency',
   descripcion:
     'Estrategia, contenido y desarrollo web para marcas que venden online.',
 };

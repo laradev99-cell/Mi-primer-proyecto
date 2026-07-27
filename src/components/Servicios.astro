@@ -1,41 +1,41 @@
 ---
 import { whatsapp } from '../data/site.js';
 
-const servicios = [
+// El foco de esta página es el manejo de redes. El análisis arranca el
+// servicio, el contenido es el ciclo mensual y la IA se le suma aparte.
+// Los tres grupos existen porque son tres momentos distintos, no un
+// listado suelto.
+const arranque = {
+  titulo: 'Análisis y estrategia',
+  texto:
+    'Entendemos tu marca, tu público y tu competencia. De ahí sale el plan que guía todo el trabajo.',
+};
+
+const mensual = [
+  'Ideas y plan de contenido',
+  'Diseño y edición de cada pieza',
+  'Textos escritos para vender',
+  'Publicación en Instagram y Facebook',
+  'Kit de Grabación',
+  'Reporte y reunión mensual',
+];
+
+const extra = {
+  titulo: 'Respuestas automáticas con IA',
+  texto:
+    'Un asistente que conoce tu negocio y responde precios, stock y envíos en Instagram y WhatsApp las 24 horas.',
+};
+
+const webs = [
   {
-    titulo: 'Análisis y estrategia',
+    titulo: 'Tienda sobre plataforma',
     texto:
-      'Entendemos tu marca, tu público y tu competencia. De ahí sale el plan que guía todo el trabajo.',
-    span: 'ancho-2',
-    consulta: 'Hola Lara, quiero saber más sobre el análisis y la estrategia.',
-  },
-  {
-    titulo: 'Manejo de redes sociales',
-    texto:
-      'Ideas, diseño, edición, textos y publicación. Contenido constante en Instagram y Facebook, con reporte mensual.',
-    span: 'ancho-4 destacada',
-    consulta: 'Hola Lara, quiero saber más sobre el manejo de redes.',
-  },
-  {
-    titulo: 'Tienda online',
-    texto:
-      'Armamos tu tienda en Tienda Nube o Shopify, o mejoramos la que ya tenés.',
-    span: 'ancho-2',
-    consulta: 'Hola Lara, quiero saber más sobre las tiendas online.',
+      'Armamos tu tienda en Tienda Nube o Shopify, o mejoramos la que ya tenés. Para salir a vender rápido, sobre algo probado.',
   },
   {
     titulo: 'Desarrollo a medida',
     texto:
-      'Webs, tiendas y sistemas programados desde cero, con código propio. Sin plantillas y sin los límites de una plataforma.',
-    span: 'ancho-2',
-    consulta: 'Hola Lara, quiero saber más sobre el desarrollo a medida.',
-  },
-  {
-    titulo: 'Respuestas automáticas con IA',
-    texto:
-      'Un asistente que conoce tu negocio y responde precios, stock y envíos en Instagram y WhatsApp las 24 horas.',
-    span: 'ancho-2',
-    consulta: 'Hola Lara, quiero saber más sobre las respuestas con IA.',
+      'Programada desde cero, con código propio. El diseño no depende de una plantilla y el código queda a tu nombre.',
   },
 ];
 ---
@@ -47,134 +47,218 @@ const servicios = [
       <h2 class="titulo" data-revelar style="--retraso: 80ms">Qué hacemos</h2>
     </div>
 
-    <div class="bento">
-      {
-        servicios.map((s, i) => (
-          <a
-            class={`tarjeta ${s.span}`}
-            href={whatsapp(s.consulta)}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-revelar
-            style={`--retraso: ${i * 80}ms`}
-          >
-            <h3 class="subtitulo">{s.titulo}</h3>
-            <p class="cuerpo">{s.texto}</p>
-            <span class="consultar">
-              Consultar
-              <svg class="flecha" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </a>
-        ))
-      }
+    <!-- El servicio central -->
+    <article class="principal" data-revelar>
+      <div class="principal-intro">
+        <h3 class="principal-titulo">Manejo de redes sociales</h3>
+        <p class="cuerpo">
+          Nos hacemos cargo de tu Instagram y tu Facebook enteros: qué se dice,
+          cómo se ve y cuándo sale.
+        </p>
+        <a
+          class="boton boton-acento"
+          href={whatsapp('Hola Lara, quiero saber más sobre el manejo de redes.')}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Consultar
+          <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="principal-detalle">
+        <div class="grupo">
+          <p class="grupo-titulo">Arranca con</p>
+          <p class="grupo-destacado">{arranque.titulo}</p>
+          <p class="grupo-texto">{arranque.texto}</p>
+        </div>
+
+        <div class="grupo">
+          <p class="grupo-titulo">Todos los meses</p>
+          <ul class="items">
+            {mensual.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+
+        <div class="grupo">
+          <p class="grupo-titulo">Se le puede sumar</p>
+          <p class="grupo-destacado">{extra.titulo}</p>
+          <p class="grupo-texto">{extra.texto}</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- El servicio que se le agrega -->
+    <div class="webs">
+      <p class="etiqueta" data-revelar>Y si además necesitás web</p>
+      <h3 class="webs-titulo" data-revelar style="--retraso: 70ms">
+        Páginas web, por dos caminos
+      </h3>
+
+      <div class="webs-grilla">
+        {
+          webs.map((w, i) => (
+            <div class="web" data-revelar style={`--retraso: ${i * 100}ms`}>
+              <h4>{w.titulo}</h4>
+              <p class="cuerpo">{w.texto}</p>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
 
 <style>
   .encabezado {
-    margin-bottom: clamp(2.75rem, 7vw, 4rem);
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
   }
 
   .encabezado .etiqueta {
     margin-bottom: 1.2rem;
   }
 
-  .bento {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(0.85rem, 2vw, 1.15rem);
-  }
-
-  .tarjeta {
-    grid-column: span 2;
-    display: flex;
-    flex-direction: column;
-    padding: clamp(1.6rem, 4vw, 2.4rem);
-    border-radius: var(--radio);
-    background: var(--violeta-100);
-    color: var(--violeta-900);
-    text-decoration: none;
-    border: 1px solid transparent;
-    transition: transform var(--transicion), border-color var(--transicion),
-      background-color var(--transicion), box-shadow var(--transicion);
-  }
-
-  .tarjeta h3 {
-    margin-bottom: 0.75rem;
-    max-width: 18ch;
-  }
-
-  .tarjeta .cuerpo {
-    flex: 1;
-    margin-bottom: clamp(1.6rem, 4vw, 2.2rem);
-  }
-
-  .consultar {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5em;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--violeta-600);
-  }
-
-  .tarjeta:hover {
-    transform: translateY(-5px);
-    border-color: var(--violeta-200);
-    box-shadow: 0 22px 50px -30px rgba(45, 10, 107, 0.55);
-  }
-
-  .tarjeta:hover .flecha {
-    transform: translateX(5px);
-  }
-
-  .flecha {
-    transition: transform var(--transicion);
-  }
-
-  /* La tarjeta destacada es la única en oscuro: ancla la grilla */
-  .destacada {
+  /* ── El servicio central ── */
+  .principal {
     background: var(--tinta);
     color: var(--blanco);
+    border-radius: var(--radio);
+    padding: clamp(1.8rem, 5vw, 3.5rem);
+    display: grid;
+    gap: clamp(2.2rem, 5vw, 4rem);
+    margin-bottom: clamp(4rem, 10vw, 6.5rem);
   }
 
-  .destacada h3 {
-    color: var(--blanco);
+  .principal-titulo {
+    font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin-bottom: 1.1rem;
+    text-wrap: balance;
   }
 
-  .destacada .cuerpo {
+  .principal .cuerpo {
     color: var(--texto-claro);
+    margin-bottom: clamp(1.8rem, 4vw, 2.4rem);
+    max-width: 32ch;
   }
 
-  .destacada .consultar {
-    color: var(--acento);
+  /* Dentro de la tarjeta oscura el botón vuelve al violeta claro */
+  .principal .boton-acento {
+    background: #a87cff;
+    color: var(--tinta);
   }
 
-  .destacada:hover {
-    border-color: rgba(255, 46, 136, 0.5);
+  .principal .boton-acento:hover {
+    background: #bd9bff;
   }
 
-  @media (min-width: 760px) {
-    .bento {
-      grid-template-columns: repeat(6, 1fr);
+  .principal-detalle {
+    display: grid;
+    gap: clamp(1.6rem, 4vw, 2.2rem);
+  }
+
+  .grupo {
+    padding-top: clamp(1.2rem, 3vw, 1.6rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .grupo-titulo {
+    font-size: var(--micro);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(217, 199, 255, 0.62);
+    margin-bottom: 0.9rem;
+  }
+
+  .grupo-destacado {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--blanco);
+    margin-bottom: 0.45rem;
+  }
+
+  .grupo-texto {
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--texto-claro);
+    max-width: 46ch;
+  }
+
+  .items {
+    list-style: none;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .items li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-weight: 300;
+    color: var(--texto-claro);
+    line-height: 1.55;
+  }
+
+  .items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 10px;
+    height: 1.5px;
+    background: #a87cff;
+  }
+
+  /* ── Las webs: sin tarjetas, para que se lean como un agregado ── */
+  .webs .etiqueta {
+    margin-bottom: 1.1rem;
+  }
+
+  .webs-titulo {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--violeta-900);
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+    text-wrap: balance;
+  }
+
+  .webs-grilla {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .web {
+    padding-top: clamp(1.2rem, 3vw, 1.6rem);
+    border-top: 2px solid var(--violeta-900);
+  }
+
+  .web h4 {
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--violeta-900);
+    margin-bottom: 0.8rem;
+  }
+
+  @media (min-width: 880px) {
+    .principal {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      align-items: start;
     }
 
-    .ancho-2 {
-      grid-column: span 2;
+    .principal-detalle {
+      grid-template-columns: 1fr;
     }
 
-    .ancho-4 {
-      grid-column: span 4;
-    }
-
-    .destacada h3 {
-      font-size: clamp(1.5rem, 2.8vw, 2rem);
-      max-width: 14ch;
+    .webs-grilla {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>

@@ -1,4 +1,4 @@
-// Precios de Naimid.Agencÿ
+// Precios de Naimid.Agency
 // Actualizar cada 3 meses (enero, abril, julio, octubre)
 
 export const precios = {
