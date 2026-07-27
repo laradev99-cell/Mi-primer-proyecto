@@ -20,11 +20,20 @@ const mensual = [
   'Reporte y reunión mensual',
 ];
 
-const extra = {
-  titulo: 'Respuestas automáticas con IA',
-  texto:
-    'Un asistente que conoce tu negocio y responde precios, stock y envíos en Instagram y WhatsApp las 24 horas.',
-};
+// Dos agregados: uno se resuelve acá mismo, el otro abre la sección
+// que sigue. Por eso el segundo se escribe como pie, no como cierre.
+const extras = [
+  {
+    titulo: 'Respuestas automáticas con IA',
+    texto:
+      'Un asistente que conoce tu negocio y responde precios, stock y envíos en Instagram y WhatsApp las 24 horas.',
+  },
+  {
+    titulo: 'Páginas web',
+    texto:
+      'Si además necesitás dónde vender, lo programamos nosotros. Te lo contamos acá abajo.',
+  },
+];
 
 const webs = [
   {
@@ -73,8 +82,14 @@ const webs = [
 
         <div class="grupo">
           <p class="grupo-titulo">Se le puede sumar</p>
-          <p class="grupo-destacado">{extra.titulo}</p>
-          <p class="grupo-texto">{extra.texto}</p>
+          {
+            extras.map((e) => (
+              <div class="extra">
+                <p class="grupo-destacado">{e.titulo}</p>
+                <p class="grupo-texto">{e.texto}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
 
@@ -174,13 +189,13 @@ const webs = [
     border-top: 1px solid rgba(255, 255, 255, 0.16);
   }
 
+  /* En minúscula: al lado de los ítems, la versaleta gritaba de más */
   .grupo-titulo {
-    font-size: var(--micro);
+    font-size: 0.82rem;
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: rgba(217, 199, 255, 0.62);
-    margin-bottom: 0.9rem;
+    letter-spacing: 0.02em;
+    color: rgba(217, 199, 255, 0.72);
+    margin-bottom: 1.1rem;
   }
 
   .grupo-destacado {
@@ -198,28 +213,36 @@ const webs = [
     max-width: 46ch;
   }
 
+  /* Dos columnas: seis ítems en una sola fila larga rompían el bloque */
   .items {
     list-style: none;
     display: grid;
-    gap: 0.55rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+    gap: 0.75rem 2rem;
   }
 
   .items li {
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: 1.4rem;
     font-weight: 300;
     color: var(--texto-claro);
-    line-height: 1.55;
+    line-height: 1.5;
+    text-wrap: balance;
   }
 
   .items li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0.68em;
-    width: 10px;
+    top: 0.62em;
+    width: 8px;
     height: 1.5px;
     background: #a87cff;
+  }
+
+  /* Los dos agregados se leen como bloques distintos, no como un párrafo */
+  .extra + .extra {
+    margin-top: 1.3rem;
   }
 
   /* ── Las webs: sin tarjetas, para que se lean como un agregado ── */
