@@ -16,7 +16,7 @@ const mensual = [
   'Diseño y edición de cada pieza',
   'Textos escritos para vender',
   'Publicación en Instagram y Facebook',
-  'Kit de Grabación',
+  'Te decimos qué grabar',
   'Reporte y reunión mensual',
 ];
 
@@ -55,17 +55,6 @@ const webs = [
           Nos hacemos cargo de tu Instagram y tu Facebook enteros: qué se dice,
           cómo se ve y cuándo sale.
         </p>
-        <a
-          class="boton boton-acento"
-          href={whatsapp('Hola Lara, quiero saber más sobre el manejo de redes.')}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Consultar
-          <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
       </div>
 
       <div class="principal-detalle">
@@ -87,6 +76,21 @@ const webs = [
           <p class="grupo-destacado">{extra.titulo}</p>
           <p class="grupo-texto">{extra.texto}</p>
         </div>
+      </div>
+
+      <!-- El botón cierra la tarjeta: se llega a él después de leer todo -->
+      <div class="principal-pie">
+        <a
+          class="boton boton-acento"
+          href={whatsapp('Hola Lara, quiero saber más sobre el manejo de redes.')}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Consultar
+          <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
       </div>
     </article>
 
@@ -142,8 +146,12 @@ const webs = [
 
   .principal .cuerpo {
     color: var(--texto-claro);
-    margin-bottom: clamp(1.8rem, 4vw, 2.4rem);
     max-width: 32ch;
+  }
+
+  .principal-pie {
+    padding-top: clamp(1.4rem, 3vw, 1.9rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
   }
 
   /* Dentro de la tarjeta oscura el botón vuelve al violeta claro */
@@ -255,6 +263,11 @@ const webs = [
 
     .principal-detalle {
       grid-template-columns: 1fr;
+    }
+
+    /* El botón cruza las dos columnas, al pie de todo */
+    .principal-pie {
+      grid-column: 1 / -1;
     }
 
     .webs-grilla {

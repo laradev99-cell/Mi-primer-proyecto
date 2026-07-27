@@ -91,12 +91,12 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
     </div>
   </section>
 
-  <!-- ─── TIENDA ONLINE ─── -->
+  <!-- ─── PÁGINAS WEB · SOBRE PLATAFORMA ─── -->
   <section class="seccion clara">
     <div class="contenedor">
-      <p class="etiqueta" data-revelar>Tienda online</p>
+      <p class="etiqueta" data-revelar>Páginas web</p>
       <h2 class="titulo" data-revelar style="--retraso: 70ms">
-        Salir a vender rápido
+        Tienda sobre plataforma
       </h2>
       <p class="cuerpo bajo-titulo" data-revelar style="--retraso: 120ms">
         {tiendaOnline.bajada}
@@ -107,7 +107,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
           tiendaOnline.opciones.map((o) => (
             <div class="fila">
               <dt>{o.nombre}</dt>
-              <dd>desde {pesos(o.precioDesde)}</dd>
+              <dd>{pesos(o.precio)}</dd>
             </div>
           ))
         }
@@ -121,7 +121,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
   <section class="seccion oscura grano medida">
     <div class="orbe orbe-medida"></div>
     <div class="contenedor interior-medida">
-      <p class="etiqueta" data-revelar>Otra categoría</p>
+      <p class="etiqueta" data-revelar>Páginas web</p>
       <h2 class="titulo titulo-grande" data-revelar style="--retraso: 70ms">
         Desarrollo<br />a medida
       </h2>
@@ -136,9 +136,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
       <div class="sirve" data-revelar>
         <p class="sirve-titulo">Sirve para</p>
         <ul>
-          <li>{desarrolloMedida.sirveParaItem1}</li>
-          <li>{desarrolloMedida.sirveParaItem2}</li>
-          <li>{desarrolloMedida.sirveParaItem3}</li>
+          {desarrolloMedida.sirvePara.map((item) => <li>{item}</li>)}
         </ul>
       </div>
 
@@ -147,11 +145,15 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
           desarrolloMedida.opciones.map((o) => (
             <div class="fila">
               <dt>{o.nombre}</dt>
-              <dd>{o.precioDesde ? `desde ${pesos(o.precioDesde)}` : o.nota}</dd>
+              <dd>{o.precio ? pesos(o.precio) : o.nota}</dd>
             </div>
           ))
         }
       </dl>
+
+      <p class="aclaracion aclaracion-oscura" data-revelar>
+        {desarrolloMedida.aclaracion}
+      </p>
     </div>
   </section>
 
@@ -159,7 +161,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
   <section class="seccion clara">
     <div class="contenedor">
       <p class="etiqueta" data-revelar>Automatización</p>
-      <h2 class="titulo" data-revelar style="--retraso: 70ms">
+      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
         Respuestas automáticas con IA
       </h2>
 
@@ -174,11 +176,27 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
 
         <aside class="caja-precio" data-revelar style="--retraso: 120ms">
           <p class="mini-etiqueta">Instalación</p>
-          <p class="precio">{pesos(respuestasAutomaticas.instalacion)}</p>
+          <p class="precio">
+            {
+              respuestasAutomaticas.instalacion
+                ? pesos(respuestasAutomaticas.instalacion)
+                : 'A definir'
+            }
+          </p>
           <hr />
           <p class="mini-etiqueta">Mantenimiento</p>
-          <p class="precio">{pesos(respuestasAutomaticas.mantenimiento)}</p>
-          <p class="nota">por mes</p>
+          <p class="precio">
+            {
+              respuestasAutomaticas.mantenimiento
+                ? pesos(respuestasAutomaticas.mantenimiento)
+                : 'A definir'
+            }
+          </p>
+          {
+            respuestasAutomaticas.aclaracion && (
+              <p class="nota">{respuestasAutomaticas.aclaracion}</p>
+            )
+          }
         </aside>
       </div>
     </div>
@@ -188,7 +206,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
   <section class="seccion lavanda">
     <div class="contenedor">
       <p class="etiqueta" data-revelar>Condiciones</p>
-      <h2 class="titulo" data-revelar style="--retraso: 70ms">Cómo funciona</h2>
+      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">Cómo funciona</h2>
 
       <dl class="condiciones">
         {
@@ -220,11 +238,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
       </p>
 
       <ul class="lista-check" data-revelar>
-        <li>{loQueNecesitamos.item1}</li>
-        <li>{loQueNecesitamos.item2}</li>
-        <li>{loQueNecesitamos.item3}</li>
-        <li>{loQueNecesitamos.item4}</li>
-        <li>{loQueNecesitamos.item5}</li>
+        {loQueNecesitamos.items.map((item) => <li>{item}</li>)}
       </ul>
 
       <p class="pacto" data-revelar>{loQueNecesitamos.nota}</p>
@@ -307,6 +321,11 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
     margin-top: 1rem;
     margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
     max-width: 46ch;
+  }
+
+  /* Título sin bajada: necesita su propio aire antes del contenido */
+  .titulo-suelto {
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
   }
 
   /* ── Listas con check ── */
@@ -499,6 +518,11 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
     font-size: 0.88rem;
     font-weight: 300;
     color: var(--texto-medio);
+    max-width: 60ch;
+  }
+
+  .aclaracion-oscura {
+    color: var(--texto-claro);
   }
 
   /* ── Desarrollo a medida ── */
