@@ -74,23 +74,21 @@ const webs = [
         </div>
 
         <div class="grupo">
-          <p class="grupo-titulo">Todos los meses</p>
+          <p class="grupo-encabezado">Todos los meses</p>
           <ul class="items">
             {mensual.map((item) => <li>{item}</li>)}
           </ul>
         </div>
 
-        <div class="grupo">
-          <p class="grupo-titulo">Se le puede sumar</p>
-          {
-            extras.map((e) => (
-              <div class="extra">
-                <p class="grupo-destacado">{e.titulo}</p>
-                <p class="grupo-texto">{e.texto}</p>
-              </div>
-            ))
-          }
-        </div>
+        {
+          extras.map((e) => (
+            <div class="grupo">
+              <p class="grupo-titulo">Se le puede sumar</p>
+              <p class="grupo-destacado">{e.titulo}</p>
+              <p class="grupo-texto">{e.texto}</p>
+            </div>
+          ))
+        }
       </div>
 
       <!-- El botón cierra la tarjeta: se llega a él después de leer todo -->
@@ -144,9 +142,10 @@ const webs = [
     background: var(--tinta);
     color: var(--blanco);
     border-radius: var(--radio);
-    padding: clamp(1.8rem, 5vw, 3.5rem);
+    padding: clamp(2rem, 5vw, 3.5rem);
     display: grid;
-    gap: clamp(2.2rem, 5vw, 4rem);
+    /* 60px: la bajada tiene que despegarse del primer bloque */
+    gap: 3.75rem;
     margin-bottom: clamp(4rem, 10vw, 6.5rem);
   }
 
@@ -155,17 +154,19 @@ const webs = [
     font-weight: 800;
     letter-spacing: -0.035em;
     line-height: 1.05;
-    margin-bottom: 1.1rem;
+    margin-bottom: 2.5rem;
     text-wrap: balance;
   }
 
   .principal .cuerpo {
     color: var(--texto-claro);
     max-width: 32ch;
+    font-size: 1.05rem;
+    line-height: 1.75;
   }
 
   .principal-pie {
-    padding-top: clamp(1.4rem, 3vw, 1.9rem);
+    padding-top: 2.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.16);
   }
 
@@ -179,70 +180,88 @@ const webs = [
     background: #bd9bff;
   }
 
+  /* 50px entre bloques: cada grupo tiene que leerse como una unidad
+     aparte, no como párrafos de una misma lista */
   .principal-detalle {
     display: grid;
-    gap: clamp(1.6rem, 4vw, 2.2rem);
+    gap: 3.125rem;
   }
 
   .grupo {
-    padding-top: clamp(1.2rem, 3vw, 1.6rem);
+    padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.16);
   }
 
-  /* En minúscula: al lado de los ítems, la versaleta gritaba de más */
+  /* Los dos agregados van más cerca entre sí: son la misma categoría */
+  .grupo + .grupo:last-child {
+    margin-top: -1.25rem;
+  }
+
+  /* Versaleta solo acá: marca el momento del servicio, no el contenido */
   .grupo-titulo {
-    font-size: 0.82rem;
+    font-size: var(--micro);
     font-weight: 500;
-    letter-spacing: 0.02em;
-    color: rgba(217, 199, 255, 0.72);
-    margin-bottom: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(217, 199, 255, 0.62);
+    margin-bottom: 1.4rem;
+  }
+
+  /* El listado mensual lleva encabezado normal: es contenido, no rótulo */
+  .grupo-encabezado {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    text-transform: none;
+    color: var(--blanco);
+    margin-bottom: 1.6rem;
   }
 
   .grupo-destacado {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
     letter-spacing: -0.015em;
+    text-transform: none;
     color: var(--blanco);
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.8rem;
   }
 
   .grupo-texto {
     font-weight: 300;
-    line-height: 1.65;
+    font-size: 1rem;
+    line-height: 1.75;
+    text-transform: none;
     color: var(--texto-claro);
     max-width: 46ch;
   }
 
-  /* Dos columnas: seis ítems en una sola fila larga rompían el bloque */
+  /* Dos columnas y renglones sueltos: comprimidos se leían como un
+     bloque de texto en lugar de seis cosas distintas */
   .items {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
-    gap: 0.75rem 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 1.15rem 2.5rem;
   }
 
   .items li {
     position: relative;
-    padding-left: 1.4rem;
+    padding-left: 1.6rem;
     font-weight: 300;
+    font-size: 1rem;
+    text-transform: none;
     color: var(--texto-claro);
-    line-height: 1.5;
-    text-wrap: balance;
+    line-height: 1.6;
   }
 
   .items li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0.62em;
-    width: 8px;
+    top: 0.68em;
+    width: 10px;
     height: 1.5px;
     background: #a87cff;
-  }
-
-  /* Los dos agregados se leen como bloques distintos, no como un párrafo */
-  .extra + .extra {
-    margin-top: 1.3rem;
   }
 
   /* ── Las webs: sin tarjetas, para que se lean como un agregado ── */
