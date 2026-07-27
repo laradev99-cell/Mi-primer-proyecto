@@ -1,0 +1,708 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { precios } from '../data/precios';
+
+const whatsappLink = "https://wa.me/message/RVXNEXMKBJIYC1";
+
+// Format price como moneda argentina
+const formatPrice = (price) => {
+  return new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(price);
+};
+---
+
+<Layout title="Tu propuesta" noindex={true}>
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--color-lightest) 0%, var(--color-light) 100%);
+      padding: var(--spacing-2xl) var(--spacing-md);
+      text-align: center;
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      color: var(--color-darkest);
+      margin-bottom: var(--spacing-md);
+      font-weight: 900;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--color-dark);
+      font-weight: 300;
+    }
+
+    /* Secciones */
+    .section {
+      padding: var(--spacing-2xl) var(--spacing-md);
+      border-bottom: 1px solid var(--color-lightest);
+    }
+
+    .section-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-darkest);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    /* Paso 1: Análisis y Estrategia */
+    .paso-1 {
+      background-color: var(--color-lightest);
+    }
+
+    .paso-1 .section-title {
+      margin-top: 0;
+    }
+
+    .paso-subtitle {
+      font-size: 1.1rem;
+      color: var(--color-dark);
+      font-weight: 300;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .includes-list {
+      list-style: none;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .includes-list li {
+      padding: var(--spacing-sm) 0;
+      padding-left: var(--spacing-md);
+      position: relative;
+      color: var(--color-dark);
+      font-weight: 300;
+    }
+
+    .includes-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--color-dark);
+      font-weight: 600;
+    }
+
+    .price-box {
+      background: white;
+      padding: var(--spacing-lg);
+      border-radius: 0.5rem;
+      text-align: center;
+      margin-top: var(--spacing-lg);
+      border: 1px solid var(--color-light);
+    }
+
+    .price-box .price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--color-dark);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .price-box .frequency {
+      font-size: 0.9rem;
+      color: var(--color-dark);
+      font-weight: 300;
+    }
+
+    /* Paso 2: Manejo de Redes */
+    .paso-2 {
+      background: white;
+    }
+
+    .redes-intro {
+      font-size: 1rem;
+      color: var(--color-dark);
+      font-weight: 300;
+      margin-bottom: var(--spacing-lg);
+      background-color: var(--color-lightest);
+      padding: var(--spacing-lg);
+      border-radius: 0.5rem;
+    }
+
+    .planes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .plan-card {
+      background: var(--color-lightest);
+      padding: var(--spacing-lg);
+      border-radius: 0.5rem;
+      text-align: center;
+      border: 2px solid var(--color-light);
+    }
+
+    .plan-card h4 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .plan-card .descripcion {
+      font-size: 0.95rem;
+      color: var(--color-dark);
+      font-weight: 300;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .plan-card .detalles {
+      font-size: 0.85rem;
+      color: var(--color-dark);
+      font-weight: 300;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .plan-card .price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--color-dark);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .plan-card .frequency {
+      font-size: 0.9rem;
+      color: var(--color-dark);
+      font-weight: 300;
+    }
+
+    /* Tienda Online */
+    .paso-3 {
+      background-color: white;
+    }
+
+    .options-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--spacing-lg);
+    }
+
+    .options-table tr {
+      border-bottom: 1px solid var(--color-lightest);
+    }
+
+    .options-table td {
+      padding: var(--spacing-md);
+      text-align: left;
+      color: var(--color-dark);
+    }
+
+    .options-table td:first-child {
+      font-weight: 500;
+    }
+
+    .options-table td:last-child {
+      text-align: right;
+      font-weight: 700;
+      color: var(--color-dark);
+    }
+
+    .table-note {
+      font-size: 0.9rem;
+      color: var(--color-dark);
+      font-weight: 300;
+      margin-top: var(--spacing-md);
+      font-style: italic;
+    }
+
+    /* Desarrollo a Medida */
+    .paso-4 {
+      background: linear-gradient(135deg, var(--color-medium) 10%, var(--color-dark) 100%);
+      color: white;
+    }
+
+    .paso-4 .section-title {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .paso-4 .paso-subtitle {
+      color: white;
+      font-weight: 400;
+    }
+
+    .paso-4 p {
+      color: white;
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .sirve-para {
+      background: rgba(255, 255, 255, 0.1);
+      padding: var(--spacing-lg);
+      border-radius: 0.5rem;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .sirve-para h4 {
+      font-weight: 600;
+      margin-bottom: var(--spacing-md);
+      color: white;
+    }
+
+    .sirve-para ul {
+      list-style: none;
+    }
+
+    .sirve-para li {
+      padding: var(--spacing-sm) 0;
+      padding-left: var(--spacing-md);
+      position: relative;
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 300;
+    }
+
+    .sirve-para li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: white;
+    }
+
+    .paso-4 .options-table {
+      background: white;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      margin-top: var(--spacing-lg);
+    }
+
+    .paso-4 .options-table td {
+      color: var(--color-darkest);
+      background: white;
+    }
+
+    .paso-4 .options-table td:last-child {
+      color: var(--color-dark);
+    }
+
+    /* Respuestas Automáticas */
+    .paso-5 {
+      background: white;
+    }
+
+    .ia-content {
+      max-width: 700px;
+    }
+
+    .ia-content p {
+      color: var(--color-dark);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .ia-pricing {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .ia-price-item {
+      background-color: var(--color-lightest);
+      padding: var(--spacing-lg);
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+
+    .ia-price-item h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-dark);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .ia-price-item .price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--color-dark);
+    }
+
+    /* Condiciones */
+    .paso-6 {
+      background-color: var(--color-lightest);
+    }
+
+    .conditions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .condition-item {
+      background: white;
+      padding: var(--spacing-lg);
+      border-radius: 0.5rem;
+      border-left: 4px solid var(--color-dark);
+    }
+
+    .condition-item h4 {
+      font-weight: 600;
+      color: var(--color-dark);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .condition-item p {
+      color: var(--color-dark);
+      font-weight: 300;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* Lo que necesitamos */
+    .paso-7 {
+      background: white;
+    }
+
+    .needs-content {
+      max-width: 700px;
+    }
+
+    .needs-list {
+      list-style: none;
+      background-color: var(--color-lightest);
+      padding: var(--spacing-lg);
+      border-radius: 0.5rem;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .needs-list li {
+      padding: var(--spacing-sm) 0;
+      padding-left: var(--spacing-md);
+      position: relative;
+      color: var(--color-dark);
+      font-weight: 300;
+    }
+
+    .needs-list li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--color-dark);
+      font-weight: 600;
+    }
+
+    .needs-note {
+      background-color: var(--color-medium);
+      color: white;
+      padding: var(--spacing-lg);
+      border-radius: 0.5rem;
+      font-weight: 400;
+      text-align: center;
+    }
+
+    /* CTA Final */
+    .cta-final {
+      background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-darkest) 100%);
+      color: white;
+      padding: var(--spacing-2xl) var(--spacing-md);
+      text-align: center;
+    }
+
+    .cta-final h2 {
+      color: white;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .cta-final p {
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 300;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .cta-final .btn {
+      margin-top: var(--spacing-md);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--color-darkest);
+      color: white;
+      padding: var(--spacing-xl) var(--spacing-md);
+      text-align: center;
+    }
+
+    footer p {
+      margin-bottom: var(--spacing-sm);
+      font-weight: 300;
+    }
+
+    footer a {
+      color: var(--color-light);
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .paso-4 .section-title {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      .price-box .price {
+        font-size: 2rem;
+      }
+
+      .plan-card .price {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .options-table {
+        font-size: 0.9rem;
+      }
+
+      .options-table td {
+        padding: var(--spacing-sm);
+      }
+    }
+  </style>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Tu propuesta</h1>
+      <p>Todo lo que hablamos, ordenado. Si algo no te cierra, escribime y lo vemos.</p>
+    </div>
+  </section>
+
+  <!-- PASO 1: ANÁLISIS Y ESTRATEGIA -->
+  <section class="section paso-1">
+    <div class="section-content">
+      <h2 class="section-title">Paso 1: Análisis y estrategia</h2>
+      <p class="paso-subtitle">Antes de publicar, entendemos.</p>
+
+      <ul class="includes-list">
+        {precios.analisisEstrategia.incluye.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+
+      <div class="price-box">
+        <div class="price">{formatPrice(precios.analisisEstrategia.precio)}</div>
+        <div class="frequency">{precios.analisisEstrategia.frecuencia}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASO 2: MANEJO DE REDES -->
+  <section class="section paso-2">
+    <div class="section-content">
+      <h2 class="section-title">Paso 2: Manejo de redes</h2>
+      <div class="redes-intro">
+        {precios.manejoRedes.bajada}
+      </div>
+
+      <div style="background-color: var(--color-lightest); padding: var(--spacing-lg); border-radius: 0.5rem; margin-bottom: var(--spacing-lg);">
+        <p style="margin: 0; font-weight: 500; color: var(--color-darkest);">Todos incluyen</p>
+        <ul class="includes-list">
+          {precios.manejoRedes.incluye.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="planes-grid">
+        {precios.manejoRedes.planes.map((plan) => (
+          <div class="plan-card">
+            <h4>{plan.nombre}</h4>
+            <div class="descripcion">{plan.descripcion}</div>
+            <div class="detalles">{plan.detalles}</div>
+            <div class="price">{formatPrice(plan.precio)}</div>
+            <div class="frequency">/mes</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PASO 3: TIENDA ONLINE -->
+  <section class="section paso-3">
+    <div class="section-content">
+      <h2 class="section-title">Tienda online</h2>
+      <p class="paso-subtitle">{precios.tiendaOnline.bajada}</p>
+
+      <table class="options-table">
+        <tbody>
+          {precios.tiendaOnline.opciones.map((opcion) => (
+            <tr>
+              <td>{opcion.nombre}</td>
+              <td>desde {formatPrice(opcion.precioDesde)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <p class="table-note">{precios.tiendaOnline.nota}</p>
+    </div>
+  </section>
+
+  <!-- PASO 4: DESARROLLO A MEDIDA -->
+  <section class="section paso-4">
+    <div class="section-content">
+      <h2 class="section-title">Desarrollo a medida</h2>
+      <p class="paso-subtitle">{precios.desarrolloMedida.bajada}</p>
+
+      <p>{precios.desarrolloMedida.descripcion}</p>
+
+      <div class="sirve-para">
+        <h4>Sirve para:</h4>
+        <ul>
+          <li>{precios.desarrolloMedida.sirveParaItem1}</li>
+          <li>{precios.desarrolloMedida.sirveParaItem2}</li>
+          <li>{precios.desarrolloMedida.sirveParaItem3}</li>
+        </ul>
+      </div>
+
+      <table class="options-table">
+        <tbody>
+          {precios.desarrolloMedida.opciones.map((opcion) => (
+            <tr>
+              <td>{opcion.nombre}</td>
+              <td>
+                {opcion.precioDesde ? (
+                  <>desde {formatPrice(opcion.precioDesde)}</>
+                ) : (
+                  opcion.nota
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PASO 5: RESPUESTAS AUTOMÁTICAS -->
+  <section class="section paso-5">
+    <div class="section-content">
+      <div class="ia-content">
+        <h2 class="section-title">Respuestas automáticas con IA</h2>
+
+        <p>{precios.respuestasAutomaticas.descripcion}</p>
+
+        <div class="ia-pricing">
+          <div class="ia-price-item">
+            <h4>Instalación</h4>
+            <div class="price">{formatPrice(precios.respuestasAutomaticas.instalacion)}</div>
+          </div>
+          <div class="ia-price-item">
+            <h4>Mantenimiento</h4>
+            <div class="price">{formatPrice(precios.respuestasAutomaticas.mantenimiento)}/mes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASO 6: CONDICIONES -->
+  <section class="section paso-6">
+    <div class="section-content">
+      <h2 class="section-title">Condiciones</h2>
+
+      <div class="conditions-grid">
+        <div class="condition-item">
+          <h4>Pago</h4>
+          <p>{precios.condiciones.pago}</p>
+        </div>
+        <div class="condition-item">
+          <h4>Duración</h4>
+          <p>{precios.condiciones.duracion}</p>
+        </div>
+        <div class="condition-item">
+          <h4>Ajuste</h4>
+          <p>{precios.condiciones.ajuste}</p>
+        </div>
+        <div class="condition-item">
+          <h4>Revisiones</h4>
+          <p>{precios.condiciones.revisiones}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASO 7: LO QUE NECESITAMOS -->
+  <section class="section paso-7">
+    <div class="section-content">
+      <div class="needs-content">
+        <h2 class="section-title">Lo que necesitamos de vos</h2>
+
+        <p style="text-align: center; font-weight: 600; color: var(--color-dark); margin-bottom: var(--spacing-lg);">Unas 3 horas por semana.</p>
+
+        <ul class="needs-list">
+          <li>{precios.loQueNecesitamos.item1}</li>
+          <li>{precios.loQueNecesitamos.item2}</li>
+          <li>{precios.loQueNecesitamos.item3}</li>
+          <li>{precios.loQueNecesitamos.item4}</li>
+          <li>{precios.loQueNecesitamos.item5}</li>
+        </ul>
+
+        <div class="needs-note">
+          {precios.loQueNecesitamos.nota}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <div class="section-content">
+      <h2>¿Arrancamos?</h2>
+      <p>Escribime y coordinamos la fecha de inicio.</p>
+      <a href={whatsappLink} class="btn btn-primary" target="_blank" rel="noopener noreferrer">Quiero arrancar</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>Naimid.Agencÿ</strong></p>
+    <p>
+      Instagram: <a href="https://instagram.com/naimid.agency" target="_blank" rel="noopener noreferrer">@naimid.agency</a>
+    </p>
+    <p>
+      TikTok: <a href="https://tiktok.com/@naimid.agency" target="_blank" rel="noopener noreferrer">@naimid.agency</a>
+    </p>
+    <p>
+      <a href={whatsappLink} target="_blank" rel="noopener noreferrer">Escribime por WhatsApp</a>
+    </p>
+  </footer>
+</Layout>
