@@ -29,12 +29,11 @@ import { CAL_LINK, whatsapp, mensajes } from '../data/site.js';
         CAL_LINK ? (
           <div id="cal-inline" data-cal-link={CAL_LINK} />
         ) : (
+          <!-- Sin calendario configurado, la sección sigue cerrando:
+               nunca muestra nada de la cocina al visitante. -->
           <div class="calendario-pendiente">
-            <p class="pendiente-titulo">Acá va el calendario</p>
             <p class="pendiente-texto">
-              Cuando crees la cuenta de Cal.com, cargá tu link en
-              <code>src/data/site.js</code> y el calendario aparece solo, con
-              tus horarios reales.
+              Escribime y coordinamos el día y la hora que te queden bien.
             </p>
             <a
               class="boton boton-acento"
@@ -178,36 +177,17 @@ import { CAL_LINK, whatsapp, mensajes } from '../data/site.js';
   }
 
   .calendario-pendiente {
-    border: 1px dashed rgba(255, 255, 255, 0.28);
-    border-radius: var(--radio);
-    padding: clamp(2rem, 6vw, 3.5rem) clamp(1.4rem, 4vw, 3rem);
-    background: rgba(255, 255, 255, 0.04);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-  }
-
-  .pendiente-titulo {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--blanco);
+    gap: 1.6rem;
   }
 
   .pendiente-texto {
     font-weight: 300;
     color: var(--texto-claro);
-    max-width: 46ch;
-    font-size: 0.95rem;
-    margin-bottom: 0.6rem;
-  }
-
-  code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.86em;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.15em 0.45em;
-    border-radius: 5px;
+    max-width: 40ch;
+    font-size: 1.05rem;
   }
 
   .secundario {
