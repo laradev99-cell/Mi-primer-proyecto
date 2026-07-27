@@ -1,0 +1,224 @@
+---
+import Mariposa from './Mariposa.astro';
+import { CAL_LINK, whatsapp, mensajes } from '../data/site.js';
+---
+
+<section class="seccion oscura grano cierre" id="agenda">
+  <div class="orbe orbe-cierre"></div>
+
+  <div class="contenedor interior">
+    <Mariposa />
+
+    <p class="etiqueta" data-revelar style="--retraso: 60ms">Diagnóstico gratis</p>
+
+    <h2 class="titulo" data-revelar style="--retraso: 120ms">
+      Empecemos por una charla
+    </h2>
+
+    <p class="cuerpo intro" data-revelar style="--retraso: 180ms">
+      Son 30 minutos y son para escucharte: qué vendés, cómo venís, qué te está
+      costando. Con eso te digo qué veo y qué haría con tu marca.
+    </p>
+
+    <p class="promesa" data-revelar style="--retraso: 220ms">
+      Salgas o no trabajando con nosotros, te llevás el diagnóstico.
+    </p>
+
+    <div class="calendario" data-revelar style="--retraso: 280ms">
+      {
+        CAL_LINK ? (
+          <div id="cal-inline" data-cal-link={CAL_LINK} />
+        ) : (
+          <div class="calendario-pendiente">
+            <p class="pendiente-titulo">Acá va el calendario</p>
+            <p class="pendiente-texto">
+              Cuando crees la cuenta de Cal.com, cargá tu link en
+              <code>src/data/site.js</code> y el calendario aparece solo, con
+              tus horarios reales.
+            </p>
+            <a
+              class="boton boton-acento"
+              href={whatsapp(mensajes.cierre)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Coordinar por WhatsApp
+              <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        )
+      }
+    </div>
+
+    {
+      CAL_LINK && (
+        <p class="secundario" data-revelar>
+          ¿Preferís escribirme antes?{' '}
+          <a
+            class="enlace"
+            href={whatsapp(mensajes.cierre)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Mandame un mensaje.
+          </a>
+        </p>
+      )
+    }
+  </div>
+</section>
+
+{
+  CAL_LINK && (
+    <script is:inline>
+      (function () {
+        var contenedor = document.getElementById('cal-inline');
+        if (!contenedor) return;
+        (function (C, A, L) {
+          let p = function (a, ar) { a.q.push(ar); };
+          let d = C.document;
+          C.Cal = C.Cal || function () {
+            let cal = C.Cal; let ar = arguments;
+            if (!cal.loaded) {
+              cal.ns = {}; cal.q = cal.q || [];
+              d.head.appendChild(d.createElement('script')).src = A;
+              cal.loaded = true;
+            }
+            if (ar[0] === L) {
+              const api = function () { p(api, arguments); };
+              const namespace = ar[1];
+              api.q = api.q || [];
+              typeof namespace === 'string'
+                ? (cal.ns[namespace] = api) && p(api, ar)
+                : p(cal, ar);
+              return;
+            }
+            p(cal, ar);
+          };
+        })(window, 'https://app.cal.com/embed/embed.js', 'init');
+
+        Cal('init', { origin: 'https://cal.com' });
+        Cal('inline', {
+          elementOrSelector: '#cal-inline',
+          calLink: contenedor.dataset.calLink,
+          layout: 'month_view',
+        });
+        Cal('ui', {
+          styles: { branding: { brandColor: '#FF2E88' } },
+          hideEventTypeDetails: false,
+          layout: 'month_view',
+        });
+      })();
+    </script>
+  )
+}
+
+<style>
+  .cierre {
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--tinta) 0%, #240a54 100%);
+  }
+
+  .orbe-cierre {
+    width: min(70vw, 780px);
+    aspect-ratio: 1;
+    bottom: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, #ff2e88 0%, transparent 65%);
+    opacity: 0.3;
+  }
+
+  .interior {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .etiqueta {
+    margin-top: clamp(1.4rem, 3vw, 2rem);
+    margin-bottom: 1.2rem;
+  }
+
+  h2 {
+    margin-bottom: clamp(1.2rem, 3vw, 1.6rem);
+    max-width: 16ch;
+  }
+
+  .intro {
+    max-width: 48ch;
+    margin-bottom: 1.2rem;
+  }
+
+  .promesa {
+    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--acento);
+    max-width: 30ch;
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  .calendario {
+    width: 100%;
+    max-width: 900px;
+  }
+
+  #cal-inline {
+    width: 100%;
+    min-height: 620px;
+    background: var(--blanco);
+    border-radius: var(--radio);
+    overflow: hidden;
+  }
+
+  .calendario-pendiente {
+    border: 1px dashed rgba(255, 255, 255, 0.28);
+    border-radius: var(--radio);
+    padding: clamp(2rem, 6vw, 3.5rem) clamp(1.4rem, 4vw, 3rem);
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .pendiente-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--blanco);
+  }
+
+  .pendiente-texto {
+    font-weight: 300;
+    color: var(--texto-claro);
+    max-width: 46ch;
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.86em;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.15em 0.45em;
+    border-radius: 5px;
+  }
+
+  .secundario {
+    margin-top: clamp(1.6rem, 4vw, 2.2rem);
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--texto-claro);
+  }
+
+  .secundario .enlace {
+    color: var(--blanco);
+    font-weight: 500;
+  }
+</style>

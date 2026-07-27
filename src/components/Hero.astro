@@ -1,0 +1,113 @@
+---
+import { whatsapp, mensajes } from '../data/site.js';
+---
+
+<header class="hero oscura grano" id="contenido">
+  <div class="orbe orbe-1"></div>
+  <div class="orbe orbe-2"></div>
+
+  <div class="contenedor hero-inner">
+    <p class="etiqueta marca" data-revelar>Naimid.Agencÿ</p>
+
+    <h1 class="display" data-revelar style="--retraso: 90ms">
+      Hacemos que tu marca se venda <span class="acento">sola</span>
+    </h1>
+
+    <p class="bajada" data-revelar style="--retraso: 190ms">
+      Estrategia, contenido y desarrollo web para marcas que venden online.
+      Todo con el mismo equipo.
+    </p>
+
+    <div class="acciones" data-revelar style="--retraso: 280ms">
+      <a class="boton boton-acento" href="#agenda">
+        Reservar un diagnóstico gratis
+        <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a
+        class="boton boton-linea"
+        href={whatsapp(mensajes.hero)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Escribirnos
+      </a>
+    </div>
+
+    <p class="pie-hero" data-revelar style="--retraso: 360ms">
+      Redes · Tiendas online · Desarrollo a medida · Respuestas con IA
+    </p>
+  </div>
+</header>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-block: clamp(6rem, 16vw, 9rem);
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .orbe-1 {
+    width: min(52vw, 620px);
+    aspect-ratio: 1;
+    top: -18%;
+    right: -12%;
+    background: radial-gradient(circle, #6b2fd6 0%, transparent 68%);
+    opacity: 0.85;
+  }
+
+  .orbe-2 {
+    width: min(44vw, 500px);
+    aspect-ratio: 1;
+    bottom: -24%;
+    left: -14%;
+    background: radial-gradient(circle, #ff2e88 0%, transparent 66%);
+    opacity: 0.34;
+  }
+
+  .marca {
+    color: var(--violeta-400);
+    margin-bottom: clamp(1.4rem, 4vw, 2.2rem);
+  }
+
+  h1 {
+    margin-bottom: clamp(1.4rem, 3.5vw, 2rem);
+    /* El título respira: nunca ocupa todo el ancho en escritorio */
+    max-width: 15ch;
+  }
+
+  .bajada {
+    margin-bottom: clamp(2.2rem, 5vw, 3rem);
+  }
+
+  .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-bottom: clamp(3rem, 8vw, 4.5rem);
+  }
+
+  .pie-hero {
+    font-size: var(--micro);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 560px) {
+    .acciones .boton {
+      flex: 1 1 100%;
+      justify-content: center;
+    }
+  }
+</style>

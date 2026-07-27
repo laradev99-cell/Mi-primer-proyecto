@@ -32,3 +32,6 @@ Thumbs.db
 
 # Build
 *.tsbuildinfo
+
+# Previsualizaciones generadas
+/tmp-vista-*.html

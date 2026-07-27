@@ -1,0 +1,107 @@
+---
+// Tres síntomas que conviven, no tres pasos. Por eso no van numerados:
+// numerarlos inventaría un orden que no existe.
+const bloques = [
+  {
+    titulo: 'Publican sin saber si sirve',
+    texto:
+      'Se sube algo el lunes porque hay que subir algo. Sin plan, sin pilares, sin saber a quién le hablan.',
+  },
+  {
+    titulo: 'No tienen qué grabar',
+    texto:
+      'No hay fotos, no hay videos, no hay tiempo. El contenido se hace con lo que hay, y lo que hay es siempre lo mismo.',
+  },
+  {
+    titulo: 'No saben qué les trae plata',
+    texto:
+      'Reciben alcance, likes y seguidores nuevos. Nadie les dice cuántos pesos entraron por Instagram.',
+  },
+];
+---
+
+<section class="seccion lavanda problema">
+  <div class="contenedor">
+    <p class="etiqueta" data-revelar>El diagnóstico</p>
+
+    <h2 class="titulo" data-revelar style="--retraso: 80ms">
+      Lo que vemos<br />todos los días
+    </h2>
+
+    <p class="cuerpo intro" data-revelar style="--retraso: 140ms">
+      Trabajamos con marcas que venden online, y casi todas llegan con el mismo
+      cuadro.
+    </p>
+
+    <div class="grilla">
+      {
+        bloques.map((b, i) => (
+          <article class="bloque" data-revelar style={`--retraso: ${i * 110}ms`}>
+            <h3>{b.titulo}</h3>
+            <p class="cuerpo">{b.texto}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <p class="remate" data-revelar>
+      Si algo de esto te suena, no es porque hiciste las cosas mal.
+      <span class="destacado">Es porque estabas haciendo dos trabajos a la vez.</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .problema h2 {
+    margin-bottom: clamp(1.2rem, 3vw, 1.6rem);
+  }
+
+  .etiqueta {
+    margin-bottom: clamp(1.2rem, 3vw, 1.8rem);
+  }
+
+  .intro {
+    max-width: 44ch;
+    margin-bottom: clamp(3.5rem, 9vw, 6rem);
+  }
+
+  .grilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: clamp(2.75rem, 6vw, 3.5rem);
+    margin-bottom: clamp(4rem, 10vw, 6.5rem);
+  }
+
+  .bloque {
+    padding-top: clamp(1.4rem, 3vw, 1.9rem);
+    border-top: 2px solid var(--violeta-900);
+  }
+
+  /* El peso lo carga el título, no un adorno numérico */
+  .bloque h3 {
+    font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    color: var(--violeta-900);
+    margin-bottom: 1rem;
+    text-wrap: balance;
+  }
+
+  .remate {
+    font-size: clamp(1.35rem, 3.8vw, 2.3rem);
+    font-weight: 200;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+    max-width: 24ch;
+    color: var(--violeta-900);
+    text-wrap: balance;
+  }
+
+  .destacado {
+    display: block;
+    font-weight: 600;
+    color: var(--acento);
+    margin-top: 0.35em;
+  }
+</style>

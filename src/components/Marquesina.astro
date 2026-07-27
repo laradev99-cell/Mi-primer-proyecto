@@ -1,0 +1,80 @@
+---
+const items = [
+  'Estrategia',
+  'Contenido',
+  'Diseño',
+  'Edición',
+  'Tiendas online',
+  'Desarrollo a medida',
+  'Respuestas con IA',
+  'Reportes que se entienden',
+];
+---
+
+<div class="marquesina" aria-hidden="true">
+  <div class="pista">
+    {
+      [0, 1].map(() => (
+        <ul class="grupo">
+          {items.map((item) => (
+            <li>
+              {item}
+              <span class="punto">◆</span>
+            </li>
+          ))}
+        </ul>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .marquesina {
+    background: var(--acento);
+    color: var(--tinta);
+    overflow: hidden;
+    padding-block: 0.95rem;
+    display: flex;
+  }
+
+  .pista {
+    display: flex;
+    width: max-content;
+    animation: correr 34s linear infinite;
+  }
+
+  .grupo {
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+
+  .grupo li {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .punto {
+    font-size: 0.5rem;
+    opacity: 0.55;
+  }
+
+  @keyframes correr {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pista {
+      animation: none;
+    }
+  }
+</style>

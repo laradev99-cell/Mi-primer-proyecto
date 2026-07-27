@@ -1,0 +1,93 @@
+---
+// La mariposa aparece UNA sola vez en todo el sitio, acá:
+// en el momento en que se pide la reunión.
+---
+
+<svg
+  class="mariposa"
+  viewBox="0 0 140 120"
+  fill="none"
+  role="img"
+  aria-label="Mariposa, símbolo de Naimid"
+  data-revelar
+>
+  <defs>
+    <linearGradient id="trazo-mariposa" x1="0" y1="0" x2="140" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#A87CFF" />
+      <stop offset="55%" stop-color="#FF2E88" />
+      <stop offset="100%" stop-color="#A87CFF" />
+    </linearGradient>
+  </defs>
+
+  <g
+    stroke="url(#trazo-mariposa)"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path class="ala" d="M69 37 C 52 12, 24 6, 13 20 C 3 33, 14 54, 68 58 Z" />
+    <path class="ala" d="M71 37 C 88 12, 116 6, 127 20 C 137 33, 126 54, 72 58 Z" />
+    <path class="ala" d="M68 61 C 38 62, 20 74, 26 90 C 32 104, 56 94, 69 76 Z" />
+    <path class="ala" d="M72 61 C 102 62, 120 74, 114 90 C 108 104, 84 94, 71 76 Z" />
+    <path class="cuerpo" d="M70 32 C 67.5 48, 67.5 70, 70 88 C 72.5 70, 72.5 48, 70 32 Z" />
+    <path class="antena" d="M70 33 C 65 22, 58 15, 50 11" />
+    <path class="antena" d="M70 33 C 75 22, 82 15, 90 11" />
+    <circle class="antena" cx="50" cy="11" r="1.9" />
+    <circle class="antena" cx="90" cy="11" r="1.9" />
+  </g>
+</svg>
+
+<style>
+  .mariposa {
+    width: clamp(76px, 14vw, 118px);
+    height: auto;
+    margin-inline: auto;
+    overflow: visible;
+  }
+
+  .ala,
+  .cuerpo,
+  .antena {
+    stroke-dasharray: 340;
+    stroke-dashoffset: 340;
+  }
+
+  /* El trazo se dibuja cuando la sección entra en pantalla */
+  .mariposa.visible .ala,
+  .mariposa.visible .cuerpo,
+  .mariposa.visible .antena {
+    animation: dibujar 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+
+  .mariposa.visible .ala:nth-of-type(2) {
+    animation-delay: 0.1s;
+  }
+  .mariposa.visible .ala:nth-of-type(3) {
+    animation-delay: 0.2s;
+  }
+  .mariposa.visible .ala:nth-of-type(4) {
+    animation-delay: 0.3s;
+  }
+  .mariposa.visible .cuerpo {
+    animation-delay: 0.35s;
+  }
+  .mariposa.visible .antena {
+    animation-delay: 0.5s;
+  }
+
+  @keyframes dibujar {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ala,
+    .cuerpo,
+    .antena {
+      stroke-dasharray: none;
+      stroke-dashoffset: 0;
+      animation: none !important;
+    }
+  }
+</style>

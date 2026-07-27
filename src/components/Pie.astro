@@ -1,0 +1,69 @@
+---
+import { redes, whatsapp, mensajes, marca } from '../data/site.js';
+
+const anio = new Date().getFullYear();
+---
+
+<footer class="pie">
+  <div class="contenedor">
+    <p class="firma" data-revelar>{marca.nombre}</p>
+
+    <div class="enlaces" data-revelar style="--retraso: 80ms">
+      <a class="enlace" href={redes.instagram} target="_blank" rel="noopener noreferrer">
+        Instagram
+      </a>
+      <a class="enlace" href={redes.tiktok} target="_blank" rel="noopener noreferrer">
+        TikTok
+      </a>
+      <a
+        class="enlace"
+        href={whatsapp(mensajes.footer)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        WhatsApp
+      </a>
+    </div>
+
+    <p class="legal">© {anio} {marca.nombre} · Argentina</p>
+  </div>
+</footer>
+
+<style>
+  .pie {
+    background: var(--tinta);
+    color: var(--blanco);
+    padding-block: clamp(3.5rem, 8vw, 5rem) clamp(2rem, 5vw, 3rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* La marca cierra grande: es lo último que queda en la retina */
+  .firma {
+    font-size: clamp(2rem, 9vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+  }
+
+  .enlaces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1.2rem, 4vw, 2.5rem);
+    padding-bottom: clamp(1.6rem, 4vw, 2.4rem);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .enlaces a {
+    color: var(--blanco);
+  }
+
+  .legal {
+    margin-top: 1.6rem;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.45);
+  }
+</style>
