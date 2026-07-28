@@ -1,7 +1,7 @@
 {
   "name": "naimid-agency",
   "version": "1.0.0",
-  "description": "Naimid.Agencÿ - Marketing digital para marcas que venden online",
+  "description": "Naimid.Agency - Marketing digital para marcas que venden online",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
