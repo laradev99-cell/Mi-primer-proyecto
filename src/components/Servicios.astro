@@ -74,7 +74,7 @@ const webs = [
         </div>
 
         <div class="grupo">
-          <p class="grupo-encabezado">Todos los meses</p>
+          <p class="grupo-titulo">Todos los meses</p>
           <ul class="items">
             {mensual.map((item) => <li>{item}</li>)}
           </ul>
@@ -192,12 +192,7 @@ const webs = [
     border-top: 1px solid rgba(255, 255, 255, 0.16);
   }
 
-  /* Los dos agregados van más cerca entre sí: son la misma categoría */
-  .grupo + .grupo:last-child {
-    margin-top: -1.25rem;
-  }
-
-  /* Versaleta solo acá: marca el momento del servicio, no el contenido */
+  /* Versaleta en todos: marca momento o contenido especial */
   .grupo-titulo {
     font-size: var(--micro);
     font-weight: 500;
@@ -205,16 +200,6 @@ const webs = [
     letter-spacing: 0.2em;
     color: rgba(217, 199, 255, 0.62);
     margin-bottom: 1.4rem;
-  }
-
-  /* El listado mensual lleva encabezado normal: es contenido, no rótulo */
-  .grupo-encabezado {
-    font-size: 1.15rem;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    text-transform: none;
-    color: var(--blanco);
-    margin-bottom: 1.6rem;
   }
 
   .grupo-destacado {
