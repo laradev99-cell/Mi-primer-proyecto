@@ -203,11 +203,11 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
               </ul>
               <div class="tarjeta-pie doble">
                 <div>
-                  <p class="mini-etiqueta oscura">Instalación</p>
+                  <p class="mini-etiqueta fuerte">Instalación</p>
                   <p class="tarjeta-precio">{pesos(s.instalacion)}</p>
                 </div>
                 <div>
-                  <p class="mini-etiqueta oscura">Mantenimiento</p>
+                  <p class="mini-etiqueta fuerte">Mantenimiento</p>
                   <p class="tarjeta-precio chico">
                     {pesos(s.mantenimiento)}<span class="por-mes">/mes</span>
                   </p>
@@ -538,7 +538,9 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
     margin-bottom: 0.5rem;
   }
 
-  .mini-etiqueta.oscura {
+  /* No "oscura": esa clase ya la usa .seccion.oscura en global.css
+     y pintaba un fondo tinta detrás del texto por la colisión */
+  .mini-etiqueta.fuerte {
     color: var(--violeta-600);
   }
 
