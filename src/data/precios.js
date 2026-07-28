@@ -54,17 +54,16 @@ export const precios = {
     ],
   },
 
-  // Resumen para la propuesta. El catálogo completo vive en paginasWeb,
-  // que es lo que se muestra en /webs.
+  // Resumen para la propuesta: solo lo más pedido. El catálogo entero
+  // vive en paginasWeb y se muestra en /webs, adonde lleva el botón.
   tiendaOnline: {
-    nombre: 'Tienda sobre plataforma',
-    bajada: 'Para salir a vender rápido, sobre plataformas probadas.',
+    nombre: 'Páginas web',
+    bajada: 'Lo que más nos piden. Si buscás otra cosa, está todo en la página de webs.',
     opciones: [
-      { nombre: 'Mejorar o migrar tu tienda actual', precio: 140000 },
-      { nombre: 'Tienda Nube · hasta 10 productos', precio: 260000 },
       { nombre: 'Tienda Nube · hasta 30 productos', precio: 390000 },
-      { nombre: 'Tienda Nube · sin límite', precio: 444000 },
       { nombre: 'Shopify', precio: 320000 },
+      { nombre: 'Mejorar o migrar tu tienda', precio: 140000 },
+      { nombre: 'Página web personalizada', precio: 300000 },
     ],
     nota: 'La plataforma y el dominio los paga el cliente directo al proveedor.',
   },
@@ -95,10 +94,10 @@ export const precios = {
     nombre: 'Respuestas automáticas con IA',
     descripcion:
       'La mayoría de los mensajes que recibe una tienda son siempre los mismos: precio, stock, envío, talle. Y cada uno que queda sin responder es una venta que se enfría.\n\nArmamos un asistente que conoce tu negocio y responde en Instagram y WhatsApp las 24 horas, con lenguaje natural. Te deriva solo las consultas que valen tu tiempo.',
-    instalacion: null,
-    mantenimiento: null,
+    instalacion: 400000,
+    mantenimiento: 87500,
     aclaracion:
-      'El precio depende de cuántos canales conectemos y de qué tenga que saber el asistente. Lo cerramos en la reunión.',
+      'La instalación se paga una vez. El mantenimiento es mensual y cubre los ajustes al asistente a medida que cambia tu negocio.',
   },
 
   // ───────────────────────────────────────────────────────────
@@ -252,7 +251,7 @@ export const precios = {
 
   loQueNecesitamos: {
     items: [
-      'Grabar el material que te pedimos y mandarlo antes del día 25',
+      'Grabar el material que te pedimos y mandarlo en tiempo y forma',
       'Aprobar el plan de contenido dentro de las 72 horas',
       'Avisarnos lanzamientos o promos al comienzo de cada mes',
       'Darnos acceso a tus redes',

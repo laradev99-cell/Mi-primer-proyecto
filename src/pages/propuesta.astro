@@ -12,7 +12,9 @@ const pesos = (n) =>
     maximumFractionDigits: 0,
   }).format(n);
 
-const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respuestasAutomaticas, condiciones, loQueNecesitamos } = precios;
+// Desarrollo a medida ya no vive acá: está en /webs, adonde lleva el
+// botón de la sección de páginas web.
+const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, condiciones, loQueNecesitamos } = precios;
 ---
 
 <Layout
@@ -91,12 +93,12 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
     </div>
   </section>
 
-  <!-- ─── PÁGINAS WEB · SOBRE PLATAFORMA ─── -->
+  <!-- ─── PÁGINAS WEB ─── -->
   <section class="seccion clara">
     <div class="contenedor">
-      <p class="etiqueta" data-revelar>Páginas web</p>
+      <p class="etiqueta" data-revelar>Paso 03</p>
       <h2 class="titulo" data-revelar style="--retraso: 70ms">
-        Tienda sobre plataforma
+        {tiendaOnline.nombre}
       </h2>
       <p class="cuerpo bajo-titulo" data-revelar style="--retraso: 120ms">
         {tiendaOnline.bajada}
@@ -117,59 +119,23 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
 
       <!-- El catálogo entero vive en su propia página -->
       <div class="ver-mas" data-revelar>
+        <p class="ver-mas-intro">¿Querés ver más opciones?</p>
         <a class="boton boton-linea-oscura" href="/webs">
-          Ver todos los servicios de web
+          Ver todos los servicios de páginas web
           <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <p class="ver-mas-nota">Landings, webs institucionales, catálogos por WhatsApp y automatizaciones.</p>
+        <p class="ver-mas-nota">
+          Landings, catálogos con pedidos por WhatsApp, desarrollo a medida y
+          automatizaciones, con precios y plazos.
+        </p>
       </div>
-    </div>
-  </section>
-
-  <!-- ─── DESARROLLO A MEDIDA — bloque con peso propio ─── -->
-  <section class="seccion oscura grano medida">
-    <div class="orbe orbe-medida"></div>
-    <div class="contenedor interior-medida">
-      <p class="etiqueta" data-revelar>Páginas web</p>
-      <h2 class="titulo titulo-grande" data-revelar style="--retraso: 70ms">
-        Desarrollo<br />a medida
-      </h2>
-      <p class="bajada" data-revelar style="--retraso: 130ms">
-        {desarrolloMedida.bajada}
-      </p>
-
-      <p class="cuerpo descripcion" data-revelar style="--retraso: 180ms">
-        {desarrolloMedida.descripcion}
-      </p>
-
-      <div class="sirve" data-revelar>
-        <p class="sirve-titulo">Sirve para</p>
-        <ul>
-          {desarrolloMedida.sirvePara.map((item) => <li>{item}</li>)}
-        </ul>
-      </div>
-
-      <dl class="filas filas-oscuras" data-revelar>
-        {
-          desarrolloMedida.opciones.map((o) => (
-            <div class="fila">
-              <dt>{o.nombre}</dt>
-              <dd>{o.precio ? pesos(o.precio) : o.nota}</dd>
-            </div>
-          ))
-        }
-      </dl>
-
-      <p class="aclaracion aclaracion-oscura" data-revelar>
-        {desarrolloMedida.aclaracion}
-      </p>
     </div>
   </section>
 
   <!-- ─── RESPUESTAS CON IA ─── -->
-  <section class="seccion clara">
+  <section class="seccion lavanda">
     <div class="contenedor">
       <p class="etiqueta" data-revelar>Automatización</p>
       <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
@@ -214,7 +180,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
   </section>
 
   <!-- ─── CONDICIONES ─── -->
-  <section class="seccion lavanda">
+  <section class="seccion clara">
     <div class="contenedor">
       <p class="etiqueta" data-revelar>Condiciones</p>
       <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">Cómo funciona</h2>
@@ -238,7 +204,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
   </section>
 
   <!-- ─── LO QUE NECESITAMOS ─── -->
-  <section class="seccion clara">
+  <section class="seccion lavanda">
     <div class="contenedor">
       <p class="etiqueta" data-revelar>De tu lado</p>
       <h2 class="titulo" data-revelar style="--retraso: 70ms">
@@ -383,16 +349,23 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
     }
   }
 
+  /* Violeta claro con borde, no el violeta-900 que leía como negro.
+     El precio se destaca por tamaño, no por invertir el fondo. */
   .caja-precio {
-    background: var(--violeta-900);
-    color: var(--blanco);
+    background: var(--violeta-100);
+    border: 1px solid var(--violeta-200);
     border-radius: var(--radio);
     padding: clamp(1.8rem, 4vw, 2.4rem);
   }
 
+  /* Sobre lavanda el violeta claro desaparece: ahí la caja va blanca */
+  .lavanda .caja-precio {
+    background: var(--blanco);
+  }
+
   .caja-precio hr {
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-top: 1px solid var(--violeta-200);
     margin-block: 1.4rem;
   }
 
@@ -401,7 +374,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.05;
-    color: var(--blanco);
+    color: var(--violeta-900);
     font-variant-numeric: tabular-nums;
   }
 
@@ -410,7 +383,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: var(--violeta-400);
+    color: var(--violeta-600);
     margin-bottom: 0.5rem;
   }
 
@@ -419,7 +392,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
     font-size: 0.88rem;
     font-weight: 300;
     line-height: 1.55;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--texto-medio);
   }
 
   /* ── Incluye todos ── */
@@ -532,16 +505,18 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
     max-width: 60ch;
   }
 
-  .aclaracion-oscura {
-    color: var(--texto-claro);
+  .ver-mas {
+    margin-top: clamp(2.5rem, 6vw, 3.5rem);
+    padding-top: clamp(2rem, 5vw, 2.6rem);
+    border-top: 1px solid var(--violeta-200);
   }
 
-  .ver-mas {
-    margin-top: clamp(2.2rem, 5vw, 3rem);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.9rem 1.4rem;
+  .ver-mas-intro {
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--violeta-900);
+    margin-bottom: 1.3rem;
   }
 
   .boton-linea-oscura {
@@ -556,99 +531,11 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, desarrolloMedida, respues
   }
 
   .ver-mas-nota {
+    margin-top: 1.1rem;
     font-size: 0.9rem;
     font-weight: 300;
     color: var(--texto-medio);
-    max-width: 32ch;
-  }
-
-  /* ── Desarrollo a medida ── */
-  .medida {
-    overflow: hidden;
-    background: linear-gradient(165deg, var(--tinta) 0%, #300b70 100%);
-    padding-block: clamp(6rem, 16vw, 11rem);
-  }
-
-  .orbe-medida {
-    width: min(66vw, 720px);
-    aspect-ratio: 1;
-    top: -20%;
-    left: -18%;
-    background: radial-gradient(circle, #a87cff 0%, transparent 66%);
-    opacity: 0.28;
-  }
-
-  .interior-medida {
-    position: relative;
-    z-index: 1;
-  }
-
-  .titulo-grande {
-    font-size: clamp(2.6rem, 8.5vw, 5.5rem);
-    margin-block: 0 1.4rem;
-  }
-
-  .medida .bajada {
-    margin-bottom: 2rem;
-  }
-
-  .descripcion {
-    max-width: 54ch;
-    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
-  }
-
-  .sirve {
-    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
-  }
-
-  .sirve-titulo {
-    font-size: var(--micro);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--violeta-400);
-    margin-bottom: 1.2rem;
-  }
-
-  .sirve ul {
-    list-style: none;
-    display: grid;
-    gap: 0.8rem;
-  }
-
-  .sirve li {
-    position: relative;
-    padding-left: 1.9rem;
-    font-weight: 300;
-    color: var(--texto-claro);
-    line-height: 1.6;
-  }
-
-  .sirve li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.68em;
-    width: 12px;
-    height: 1.5px;
-    background: var(--acento);
-  }
-
-  .filas-oscuras {
-    border-top-color: rgba(255, 255, 255, 0.16);
-  }
-
-  .filas-oscuras .fila {
-    border-bottom-color: rgba(255, 255, 255, 0.16);
-  }
-
-  .filas-oscuras dt {
-    color: var(--blanco);
-    font-weight: 300;
-  }
-
-  .filas-oscuras dd {
-    color: var(--acento);
+    max-width: 52ch;
   }
 
   .parrafo {
