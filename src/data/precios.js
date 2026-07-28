@@ -54,13 +54,17 @@ export const precios = {
     ],
   },
 
+  // Resumen para la propuesta. El catálogo completo vive en paginasWeb,
+  // que es lo que se muestra en /webs.
   tiendaOnline: {
     nombre: 'Tienda sobre plataforma',
     bajada: 'Para salir a vender rápido, sobre plataformas probadas.',
     opciones: [
-      { nombre: 'Mejoramos tu tienda actual', precio: 300000 },
-      { nombre: 'Tienda Nube', precio: 450000 },
-      { nombre: 'Shopify', precio: 500000 },
+      { nombre: 'Mejorar o migrar tu tienda actual', precio: 140000 },
+      { nombre: 'Tienda Nube · hasta 10 productos', precio: 260000 },
+      { nombre: 'Tienda Nube · hasta 30 productos', precio: 390000 },
+      { nombre: 'Tienda Nube · sin límite', precio: 444000 },
+      { nombre: 'Shopify', precio: 320000 },
     ],
     nota: 'La plataforma y el dominio los paga el cliente directo al proveedor.',
   },
@@ -95,6 +99,146 @@ export const precios = {
     mantenimiento: null,
     aclaracion:
       'El precio depende de cuántos canales conectemos y de qué tenga que saber el asistente. Lo cerramos en la reunión.',
+  },
+
+  // ───────────────────────────────────────────────────────────
+  // PÁGINAS WEB
+  // Vive en su propia landing (/webs) para poder mandarse sola,
+  // sin arrastrar el servicio de redes.
+  // ───────────────────────────────────────────────────────────
+  paginasWeb: {
+    bajada:
+      'Programamos el lugar donde tu marca vende. Desde una tienda lista en dos semanas hasta un sistema hecho a medida.',
+
+    tiendaNube: {
+      nombre: 'Tienda Nube',
+      descripcion:
+        'Tienda lista y optimizada para vender: fichas que convencen, medios de pago y envíos ya configurados.',
+      tiempo: '1 a 2 semanas',
+      necesitamos:
+        'Tu catálogo con productos, precios y fotos, el logo, y qué medios de pago y envío usás.',
+      incluye: [
+        'Diseño pensado para convertir',
+        'Medios de pago configurados',
+        'Envíos integrados',
+        'Fichas de producto que convencen',
+      ],
+      planes: [
+        { nombre: 'BÁSICO', volumen: 'Hasta 10 productos', precio: 260000 },
+        { nombre: 'INTERMEDIO', volumen: 'Hasta 30 productos', precio: 390000 },
+        { nombre: 'AVANZADO', volumen: 'Sin límite de productos', precio: 444000 },
+      ],
+      nota: 'La plataforma y el dominio los pagás vos directo al proveedor.',
+    },
+
+    tiendas: [
+      {
+        nombre: 'Shopify',
+        descripcion:
+          'Para marcas que quieren crecer o vender al exterior. Más personalizable y más potente.',
+        precio: 320000,
+        tiempo: '1 a 2 semanas',
+        incluye: ['Tienda personalizada', 'Medios de pago', 'Envíos y gestión'],
+      },
+      {
+        nombre: 'Mejorar o migrar tu tienda',
+        descripcion:
+          'Revisamos la tienda que ya tenés y le subimos la conversión: fichas, velocidad, medios de pago y orden.',
+        precio: 140000,
+        tiempo: '1 semana',
+        incluye: [
+          'Revisión completa',
+          'Optimización de fichas',
+          'Mejora de conversión',
+        ],
+      },
+    ],
+
+    webs: [
+      {
+        nombre: 'Landing page',
+        descripcion:
+          'Una sola página enfocada en una oferta. Hecha para convertir, perfecta para acompañar publicidad.',
+        precio: 140000,
+        tiempo: '3 a 7 días',
+        incluye: [
+          'Diseño personalizado',
+          'Optimizada para convertir',
+          'Contacto integrado',
+        ],
+      },
+      {
+        nombre: 'Web institucional',
+        descripcion:
+          'Sitio programado, no una plantilla. Rápido y con el diseño propio de tu marca.',
+        precio: 300000,
+        tiempo: '1 a 3 semanas',
+        incluye: ['Varias páginas', 'Rápida y optimizada', 'Diseño a medida'],
+      },
+      {
+        nombre: 'Catálogo con pedidos por WhatsApp',
+        descripcion:
+          'Tu cliente arma el pedido y te llega listo al WhatsApp del local. Ideal para gastronomía.',
+        precio: 240000,
+        tiempo: '1 a 2 semanas',
+        incluye: [
+          'Sistema de pedidos integrado',
+          'Conexión con WhatsApp',
+          'Gestión de catálogo',
+        ],
+      },
+    ],
+
+    medida: {
+      nombre: 'Tienda o web a medida',
+      descripcion:
+        'Cuando lo que necesitás no entra en una plataforma, lo programamos desde cero: el diseño y las funciones exactas, con el código a tu nombre.',
+      precio: 750000,
+      tiempo: '2 a 4 semanas',
+      idealPara: [
+        'Catálogos con lógica especial',
+        'Membresías o suscripciones',
+        'Sistemas internos: stock, clientes, turnos',
+      ],
+      incluye: [
+        'Programación 100% personalizada',
+        'Diseño único',
+        'Funciones específicas',
+        'Base de datos propia',
+      ],
+      nota: 'El precio es un punto de partida: cada proyecto se cotiza después de una charla.',
+    },
+
+    automatizacion: [
+      {
+        nombre: 'Bot de WhatsApp con IA',
+        descripcion:
+          'No es un bot de menú fijo. Conoce tu negocio a fondo, así que entiende preguntas libres y contesta como una persona, las 24 horas.',
+        instalacion: 400000,
+        mantenimiento: 87500,
+        tiempo: '1 a 2 semanas',
+        incluye: [
+          'Base de conocimiento propia',
+          'Respuestas 24/7',
+          'Instagram y WhatsApp',
+          'Toma pedidos y reservas',
+        ],
+      },
+      {
+        nombre: 'Automatizaciones',
+        descripcion:
+          'Conectamos tus herramientas para que trabajen solas: publicar en redes, pasar interesados al CRM, mandar recordatorios.',
+        instalacion: 360000,
+        mantenimiento: 75000,
+        tiempo: '1 a 2 semanas',
+        incluye: [
+          'Procesos a medida',
+          'Integración de herramientas',
+          'Flujos de trabajo',
+          'Sin intervención manual',
+        ],
+      },
+    ],
   },
 
   condiciones: {

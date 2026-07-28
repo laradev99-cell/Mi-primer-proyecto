@@ -27,6 +27,7 @@ export const mensajes = {
   footer: 'Hola Lara, te escribo desde la web de Naimid.',
   propuesta: 'Hola Lara, tengo una duda sobre la propuesta.',
   arrancar: 'Hola Lara, quiero arrancar. ¿Coordinamos la fecha de inicio?',
+  webs: 'Hola Lara, quiero hacer una página web. ¿Lo charlamos?',
 };
 
 // ─────────────────────────────────────────────────────────────

@@ -1,0 +1,699 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Pie from '../components/Pie.astro';
+import { precios } from '../data/precios.js';
+import { whatsapp, mensajes } from '../data/site.js';
+
+const pesos = (n) =>
+  new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(n);
+
+const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
+  precios.paginasWeb;
+---
+
+<Layout
+  titulo="Páginas web y tiendas online"
+  descripcion="Tiendas online, webs a medida y automatización con IA. Programamos el lugar donde tu marca vende."
+>
+  <!-- ─── PORTADA ─── -->
+  <header class="portada oscura grano" id="contenido">
+    <div class="orbe orbe-portada"></div>
+    <div class="contenedor interior">
+      <p class="etiqueta" data-revelar>Naimid.Agency</p>
+      <h1 class="display" data-revelar style="--retraso: 90ms">
+        El lugar donde tu marca <span class="acento">vende</span>
+      </h1>
+      <p class="bajada" data-revelar style="--retraso: 180ms">{bajada}</p>
+
+      <div class="acciones" data-revelar style="--retraso: 260ms">
+        <a
+          class="boton boton-acento"
+          href={whatsapp(mensajes.webs)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Contame qué necesitás
+          <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="boton boton-linea" href="#tiendas">Ver los precios</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── TIENDA NUBE ─── -->
+  <section class="seccion clara" id="tiendas">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Tiendas online</p>
+      <h2 class="titulo" data-revelar style="--retraso: 70ms">
+        {tiendaNube.nombre}
+      </h2>
+      <p class="cuerpo bajo-titulo" data-revelar style="--retraso: 120ms">
+        {tiendaNube.descripcion}
+      </p>
+
+      <div class="ficha" data-revelar>
+        <div class="dato">
+          <p class="dato-titulo">Tiempo</p>
+          <p class="dato-texto">{tiendaNube.tiempo}</p>
+        </div>
+        <div class="dato">
+          <p class="dato-titulo">Necesitamos de vos</p>
+          <p class="dato-texto">{tiendaNube.necesitamos}</p>
+        </div>
+      </div>
+
+      <div class="incluye-todos" data-revelar>
+        <p class="incluye-titulo">Los tres niveles incluyen</p>
+        <ul class="lista-check dos-col">
+          {tiendaNube.incluye.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <div class="planes">
+        {
+          tiendaNube.planes.map((plan, i) => (
+            <article class="plan" data-revelar style={`--retraso: ${i * 90}ms`}>
+              <p class="plan-nombre">{plan.nombre}</p>
+              <p class="plan-volumen">{plan.volumen}</p>
+              <p class="plan-precio">{pesos(plan.precio)}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <p class="aclaracion" data-revelar>{tiendaNube.nota}</p>
+    </div>
+  </section>
+
+  <!-- ─── OTRAS TIENDAS ─── -->
+  <section class="seccion lavanda">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Tiendas online</p>
+      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
+        Otros caminos
+      </h2>
+
+      <div class="tarjetas">
+        {
+          tiendas.map((s, i) => (
+            <article class="tarjeta" data-revelar style={`--retraso: ${i * 90}ms`}>
+              <h3>{s.nombre}</h3>
+              <p class="cuerpo">{s.descripcion}</p>
+              <ul class="lista-check chica">
+                {s.incluye.map((item) => <li>{item}</li>)}
+              </ul>
+              <div class="tarjeta-pie">
+                <p class="tarjeta-precio">{pesos(s.precio)}</p>
+                <p class="tarjeta-tiempo">{s.tiempo}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WEBS ─── -->
+  <section class="seccion clara">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Webs</p>
+      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
+        Si todavía no vendés online
+      </h2>
+
+      <div class="tarjetas">
+        {
+          webs.map((s, i) => (
+            <article class="tarjeta" data-revelar style={`--retraso: ${i * 90}ms`}>
+              <h3>{s.nombre}</h3>
+              <p class="cuerpo">{s.descripcion}</p>
+              <ul class="lista-check chica">
+                {s.incluye.map((item) => <li>{item}</li>)}
+              </ul>
+              <div class="tarjeta-pie">
+                <p class="tarjeta-precio">{pesos(s.precio)}</p>
+                <p class="tarjeta-tiempo">{s.tiempo}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── A MEDIDA ─── -->
+  <section class="seccion oscura grano medida">
+    <div class="orbe orbe-medida"></div>
+    <div class="contenedor interior-medida">
+      <p class="etiqueta" data-revelar>Sin plataforma de por medio</p>
+      <h2 class="titulo titulo-grande" data-revelar style="--retraso: 70ms">
+        {medida.nombre}
+      </h2>
+      <p class="bajada" data-revelar style="--retraso: 130ms">
+        {medida.descripcion}
+      </p>
+
+      <div class="medida-grilla">
+        <div class="sirve" data-revelar>
+          <p class="sirve-titulo">Ideal para</p>
+          <ul>
+            {medida.idealPara.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+
+        <div class="sirve" data-revelar style="--retraso: 90ms">
+          <p class="sirve-titulo">Incluye</p>
+          <ul>
+            {medida.incluye.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="caja-precio caja-medida" data-revelar>
+        <p class="mini-etiqueta">Desde</p>
+        <p class="precio">{pesos(medida.precio)}</p>
+        <p class="nota">{medida.tiempo} · {medida.nota}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── AUTOMATIZACIÓN ─── -->
+  <section class="seccion lavanda">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Automatización con IA</p>
+      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
+        Que trabaje sin vos
+      </h2>
+
+      <div class="tarjetas dos">
+        {
+          automatizacion.map((s, i) => (
+            <article class="tarjeta" data-revelar style={`--retraso: ${i * 90}ms`}>
+              <h3>{s.nombre}</h3>
+              <p class="cuerpo">{s.descripcion}</p>
+              <ul class="lista-check chica">
+                {s.incluye.map((item) => <li>{item}</li>)}
+              </ul>
+              <div class="tarjeta-pie doble">
+                <div>
+                  <p class="mini-etiqueta oscura">Instalación</p>
+                  <p class="tarjeta-precio">{pesos(s.instalacion)}</p>
+                </div>
+                <div>
+                  <p class="mini-etiqueta oscura">Mantenimiento</p>
+                  <p class="tarjeta-precio chico">
+                    {pesos(s.mantenimiento)}<span class="por-mes">/mes</span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CIERRE ─── -->
+  <section class="seccion oscura grano cierre">
+    <div class="orbe orbe-cierre"></div>
+    <div class="contenedor interior">
+      <h2 class="titulo" data-revelar>¿Cuál de todas es la tuya?</h2>
+      <p class="cuerpo" data-revelar style="--retraso: 90ms">
+        Escribime y lo charlamos. Si no sabés cuál te sirve, te digo qué haría
+        yo con tu negocio.
+      </p>
+      <a
+        class="boton boton-acento"
+        href={whatsapp(mensajes.webs)}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-revelar
+        style="--retraso: 160ms"
+      >
+        Escribime por WhatsApp
+        <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <p class="duda" data-revelar style="--retraso: 220ms">
+        ¿Buscabas manejo de redes?{' '}
+        <a class="enlace" href="/">Es por acá.</a>
+      </p>
+    </div>
+  </section>
+
+  <Pie />
+</Layout>
+
+<style>
+  /* ── Portada ── */
+  .portada {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(6rem, 18vw, 11rem) clamp(4rem, 12vw, 7rem);
+  }
+
+  .orbe-portada {
+    width: min(60vw, 640px);
+    aspect-ratio: 1;
+    top: -25%;
+    right: -15%;
+    background: radial-gradient(circle, #6b2fd6 0%, transparent 68%);
+    opacity: 0.8;
+  }
+
+  .interior {
+    position: relative;
+    z-index: 1;
+  }
+
+  .portada .etiqueta {
+    color: var(--violeta-400);
+    margin-bottom: clamp(1.2rem, 3vw, 1.8rem);
+  }
+
+  .portada h1 {
+    margin-bottom: clamp(1.2rem, 3vw, 1.6rem);
+    max-width: 14ch;
+  }
+
+  .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  @media (max-width: 560px) {
+    .acciones .boton {
+      flex: 1 1 100%;
+      justify-content: center;
+    }
+  }
+
+  /* ── Encabezados ── */
+  .etiqueta {
+    margin-bottom: 1.1rem;
+  }
+
+  .bajo-titulo {
+    margin-top: 1rem;
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+    max-width: 46ch;
+  }
+
+  .titulo-suelto {
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  /* ── Ficha de datos ── */
+  .ficha {
+    display: grid;
+    gap: clamp(1.4rem, 4vw, 2.5rem);
+    padding-block: clamp(1.6rem, 4vw, 2rem);
+    border-block: 1px solid var(--violeta-200);
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  @media (min-width: 760px) {
+    .ficha {
+      grid-template-columns: minmax(0, 0.4fr) minmax(0, 1fr);
+    }
+  }
+
+  .dato-titulo {
+    font-size: var(--micro);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--violeta-600);
+    margin-bottom: 0.6rem;
+  }
+
+  .dato-texto {
+    font-weight: 300;
+    color: var(--texto-medio);
+    line-height: 1.65;
+    max-width: 50ch;
+  }
+
+  /* ── Listas ── */
+  .lista-check {
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .lista-check.dos-col {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: 0.7rem 2rem;
+  }
+
+  .lista-check.chica {
+    gap: 0.55rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .lista-check li {
+    position: relative;
+    padding-left: 1.9rem;
+    font-weight: 300;
+    color: var(--texto-medio);
+    line-height: 1.6;
+  }
+
+  .lista-check.chica li {
+    padding-left: 1.5rem;
+    font-size: 0.92rem;
+  }
+
+  .lista-check li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--acento);
+  }
+
+  .lista-check.chica li::before {
+    top: 0.6em;
+    width: 7px;
+    height: 7px;
+    border-width: 1.5px;
+  }
+
+  /* ── Incluye todos ── */
+  .incluye-todos {
+    background: var(--violeta-100);
+    border-radius: var(--radio);
+    padding: clamp(1.6rem, 4vw, 2.4rem);
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .incluye-titulo {
+    font-size: var(--micro);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--violeta-600);
+    margin-bottom: 1.3rem;
+  }
+
+  /* ── Planes ── */
+  .planes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: clamp(0.85rem, 2vw, 1.1rem);
+  }
+
+  .plan {
+    background: var(--blanco);
+    border: 1px solid var(--violeta-200);
+    border-radius: var(--radio);
+    padding: clamp(1.6rem, 4vw, 2.2rem);
+    transition: transform var(--transicion), box-shadow var(--transicion);
+  }
+
+  .plan:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 48px -30px rgba(45, 10, 107, 0.5);
+  }
+
+  .plan-nombre {
+    font-size: var(--micro);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--violeta-600);
+    margin-bottom: 1.2rem;
+  }
+
+  .plan-volumen {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--violeta-900);
+    line-height: 1.4;
+    margin-bottom: 1.6rem;
+  }
+
+  .plan-precio {
+    font-size: clamp(1.6rem, 4vw, 2.05rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--violeta-900);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Tarjetas de servicio ── */
+  .tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(1rem, 2.5vw, 1.4rem);
+  }
+
+  .tarjeta {
+    background: var(--blanco);
+    border: 1px solid var(--violeta-200);
+    border-radius: var(--radio);
+    padding: clamp(1.7rem, 4vw, 2.3rem);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transicion), box-shadow var(--transicion);
+  }
+
+  .tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 48px -30px rgba(45, 10, 107, 0.5);
+  }
+
+  .tarjeta h3 {
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--violeta-900);
+    margin-bottom: 0.9rem;
+    text-wrap: balance;
+  }
+
+  .tarjeta .cuerpo {
+    font-size: 0.95rem;
+    margin-bottom: 1.6rem;
+  }
+
+  /* El pie se empuja al fondo: las tarjetas cierran alineadas */
+  .tarjeta-pie {
+    margin-top: auto;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--violeta-200);
+  }
+
+  .tarjeta-pie.doble {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem 2rem;
+  }
+
+  .tarjeta-precio {
+    font-size: clamp(1.5rem, 3.5vw, 1.9rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--violeta-900);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tarjeta-precio.chico {
+    font-size: clamp(1.2rem, 2.8vw, 1.45rem);
+  }
+
+  .por-mes {
+    font-size: 0.7em;
+    font-weight: 300;
+    letter-spacing: 0;
+    color: var(--texto-medio);
+  }
+
+  .tarjeta-tiempo {
+    margin-top: 0.35rem;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--texto-medio);
+  }
+
+  .mini-etiqueta {
+    font-size: var(--micro);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--violeta-400);
+    margin-bottom: 0.5rem;
+  }
+
+  .mini-etiqueta.oscura {
+    color: var(--violeta-600);
+  }
+
+  /* ── A medida ── */
+  .medida {
+    overflow: hidden;
+    background: linear-gradient(165deg, var(--tinta) 0%, #300b70 100%);
+    padding-block: clamp(6rem, 16vw, 11rem);
+  }
+
+  .orbe-medida {
+    width: min(66vw, 720px);
+    aspect-ratio: 1;
+    top: -20%;
+    left: -18%;
+    background: radial-gradient(circle, #a87cff 0%, transparent 66%);
+    opacity: 0.28;
+  }
+
+  .interior-medida {
+    position: relative;
+    z-index: 1;
+  }
+
+  .titulo-grande {
+    font-size: clamp(2.3rem, 7vw, 4.2rem);
+    margin-block: 0 1.4rem;
+    max-width: 14ch;
+  }
+
+  .medida .bajada {
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+    max-width: 54ch;
+  }
+
+  .medida-grilla {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  @media (min-width: 760px) {
+    .medida-grilla {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .sirve-titulo {
+    font-size: var(--micro);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--violeta-400);
+    margin-bottom: 1.2rem;
+  }
+
+  .sirve ul {
+    list-style: none;
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .sirve li {
+    position: relative;
+    padding-left: 1.9rem;
+    font-weight: 300;
+    color: var(--texto-claro);
+    line-height: 1.6;
+  }
+
+  .sirve li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 12px;
+    height: 1.5px;
+    background: var(--acento);
+  }
+
+  .caja-precio {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radio);
+    padding: clamp(1.8rem, 4vw, 2.4rem);
+    max-width: 34rem;
+  }
+
+  .precio {
+    font-size: clamp(2rem, 5.5vw, 2.9rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--blanco);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .nota {
+    margin-top: 0.8rem;
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .aclaracion {
+    margin-top: 1.4rem;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--texto-medio);
+    max-width: 60ch;
+  }
+
+  /* ── Cierre ── */
+  .cierre {
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--tinta) 0%, #240a54 100%);
+  }
+
+  .orbe-cierre {
+    width: min(70vw, 740px);
+    aspect-ratio: 1;
+    bottom: -35%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, #a87cff 0%, transparent 65%);
+    opacity: 0.3;
+  }
+
+  .cierre .interior {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cierre h2 {
+    max-width: 18ch;
+    margin-bottom: 1.2rem;
+  }
+
+  .cierre .cuerpo {
+    margin-bottom: 2rem;
+    max-width: 46ch;
+  }
+
+  .duda {
+    margin-top: 1.6rem;
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--texto-claro);
+  }
+
+  .duda .enlace {
+    color: var(--blanco);
+    font-weight: 500;
+  }
+</style>

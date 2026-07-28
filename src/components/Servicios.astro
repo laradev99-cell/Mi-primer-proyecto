@@ -124,6 +124,17 @@ const webs = [
           ))
         }
       </div>
+
+      <!-- Las webs tienen su propia página: acá solo se abre la puerta -->
+      <div class="webs-pie" data-revelar>
+        <a class="boton boton-linea-oscura" href="/webs">
+          Ver todo lo de páginas web
+          <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="webs-nota">Precios, tiempos y todo lo que programamos.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -280,6 +291,32 @@ const webs = [
     letter-spacing: -0.02em;
     color: var(--violeta-900);
     margin-bottom: 0.8rem;
+  }
+
+  .webs-pie {
+    margin-top: clamp(2.2rem, 5vw, 3rem);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem 1.4rem;
+  }
+
+  /* Sobre fondo claro el botón de línea necesita su propio contorno */
+  .boton-linea-oscura {
+    background: transparent;
+    color: var(--violeta-900);
+    border: 1.5px solid var(--violeta-900);
+  }
+
+  .boton-linea-oscura:hover {
+    background: var(--violeta-900);
+    color: var(--blanco);
+  }
+
+  .webs-nota {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--texto-medio);
   }
 
   @media (min-width: 880px) {
