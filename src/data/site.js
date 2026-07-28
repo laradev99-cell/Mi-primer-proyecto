@@ -36,7 +36,7 @@ export const mensajes = {
 // (solo la parte de después de cal.com/). Mientras esté vacío,
 // la sección muestra un aviso en lugar del calendario.
 // ─────────────────────────────────────────────────────────────
-export const CAL_LINK = '';
+export const CAL_LINK = 'naimid-agency/diagnostico-de-redes-gratuito';
 
 // ─────────────────────────────────────────────────────────────
 // REDES
