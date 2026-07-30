@@ -74,14 +74,17 @@ export const precios = {
     nota: 'La plataforma y el dominio los paga el cliente directo al proveedor.',
   },
 
+  // No se vende como "IA" o "automatización" — eso es la tecnología
+  // por dentro, no el valor. Se vende como lo que evita: la venta que
+  // se enfría por tardar en contestar.
   respuestasAutomaticas: {
-    nombre: 'Respuestas automáticas con IA',
+    nombre: 'El vendedor que nunca duerme',
     descripcion:
-      'La mayoría de los mensajes que recibe una tienda son siempre los mismos: precio, stock, envío, talle. Y cada uno que queda sin responder es una venta que se enfría.\n\nArmamos un asistente que conoce tu negocio y responde en Instagram y WhatsApp las 24 horas, con lenguaje natural. Te deriva solo las consultas que valen tu tiempo.',
+      'La mayoría de los mensajes que recibe una tienda son siempre los mismos: precio, stock, envío, talle. Cada uno que tarda en responderse es una venta que se enfría — y a la 1 de la mañana, un domingo, o en medio de otra cosa, no siempre podés estar ahí.\n\nEsto sí. Conoce tu negocio a fondo y responde en Instagram y WhatsApp las 24 horas, con el mismo tono que usarías vos. Nadie nota que no sos vos. Y te deriva solo las consultas que valen tu tiempo.',
     instalacion: 400000,
     mantenimiento: 87500,
     aclaracion:
-      'La instalación se paga una vez. El mantenimiento es mensual y cubre los ajustes al asistente a medida que cambia tu negocio.',
+      'La instalación se paga una vez. El mantenimiento es mensual y cubre los ajustes a medida que cambia tu negocio.',
   },
 
   // ───────────────────────────────────────────────────────────
@@ -201,17 +204,17 @@ export const precios = {
 
     automatizacion: [
       {
-        nombre: 'Bot de WhatsApp con IA',
+        nombre: 'El vendedor que nunca duerme',
         descripcion:
-          'No es un bot de menú fijo. Conoce tu negocio a fondo, así que entiende preguntas libres y contesta como una persona, las 24 horas.',
+          'Cada mensaje que tarda en responderse es una venta que se enfría. Esto contesta por vos al instante, sea la hora que sea, con el mismo tono que usarías vos — nadie nota la diferencia.',
         instalacion: 400000,
         mantenimiento: 87500,
         tiempo: '1 a 2 semanas',
         incluye: [
-          'Base de conocimiento propia',
-          'Respuestas 24/7',
-          'Instagram y WhatsApp',
-          'Toma pedidos y reservas',
+          'Contesta al toque, aunque sea la 1 de la mañana',
+          'Sabe tu negocio a fondo: precios, stock, envíos',
+          'Cierra pedidos y agenda turnos solo',
+          'Vos entrás solo cuando hace falta',
         ],
       },
     ],
