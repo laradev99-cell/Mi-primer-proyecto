@@ -77,6 +77,12 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
         </ul>
       </div>
 
+      {
+        manejoRedes.lanzamiento && (
+          <p class="lanzamiento" data-revelar>{manejoRedes.lanzamiento}</p>
+        )
+      }
+
       <div class="planes">
         {
           manejoRedes.planes.map((plan, i) => (
@@ -84,6 +90,9 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
               <p class="plan-nombre">{plan.nombre}</p>
               <p class="plan-volumen">{plan.descripcion}</p>
               <p class="plan-detalle">{plan.detalles}</p>
+              {plan.precioAnterior && (
+                <p class="plan-precio-anterior">{pesos(plan.precioAnterior)}</p>
+              )}
               <p class="plan-precio">{pesos(plan.precio)}</p>
               <p class="plan-periodo">por mes</p>
             </article>
@@ -432,12 +441,30 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
     box-shadow: 0 22px 48px -30px rgba(45, 10, 107, 0.5);
   }
 
+  /* Discreto a propósito: es una promo, no un cartel de oferta */
+  .lanzamiento {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--acento);
+    margin-bottom: clamp(1.2rem, 3vw, 1.6rem);
+  }
+
   .plan-nombre {
     font-size: var(--micro);
     font-weight: 600;
     letter-spacing: 0.18em;
     color: var(--violeta-600);
     margin-bottom: 1.2rem;
+  }
+
+  .plan-precio-anterior {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--texto-medio);
+    text-decoration: line-through;
+    text-decoration-color: var(--violeta-200);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 0.2rem;
   }
 
   .plan-volumen {

@@ -23,6 +23,9 @@ export const precios = {
   manejoRedes: {
     nombre: 'Manejo de redes',
     bajada: 'Los tres planes incluyen lo mismo. Cambia el volumen.',
+    // Precio de lanzamiento: cupo limitado, no un descuento permanente.
+    // Sacar precioAnterior y lanzamiento cuando se agoten los 5 lugares.
+    lanzamiento: 'Precio de lanzamiento — válido para los primeros 5 clientes del nicho ecommerce',
     incluye: [
       'Ideas y plan de contenido mensual',
       'Diseño y edición de cada pieza',
@@ -37,19 +40,22 @@ export const precios = {
         nombre: 'PRESENCIA',
         descripcion: '6 posteos + 18 historias',
         detalles: '3 reels · 3 carruseles',
-        precio: 1380000,
+        precioAnterior: 1380000,
+        precio: 1200000,
       },
       {
         nombre: 'CRECIMIENTO',
         descripcion: '8 posteos + 26 historias',
         detalles: '4 reels · 4 carruseles',
-        precio: 1760000,
+        precioAnterior: 1760000,
+        precio: 1580000,
       },
       {
         nombre: 'EXPANSIÓN',
         descripcion: '10 posteos + 34 historias',
         detalles: '5 reels · 5 carruseles',
-        precio: 2200000,
+        precioAnterior: 2250000,
+        precio: 2070000,
       },
     ],
   },
@@ -66,28 +72,6 @@ export const precios = {
       { nombre: 'Página web personalizada', precio: 300000 },
     ],
     nota: 'La plataforma y el dominio los paga el cliente directo al proveedor.',
-  },
-
-  desarrolloMedida: {
-    nombre: 'Desarrollo a medida',
-    bajada: 'Cuando una plataforma no alcanza.',
-    descripcion:
-      'Programamos desde cero, con código propio. El diseño no depende de una plantilla, las funciones no dependen de que exista una aplicación que las resuelva, y el código queda a tu nombre.',
-    sirvePara: [
-      'Tiendas y webs con diseño y funciones únicas',
-      'Sistemas internos: stock, clientes, turnos, gastos, reportes',
-      'Aplicaciones para celular',
-    ],
-    opciones: [
-      { nombre: 'Web o tienda a medida', precio: null, nota: 'a definir' },
-      {
-        nombre: 'Sistemas y aplicaciones',
-        precio: null,
-        nota: 'cotización según proyecto',
-      },
-    ],
-    aclaracion:
-      'Cada proyecto se cotiza después de una charla: no es lo mismo una web de cinco secciones que un sistema con usuarios y stock.',
   },
 
   respuestasAutomaticas: {
@@ -188,24 +172,31 @@ export const precios = {
       },
     ],
 
+    // En dólares a propósito: es el desarrollador que programa a medida,
+    // aparte del resto de servicios (que cotizan en pesos). Marca que es
+    // un servicio distinto, más premium.
     medida: {
-      nombre: 'Tienda o web a medida',
-      descripcion:
-        'Cuando lo que necesitás no entra en una plataforma, lo programamos desde cero: el diseño y las funciones exactas, con el código a tu nombre.',
-      precio: 750000,
-      tiempo: '2 a 4 semanas',
-      idealPara: [
-        'Catálogos con lógica especial',
-        'Membresías o suscripciones',
-        'Sistemas internos: stock, clientes, turnos',
+      nombre: 'Desarrollo a medida',
+      bajada: 'Cuando una plataforma no alcanza. Programado desde cero, con código propio.',
+      webYTiendas: [
+        { nombre: 'Landing page', precioUsd: 200 },
+        { nombre: 'Catálogo digital con pedidos', precioUsd: 260 },
+        { nombre: 'Web empresarial', precioUsd: 700 },
+        { nombre: 'Tienda ecommerce con carrito y pagos', precioUsd: 1200 },
       ],
-      incluye: [
-        'Programación 100% personalizada',
-        'Diseño único',
-        'Funciones específicas',
-        'Base de datos propia',
+      sistemasYApps: [
+        { nombre: 'Aplicación móvil (Android/iOS)', precioUsd: 1650 },
+        { nombre: 'Aplicación de escritorio', precioUsd: 2000 },
+        {
+          nombre: 'Sistema administrativo',
+          descripcion: 'Stock, clientes, turnos, reportes',
+          precioUsd: 2250,
+        },
       ],
-      nota: 'El precio es un punto de partida: cada proyecto se cotiza después de una charla.',
+      // Este segmento lo cotiza en exclusiva el desarrollador que lo arma:
+      // no lo ofrece nadie más del equipo.
+      notaExclusividad: 'Este segmento no lo ofrece nadie más en el equipo — es exclusivo de este desarrollador.',
+      nota: 'El hosting, el dominio y las cuentas de desarrollador (Google Play, App Store) los paga el cliente directamente al proveedor.',
     },
 
     automatizacion: [

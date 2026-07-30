@@ -12,6 +12,10 @@ const pesos = (n) =>
     maximumFractionDigits: 0,
   }).format(n);
 
+// El desarrollo a medida cotiza en dólares a propósito: es un
+// desarrollador aparte del resto de los servicios, que van en pesos.
+const dolares = (n) => `USD ${new Intl.NumberFormat('es-AR').format(n)}`;
+
 const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
   precios.paginasWeb;
 ---
@@ -157,30 +161,44 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
         {medida.nombre}
       </h2>
       <p class="bajada" data-revelar style="--retraso: 130ms">
-        {medida.descripcion}
+        {medida.bajada}
       </p>
 
       <div class="medida-grilla">
-        <div class="sirve" data-revelar>
-          <p class="sirve-titulo">Ideal para</p>
-          <ul>
-            {medida.idealPara.map((item) => <li>{item}</li>)}
-          </ul>
+        <div class="medida-grupo" data-revelar>
+          <p class="medida-grupo-titulo">Webs y tiendas</p>
+          <dl class="filas filas-oscuras">
+            {
+              medida.webYTiendas.map((s) => (
+                <div class="fila">
+                  <dt>{s.nombre}</dt>
+                  <dd>{dolares(s.precioUsd)}</dd>
+                </div>
+              ))
+            }
+          </dl>
         </div>
 
-        <div class="sirve" data-revelar style="--retraso: 90ms">
-          <p class="sirve-titulo">Incluye</p>
-          <ul>
-            {medida.incluye.map((item) => <li>{item}</li>)}
-          </ul>
+        <div class="medida-grupo" data-revelar style="--retraso: 90ms">
+          <p class="medida-grupo-titulo">Sistemas y aplicaciones</p>
+          <dl class="filas filas-oscuras">
+            {
+              medida.sistemasYApps.map((s) => (
+                <div class="fila">
+                  <dt>
+                    {s.nombre}
+                    {s.descripcion && <span class="fila-nota"> · {s.descripcion}</span>}
+                  </dt>
+                  <dd>{dolares(s.precioUsd)}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <p class="aclaracion aclaracion-oscura">{medida.notaExclusividad}</p>
         </div>
       </div>
 
-      <div class="caja-precio caja-medida" data-revelar>
-        <p class="mini-etiqueta">Desde</p>
-        <p class="precio">{pesos(medida.precio)}</p>
-        <p class="nota">{medida.tiempo} · {medida.nota}</p>
-      </div>
+      <p class="aclaracion aclaracion-oscura" data-revelar>{medida.nota}</p>
     </div>
   </section>
 
@@ -588,7 +606,7 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
     }
   }
 
-  .sirve-titulo {
+  .medida-grupo-titulo {
     font-size: var(--micro);
     font-weight: 500;
     text-transform: uppercase;
@@ -597,53 +615,43 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
     margin-bottom: 1.2rem;
   }
 
-  .sirve ul {
-    list-style: none;
-    display: grid;
-    gap: 0.8rem;
+  /* Filas de precio, ya usadas en la propuesta: acá en su variante oscura */
+  .filas {
+    border-top: 1px solid var(--violeta-200);
   }
 
-  .sirve li {
-    position: relative;
-    padding-left: 1.9rem;
+  .filas-oscuras {
+    border-top-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .fila {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem 1.5rem;
+    padding-block: clamp(1rem, 2.5vw, 1.3rem);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .fila dt {
     font-weight: 300;
-    color: var(--texto-claro);
-    line-height: 1.6;
-  }
-
-  .sirve li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.68em;
-    width: 12px;
-    height: 1.5px;
-    background: var(--acento);
-  }
-
-  .caja-precio {
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: var(--radio);
-    padding: clamp(1.8rem, 4vw, 2.4rem);
-    max-width: 34rem;
-  }
-
-  .precio {
-    font-size: clamp(2rem, 5.5vw, 2.9rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
     color: var(--blanco);
-    font-variant-numeric: tabular-nums;
   }
 
-  .nota {
-    margin-top: 0.8rem;
-    font-size: 0.88rem;
+  .fila-nota {
     font-weight: 300;
-    line-height: 1.55;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    color: var(--texto-claro);
+  }
+
+  .fila dd {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--acento);
+    font-size: 1.05rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
 
   .aclaracion {
@@ -652,6 +660,10 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
     font-weight: 300;
     color: var(--texto-medio);
     max-width: 60ch;
+  }
+
+  .aclaracion-oscura {
+    color: var(--texto-claro);
   }
 
   /* ── Cierre ── */
