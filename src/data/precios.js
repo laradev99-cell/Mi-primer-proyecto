@@ -214,20 +214,6 @@ export const precios = {
           'Toma pedidos y reservas',
         ],
       },
-      {
-        nombre: 'Automatizaciones',
-        descripcion:
-          'Conectamos tus herramientas para que trabajen solas: publicar en redes, pasar interesados al CRM, mandar recordatorios.',
-        instalacion: 360000,
-        mantenimiento: 75000,
-        tiempo: '1 a 2 semanas',
-        incluye: [
-          'Procesos a medida',
-          'Integración de herramientas',
-          'Flujos de trabajo',
-          'Sin intervención manual',
-        ],
-      },
     ],
   },
 

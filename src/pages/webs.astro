@@ -210,7 +210,7 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
         Que trabaje sin vos
       </h2>
 
-      <div class="tarjetas dos">
+      <div class="tarjetas una">
         {
           automatizacion.map((s, i) => (
             <article class="tarjeta" data-revelar style={`--retraso: ${i * 90}ms`}>
@@ -476,6 +476,12 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     gap: clamp(1rem, 2.5vw, 1.4rem);
+  }
+
+  /* Una sola tarjeta: no la estiramos a todo el ancho */
+  .tarjetas.una {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 26rem;
   }
 
   .tarjeta {
