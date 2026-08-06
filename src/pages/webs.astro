@@ -164,6 +164,20 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
         {medida.bajada}
       </p>
 
+      <a
+        class="ver-portfolio"
+        href="https://portafolio-kohl-iota.vercel.app"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-revelar
+        style="--retraso: 160ms"
+      >
+        Ver ejemplos de proyectos
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
       <div class="medida-grilla">
         <div class="medida-grupo" data-revelar>
           <p class="medida-grupo-titulo">Webs y tiendas</p>
@@ -598,6 +612,31 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
   .medida .bajada {
     margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
     max-width: 54ch;
+  }
+
+  /* Secundario a propósito: el CTA principal sigue siendo WhatsApp,
+     esto es solo evidencia para quien quiere verla antes de escribir */
+  .ver-portfolio {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--violeta-200);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 0.15rem;
+    transition: color var(--transicion), border-color var(--transicion);
+  }
+
+  .ver-portfolio:hover {
+    color: var(--blanco);
+    border-color: var(--blanco);
+  }
+
+  .ver-portfolio svg {
+    flex-shrink: 0;
   }
 
   .medida-grilla {

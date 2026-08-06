@@ -20,13 +20,19 @@ const mensual = [
   'Reporte y reunión mensual',
 ];
 
-// Dos agregados: uno se resuelve acá mismo, el otro abre la sección
-// que sigue. Por eso el segundo se escribe como pie, no como cierre.
+// Tres agregados: los dos primeros se resuelven acá mismo, el último
+// abre la sección que sigue. Por eso ese se escribe como pie, no como
+// cierre.
 const extras = [
   {
     titulo: 'El vendedor que nunca duerme',
     texto:
       'Contesta precios, stock y envíos en Instagram y WhatsApp las 24 horas, con el mismo tono que usarías vos.',
+  },
+  {
+    titulo: 'Publicidad en Meta Ads',
+    texto:
+      'Si ya tenés el contenido funcionando, el siguiente paso es la publicidad. Configuramos y gestionamos tus campañas en Instagram y Facebook: definimos a quién le mostramos cada anuncio, probamos distintas versiones para ver cuál funciona mejor, y ajustamos el presupuesto según los resultados.\n\nLa inversión en pauta la pagás vos directamente a Meta. Nosotros nos encargamos de que esa plata se use bien.',
   },
   {
     titulo: 'Páginas web',
@@ -85,7 +91,11 @@ const webs = [
             <div class="grupo">
               <p class="grupo-titulo">Se le puede sumar</p>
               <p class="grupo-destacado">{e.titulo}</p>
-              <p class="grupo-texto">{e.texto}</p>
+              {
+                e.texto
+                  .split('\n\n')
+                  .map((parrafo) => <p class="grupo-texto">{parrafo}</p>)
+              }
             </div>
           ))
         }
@@ -229,6 +239,10 @@ const webs = [
     text-transform: none;
     color: var(--texto-claro);
     max-width: 46ch;
+  }
+
+  .grupo-texto + .grupo-texto {
+    margin-top: 1rem;
   }
 
   /* Dos columnas y renglones sueltos: comprimidos se leían como un
