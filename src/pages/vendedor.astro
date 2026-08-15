@@ -19,7 +19,7 @@ const v = precios.paginasWeb.automatizacion[0];
 
 <Layout
   titulo="El vendedor que nunca duerme"
-  descripcion="Un asistente que conoce tu negocio y contesta en Instagram y WhatsApp las 24 horas."
+  descripcion="Un asistente que conoce tu negocio y contesta por WhatsApp las 24 horas, con tus palabras."
 >
   <!-- ─── PORTADA ─── -->
   <header class="portada oscura grano" id="contenido">
@@ -79,6 +79,28 @@ const v = precios.paginasWeb.automatizacion[0];
       <p class="cuerpo grande" data-revelar style="--retraso: 130ms">
         {v.diferencial}
       </p>
+    </div>
+  </section>
+
+  <!-- ─── LOS DOS CANALES ─── -->
+  <section class="seccion clara">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Dónde contesta</p>
+      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
+        WhatsApp e Instagram<br />no funcionan igual
+      </h2>
+
+      <div class="canales">
+        {
+          v.canales.map((c, i) => (
+            <article class="canal" data-revelar style={`--retraso: ${i * 90}ms`}>
+              <p class="canal-nombre">{c.nombre}</p>
+              <p class="canal-tipo">{c.tipo}</p>
+              <p class="cuerpo">{c.texto}</p>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </section>
 
@@ -297,6 +319,41 @@ const v = precios.paginasWeb.automatizacion[0];
     color: var(--texto-claro);
     max-width: 54ch;
     margin-top: 1.4rem;
+  }
+
+  /* ── Los dos canales ── */
+  .canales {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+    gap: clamp(1rem, 2.5vw, 1.4rem);
+  }
+
+  .canal {
+    background: var(--blanco);
+    border: 1px solid var(--violeta-200);
+    border-radius: var(--radio);
+    padding: clamp(1.7rem, 4vw, 2.3rem);
+  }
+
+  .canal-nombre {
+    font-size: var(--micro);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--violeta-600);
+    margin-bottom: 0.9rem;
+  }
+
+  .canal-tipo {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--violeta-900);
+    margin-bottom: 0.8rem;
+  }
+
+  .canal .cuerpo {
+    font-size: 0.95rem;
   }
 
   /* ── Rubros ── */

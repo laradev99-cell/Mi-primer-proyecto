@@ -96,7 +96,7 @@ export const precios = {
   respuestasAutomaticas: {
     nombre: 'El vendedor que nunca duerme',
     descripcion:
-      'La mayoría de los mensajes que recibe una tienda son siempre los mismos: precio, stock, envío, talle. Cada uno que tarda en responderse es una venta que se enfría — y a la 1 de la mañana, un domingo, o en medio de otra cosa, no siempre podés estar ahí.\n\nEsto sí. Conoce tu negocio a fondo y responde en Instagram y WhatsApp las 24 horas, con el mismo tono que usarías vos. Nadie nota que no sos vos. Y te deriva solo las consultas que valen tu tiempo.',
+      'La mayoría de los mensajes que recibe una tienda son siempre los mismos: precio, stock, envío, talle. Cada uno que tarda en responderse es una venta que se enfría — y a la 1 de la mañana, un domingo, o en medio de otra cosa, no siempre podés estar ahí.\n\nEn WhatsApp le armamos un asistente que conoce tu negocio a fondo y contesta con tus palabras las 24 horas. Nadie nota que no sos vos, y te deriva solo las consultas que valen tu tiempo.\n\nEn Instagram todavía no se puede correr el asistente completo, así que dejamos respuestas automáticas que atienden lo básico y llevan la conversación a WhatsApp.',
     instalacion: 600000,
     lanzamiento: 400000,
     mantenimiento: 80000,
@@ -203,8 +203,12 @@ export const precios = {
     automatizacion: [
       {
         nombre: 'El vendedor que nunca duerme',
+        // Ojo: la IA corre en WhatsApp. Instagram todavía no la permite
+        // sin un permiso de Meta que no tenemos, así que ahí van
+        // respuestas automáticas que derivan a WhatsApp. No prometer IA
+        // en Instagram hasta que salga el permiso.
         descripcion:
-          'Cada mensaje que tarda en responderse es una venta que se enfría. Esto contesta por vos al instante, sea la hora que sea, con el mismo tono que usarías vos — nadie nota la diferencia.',
+          'Cada mensaje que tarda en responderse es una venta que se enfría. En WhatsApp contesta por vos al instante, sea la hora que sea, con el mismo tono que usarías vos — nadie nota la diferencia.',
         instalacion: 600000,
         // Precio de lanzamiento: queda un lugar. Sacar `lanzamiento`
         // cuando se ocupe y la página se acomoda sola.
@@ -233,6 +237,22 @@ export const precios = {
           'Sabe tu negocio a fondo: precios, stock, envíos',
           'Cierra pedidos y agenda turnos solo',
           'Vos entrás solo cuando hace falta',
+        ],
+        // Dos canales, dos cosas distintas. Se cuentan separadas para no
+        // vender en Instagram algo que hoy solo corre en WhatsApp.
+        canales: [
+          {
+            nombre: 'En WhatsApp',
+            tipo: 'El asistente completo',
+            texto:
+              'Entiende preguntas libres, conoce tu negocio y responde con tus palabras. Toma pedidos y agenda turnos sin que entres vos.',
+          },
+          {
+            nombre: 'En Instagram',
+            tipo: 'Respuestas automáticas',
+            texto:
+              'Todavía no se puede correr el asistente completo, así que dejamos respuestas armadas que atienden lo básico y llevan la charla a WhatsApp, que es donde se cierra la venta.',
+          },
         ],
       },
     ],
