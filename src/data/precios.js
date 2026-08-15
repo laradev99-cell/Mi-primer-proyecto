@@ -65,7 +65,7 @@ export const precios = {
         hereda: 'Crecimiento',
         incluye: [
           'Publicación también en Facebook',
-          'Media hora por mes conmigo para pensar tu marca: lo que necesites, no solo contenido',
+          'Media hora por mes conmigo para pensar tu marca: tu contenido, tu forma de vender, tu próximo paso. Lo que te esté trabando',
           '15 % de descuento en páginas web y en el vendedor que nunca duerme',
         ],
         // El cupo es real: la media hora mensual la doy yo, así que el
