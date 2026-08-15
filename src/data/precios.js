@@ -60,13 +60,17 @@ export const precios = {
       },
       {
         nombre: 'EXPANSIÓN',
-        promesa: 'Más contenido, y el resto te sale más barato',
+        promesa: 'Más contenido, y alguien con quien pensarlo',
         precio: 1999000,
         hereda: 'Crecimiento',
         incluye: [
           'Publicación también en Facebook',
+          'Media hora por mes conmigo para pensar tu marca: lo que necesites, no solo contenido',
           '15 % de descuento en páginas web y en el vendedor que nunca duerme',
         ],
+        // El cupo es real: la media hora mensual la doy yo, así que el
+        // plan no escala. Actualizar cuando se ocupen los lugares.
+        cupo: 'Solo 3 marcas en este plan',
         volumen: 'Hasta 10 posteos y 34 historias',
       },
     ],
