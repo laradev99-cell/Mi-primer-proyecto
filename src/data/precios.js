@@ -20,42 +20,54 @@ export const precios = {
     frecuencia: 'Pago único. Se repite cada 3 meses para recalibrar el rumbo.',
   },
 
+  // Los tres planes hacen el mismo trabajo: lo que cambia es cuánto
+  // sale y cuánto seguimiento tenés. Por eso cada uno se presenta por
+  // lo que conseguís, y el volumen baja al pie — que era lo único que
+  // se leía antes.
+  //
+  // Los planes son acumulativos: `incluye` lista solo lo que agrega
+  // sobre el anterior. El primero lleva la base completa.
   manejoRedes: {
     nombre: 'Manejo de redes',
-    bajada: 'Los tres planes incluyen lo mismo. Cambia el volumen.',
-    // Precio de lanzamiento: cupo limitado, no un descuento permanente.
-    // Sacar precioAnterior y lanzamiento cuando se agoten los 5 lugares.
-    lanzamiento: 'Precio de lanzamiento — válido para los primeros 5 clientes del nicho ecommerce',
-    incluye: [
-      'Ideas y plan de contenido mensual',
-      'Diseño y edición de cada pieza',
-      'Textos escritos para vender',
-      'Publicación en Instagram y Facebook',
-      'Te decimos qué grabar cada mes',
-      'Reporte mensual de resultados',
-      'Reunión mensual',
-    ],
+    bajada: 'Tres formas de trabajar. Cambia cuánto contenido sale y cuánto seguimiento tenés.',
     planes: [
       {
         nombre: 'PRESENCIA',
-        descripcion: '6 posteos + 18 historias',
-        detalles: '3 reels · 3 carruseles',
-        precioAnterior: 1380000,
-        precio: 1200000,
+        promesa: 'Ordenamos tu marca',
+        precio: 1100000,
+        incluye: [
+          'Estrategia a 3 meses y plan de contenido mensual',
+          'Diseño, edición y textos de cada pieza',
+          'Publicación en Instagram',
+          'Te decimos qué grabar cada mes',
+        ],
+        volumen: 'Hasta 6 posteos y 18 historias',
       },
       {
         nombre: 'CRECIMIENTO',
-        descripcion: '8 posteos + 26 historias',
-        detalles: '4 reels · 4 carruseles',
-        precioAnterior: 1760000,
-        precio: 1580000,
+        promesa: 'Sabés qué está funcionando y qué no',
+        precio: 1400000,
+        // El del medio es el que queremos que se elija: salto chico
+        // desde el primero y el grueso del seguimiento.
+        destacado: true,
+        hereda: 'Presencia',
+        incluye: [
+          'Reporte mensual de resultados',
+          'Reunión mensual para decidir el mes siguiente',
+          'Prioridad en las respuestas',
+        ],
+        volumen: 'Hasta 8 posteos y 26 historias',
       },
       {
         nombre: 'EXPANSIÓN',
-        descripcion: '10 posteos + 34 historias',
-        detalles: '5 reels · 5 carruseles',
-        precioAnterior: 2250000,
-        precio: 2070000,
+        promesa: 'Más contenido, y el resto te sale más barato',
+        precio: 1999000,
+        hereda: 'Crecimiento',
+        incluye: [
+          'Publicación también en Facebook',
+          '15 % de descuento en páginas web y en el vendedor que nunca duerme',
+        ],
+        volumen: 'Hasta 10 posteos y 34 historias',
       },
     ],
   },
