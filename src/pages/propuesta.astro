@@ -107,49 +107,8 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
     </div>
   </section>
 
-  <!-- ─── PÁGINAS WEB ─── -->
-  <section class="seccion clara">
-    <div class="contenedor">
-      <p class="etiqueta" data-revelar>Paso 03</p>
-      <h2 class="titulo" data-revelar style="--retraso: 70ms">
-        {tiendaOnline.nombre}
-      </h2>
-      <p class="cuerpo bajo-titulo" data-revelar style="--retraso: 120ms">
-        {tiendaOnline.bajada}
-      </p>
-
-      <dl class="filas" data-revelar>
-        {
-          tiendaOnline.opciones.map((o) => (
-            <div class="fila">
-              <dt>{o.nombre}</dt>
-              <dd>{o.precioUsd ? `USD ${o.precioUsd}` : pesos(o.precio)}</dd>
-            </div>
-          ))
-        }
-      </dl>
-
-      <p class="aclaracion" data-revelar>{tiendaOnline.nota}</p>
-
-      <!-- El catálogo entero vive en su propia página -->
-      <div class="ver-mas" data-revelar>
-        <p class="ver-mas-intro">¿Querés ver más opciones?</p>
-        <a class="boton boton-linea-oscura" href="/webs">
-          Ver todos los servicios de páginas web
-          <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <p class="ver-mas-nota">
-          Landings, catálogos con pedidos por WhatsApp, desarrollo a medida y
-          quien te responda cuando no puedas, con precios y plazos.
-        </p>
-      </div>
-    </div>
-  </section>
-
   <!-- ─── EL VENDEDOR QUE NUNCA DUERME ─── -->
-  <section class="seccion lavanda">
+  <section class="seccion clara">
     <div class="contenedor">
       <p class="etiqueta" data-revelar>Para cuando no podés contestar</p>
       <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
@@ -189,7 +148,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
   </section>
 
   <!-- ─── CONDICIONES ─── -->
-  <section class="seccion clara">
+  <section class="seccion lavanda">
     <div class="contenedor">
       <p class="etiqueta" data-revelar>Condiciones</p>
       <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">Cómo funciona</h2>
@@ -213,7 +172,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
   </section>
 
   <!-- ─── LO QUE NECESITAMOS ─── -->
-  <section class="seccion lavanda">
+  <section class="seccion clara">
     <div class="contenedor">
       <p class="etiqueta" data-revelar>De tu lado</p>
       <h2 class="titulo" data-revelar style="--retraso: 70ms">
@@ -228,6 +187,32 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
       </ul>
 
       <p class="pacto" data-revelar>{loQueNecesitamos.nota}</p>
+    </div>
+  </section>
+
+  <!-- ─── PÁGINAS WEB ───
+       Va al final y sin lista de precios: acá solo se abre la puerta,
+       el catálogo entero vive en /webs. -->
+  <section class="seccion lavanda">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Si además necesitás web</p>
+      <h2 class="titulo" data-revelar style="--retraso: 70ms">
+        {tiendaOnline.nombre}
+      </h2>
+      <p class="cuerpo bajo-titulo" data-revelar style="--retraso: 120ms">
+        Tiendas online, landings, catálogos con pedidos por WhatsApp y
+        desarrollo a medida. Está todo con precios y plazos en su propia
+        página.
+      </p>
+
+      <div class="ver-mas ver-mas-suelto" data-revelar>
+        <a class="boton boton-linea-oscura" href="/webs">
+          Ver todos los servicios de páginas web
+          <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -589,6 +574,13 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
     margin-top: clamp(2.5rem, 6vw, 3.5rem);
     padding-top: clamp(2rem, 5vw, 2.6rem);
     border-top: 1px solid var(--violeta-200);
+  }
+
+  /* Sin lista arriba no hay nada de qué separarse */
+  .ver-mas-suelto {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
   }
 
   .ver-mas-intro {

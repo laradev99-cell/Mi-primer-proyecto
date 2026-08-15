@@ -236,7 +236,7 @@ export const precios = {
   loQueNecesitamos: {
     items: [
       'Grabar el material que te pedimos y mandarlo en tiempo y forma',
-      'Aprobar el plan de contenido dentro de las 72 horas',
+      'Aprobar el plan de contenido dentro de las 48 horas',
       'Avisarnos lanzamientos o promos al comienzo de cada mes',
       'Darnos acceso a tus redes',
       'Estar en la reunión mensual',
