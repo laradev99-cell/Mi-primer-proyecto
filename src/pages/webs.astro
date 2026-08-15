@@ -21,8 +21,7 @@ const dolares = (n) => `USD ${new Intl.NumberFormat('es-AR').format(n)}`;
 const precioMedida = (s) =>
   s.precioUsd === null ? `desde ${dolares(s.desde)}` : dolares(s.precioUsd);
 
-const { tiendaNube, tiendas, medida, automatizacion, bajada } =
-  precios.paginasWeb;
+const { tiendaNube, tiendas, medida, bajada } = precios.paginasWeb;
 ---
 
 <Layout
@@ -195,54 +194,24 @@ const { tiendaNube, tiendas, medida, automatizacion, bajada } =
     </div>
   </section>
 
-  <!-- ─── EL VENDEDOR QUE NUNCA DUERME ─── -->
+  <!-- El asistente tiene página propia: acá solo se lo menciona -->
   <section class="seccion lavanda">
     <div class="contenedor">
-      <p class="etiqueta" data-revelar>Para cuando no podés contestar</p>
-      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
-        Que te venda aunque no estés
+      <p class="etiqueta" data-revelar>Aparte de las webs</p>
+      <h2 class="titulo" data-revelar style="--retraso: 70ms">
+        El vendedor que nunca duerme
       </h2>
+      <p class="cuerpo bajo-titulo" data-revelar style="--retraso: 120ms">
+        Un asistente que conoce tu negocio y contesta precios, stock y envíos
+        en tus redes las 24 horas.
+      </p>
 
-      <div class="tarjetas una">
-        {
-          automatizacion.map((s, i) => (
-            <article class="tarjeta" data-revelar style={`--retraso: ${i * 90}ms`}>
-              <h3>{s.nombre}</h3>
-              <p class="cuerpo">{s.descripcion}</p>
-              <ul class="lista-check chica">
-                {s.incluye.map((item) => <li>{item}</li>)}
-              </ul>
-              <div class="tarjeta-pie doble">
-                <div>
-                  <p class="mini-etiqueta fuerte">Instalación</p>
-                  {
-                    s.lanzamiento ? (
-                      <p class="tarjeta-precio">
-                        {pesos(s.lanzamiento)}
-                        <span class="tachado">{pesos(s.instalacion)}</span>
-                      </p>
-                    ) : (
-                      <p class="tarjeta-precio">{pesos(s.instalacion)}</p>
-                    )
-                  }
-                </div>
-                <div>
-                  <p class="mini-etiqueta fuerte">Mantenimiento</p>
-                  <p class="tarjeta-precio chico">
-                    {pesos(s.mantenimiento)}<span class="por-mes">por pedido</span>
-                  </p>
-                </div>
-              </div>
-
-              {
-                s.lanzamientoNota && (
-                  <p class="lanzamiento-nota">{s.lanzamientoNota}</p>
-                )
-              }
-            </article>
-          ))
-        }
-      </div>
+      <a class="boton boton-linea-oscura" href="/vendedor" data-revelar>
+        Ver cómo funciona y cuánto sale
+        <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
   </section>
 

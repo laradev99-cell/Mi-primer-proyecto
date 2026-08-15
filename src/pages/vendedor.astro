@@ -1,0 +1,459 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Pie from '../components/Pie.astro';
+import { precios } from '../data/precios.js';
+import { whatsapp, mensajes } from '../data/site.js';
+
+const pesos = (n) =>
+  new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(n);
+
+// Tiene página propia porque es un servicio que se manda solo: quien
+// pregunta por esto no necesita ver el catálogo de webs entero.
+const v = precios.paginasWeb.automatizacion[0];
+---
+
+<Layout
+  titulo="El vendedor que nunca duerme"
+  descripcion="Un asistente que conoce tu negocio y contesta en Instagram y WhatsApp las 24 horas."
+>
+  <!-- ─── PORTADA ─── -->
+  <header class="portada oscura grano" id="contenido">
+    <div class="orbe orbe-portada"></div>
+    <div class="contenedor interior">
+      <p class="etiqueta" data-revelar>Naimid.Agency</p>
+      <h1 class="display" data-revelar style="--retraso: 90ms">
+        El vendedor que <span class="acento">nunca duerme</span>
+      </h1>
+      <p class="bajada" data-revelar style="--retraso: 180ms">{v.bajada}</p>
+
+      <div class="acciones" data-revelar style="--retraso: 260ms">
+        <a
+          class="boton boton-acento"
+          href={whatsapp(mensajes.vendedor)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Quiero uno para mi negocio
+          <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="boton boton-linea" href="#precio">Ver el precio</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── EL PROBLEMA ─── -->
+  <section class="seccion clara">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>El problema</p>
+      <h2 class="titulo" data-revelar style="--retraso: 70ms">
+        A la 1 de la mañana<br />no estás
+      </h2>
+      <p class="cuerpo bajo-titulo" data-revelar style="--retraso: 120ms">
+        {v.descripcion}
+      </p>
+
+      <div class="hace" data-revelar>
+        <p class="hace-titulo">Qué hace por vos</p>
+        <ul class="lista-check dos-col">
+          {v.incluye.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── POR QUÉ ESTE ─── -->
+  <section class="seccion oscura grano diferencia">
+    <div class="orbe orbe-diferencia"></div>
+    <div class="contenedor interior">
+      <p class="etiqueta" data-revelar>Por qué este y no otro</p>
+      <h2 class="titulo" data-revelar style="--retraso: 70ms">
+        No es un bot de botones
+      </h2>
+      <p class="cuerpo grande" data-revelar style="--retraso: 130ms">
+        {v.diferencial}
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── PARA QUIÉN ─── -->
+  <section class="seccion lavanda">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Para quién</p>
+      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
+        Sirve si te escriben todo el día
+      </h2>
+
+      <ul class="rubros" data-revelar>
+        {v.sirvePara.map((r) => <li>{r}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─── PRECIO ─── -->
+  <section class="seccion clara" id="precio">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Precio</p>
+      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
+        Cuánto sale
+      </h2>
+
+      <div class="dos-columnas">
+        <div data-revelar>
+          <dl class="ficha">
+            <div class="dato">
+              <dt>Tiempo de armado</dt>
+              <dd>{v.tiempo}</dd>
+            </div>
+            <div class="dato">
+              <dt>Necesitamos de vos</dt>
+              <dd>{v.necesitamos}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <aside class="caja-precio" data-revelar style="--retraso: 120ms">
+          <p class="mini-etiqueta">Instalación · pago único</p>
+          <p class="precio">
+            {pesos(v.lanzamiento ?? v.instalacion)}
+            {v.lanzamiento && (
+              <span class="tachado">{pesos(v.instalacion)}</span>
+            )}
+          </p>
+          {v.lanzamientoNota && <p class="nota destacada">{v.lanzamientoNota}</p>}
+
+          <hr />
+
+          <p class="mini-etiqueta">Mantenimiento</p>
+          <p class="precio chico">{pesos(v.mantenimiento)}</p>
+          <p class="nota">{v.mantenimientoNota}</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CIERRE ─── -->
+  <section class="seccion oscura grano cierre">
+    <div class="orbe orbe-cierre"></div>
+    <div class="contenedor interior">
+      <h2 class="titulo" data-revelar>¿Lo probamos con tu negocio?</h2>
+      <p class="cuerpo" data-revelar style="--retraso: 90ms">
+        Escribime y te muestro uno andando antes de que decidas nada.
+      </p>
+      <a
+        class="boton boton-acento"
+        href={whatsapp(mensajes.vendedor)}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-revelar
+        style="--retraso: 160ms"
+      >
+        Escribime por WhatsApp
+        <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <p class="duda" data-revelar style="--retraso: 220ms">
+        ¿Buscabas otra cosa?{' '}
+        <a class="enlace" href="/">Todo lo que hacemos.</a>
+      </p>
+    </div>
+  </section>
+
+  <Pie />
+</Layout>
+
+<style>
+  /* ── Portada ── */
+  .portada {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(6rem, 18vw, 11rem) clamp(4rem, 12vw, 7rem);
+  }
+
+  .orbe-portada {
+    width: min(60vw, 640px);
+    aspect-ratio: 1;
+    top: -25%;
+    right: -15%;
+    background: radial-gradient(circle, #6b2fd6 0%, transparent 68%);
+    opacity: 0.8;
+  }
+
+  .interior {
+    position: relative;
+    z-index: 1;
+  }
+
+  .portada .etiqueta {
+    color: var(--violeta-400);
+    margin-bottom: clamp(1.2rem, 3vw, 1.8rem);
+  }
+
+  .portada h1 {
+    margin-bottom: clamp(1.2rem, 3vw, 1.6rem);
+    max-width: 14ch;
+  }
+
+  .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  @media (max-width: 560px) {
+    .acciones .boton {
+      flex: 1 1 100%;
+      justify-content: center;
+    }
+  }
+
+  /* ── Encabezados ── */
+  .etiqueta {
+    margin-bottom: 1.1rem;
+  }
+
+  .bajo-titulo {
+    margin-top: 1rem;
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+    max-width: 52ch;
+  }
+
+  .titulo-suelto {
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  /* ── Qué hace ── */
+  .hace {
+    background: var(--violeta-100);
+    border-radius: var(--radio);
+    padding: clamp(1.6rem, 4vw, 2.4rem);
+  }
+
+  .hace-titulo {
+    font-size: var(--micro);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--violeta-600);
+    margin-bottom: 1.3rem;
+  }
+
+  .lista-check {
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .lista-check.dos-col {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: 0.75rem 2rem;
+  }
+
+  .lista-check li {
+    position: relative;
+    padding-left: 1.9rem;
+    font-weight: 300;
+    color: var(--texto-medio);
+    line-height: 1.6;
+  }
+
+  .lista-check li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--acento);
+  }
+
+  /* ── La diferencia ── */
+  .diferencia {
+    overflow: hidden;
+    background: linear-gradient(165deg, var(--tinta) 0%, #300b70 100%);
+  }
+
+  .orbe-diferencia {
+    width: min(60vw, 680px);
+    aspect-ratio: 1;
+    top: -25%;
+    left: -18%;
+    background: radial-gradient(circle, #a87cff 0%, transparent 66%);
+    opacity: 0.26;
+  }
+
+  .cuerpo.grande {
+    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--texto-claro);
+    max-width: 54ch;
+    margin-top: 1.4rem;
+  }
+
+  /* ── Rubros ── */
+  .rubros {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .rubros li {
+    background: var(--blanco);
+    border: 1px solid var(--violeta-200);
+    border-radius: 100px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--violeta-900);
+  }
+
+  /* ── Precio ── */
+  .dos-columnas {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    align-items: start;
+  }
+
+  @media (min-width: 860px) {
+    .dos-columnas {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    }
+  }
+
+  .ficha {
+    border-top: 1px solid var(--violeta-200);
+  }
+
+  .dato {
+    padding-block: clamp(1.1rem, 3vw, 1.4rem);
+    border-bottom: 1px solid var(--violeta-200);
+  }
+
+  .dato dt {
+    font-size: var(--micro);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--violeta-600);
+    margin-bottom: 0.5rem;
+  }
+
+  .dato dd {
+    font-weight: 300;
+    color: var(--texto-medio);
+    line-height: 1.65;
+  }
+
+  .caja-precio {
+    background: var(--violeta-100);
+    border: 1px solid var(--violeta-200);
+    border-radius: var(--radio);
+    padding: clamp(1.8rem, 4vw, 2.4rem);
+  }
+
+  .caja-precio hr {
+    border: none;
+    border-top: 1px solid var(--violeta-200);
+    margin-block: 1.6rem;
+  }
+
+  .mini-etiqueta {
+    font-size: var(--micro);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--violeta-600);
+    margin-bottom: 0.5rem;
+  }
+
+  .precio {
+    font-size: clamp(2rem, 5.5vw, 2.7rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--violeta-900);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .precio.chico {
+    font-size: clamp(1.5rem, 4vw, 1.9rem);
+  }
+
+  .tachado {
+    margin-left: 0.6rem;
+    font-size: 0.45em;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--texto-medio);
+    text-decoration: line-through;
+    text-decoration-color: var(--violeta-200);
+  }
+
+  .nota {
+    margin-top: 0.7rem;
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--texto-medio);
+  }
+
+  .nota.destacada {
+    font-weight: 600;
+    color: var(--violeta-600);
+  }
+
+  /* ── Cierre ── */
+  .cierre {
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--tinta) 0%, #240a54 100%);
+  }
+
+  .orbe-cierre {
+    width: min(70vw, 740px);
+    aspect-ratio: 1;
+    bottom: -35%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, #a87cff 0%, transparent 65%);
+    opacity: 0.3;
+  }
+
+  .cierre .interior {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cierre h2 {
+    max-width: 18ch;
+    margin-bottom: 1.2rem;
+  }
+
+  .cierre .cuerpo {
+    margin-bottom: 2rem;
+    max-width: 44ch;
+  }
+
+  .duda {
+    margin-top: 1.6rem;
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--texto-claro);
+  }
+
+  .duda .enlace {
+    color: var(--blanco);
+    font-weight: 500;
+  }
+</style>

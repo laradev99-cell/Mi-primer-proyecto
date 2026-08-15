@@ -214,6 +214,20 @@ export const precios = {
         mantenimiento: 80000,
         mantenimientoNota: 'Por pedido, cuando necesites una actualización o un cambio.',
         tiempo: '1 a 2 semanas',
+        bajada: 'Cada mensaje que tarda en responderse es una venta que se enfría.',
+        // Lo que lo separa de un bot de menú: entiende preguntas libres
+        // porque conoce el negocio, no porque siga un árbol de botones.
+        diferencial:
+          'La mayoría de los bots siguen un menú de botones: si el cliente pregunta algo que no estaba previsto, se traba. Este no. Le cargamos toda la información de tu negocio, así que entiende preguntas libres y contesta con tus palabras.',
+        sirvePara: [
+          'Comercios y tiendas online',
+          'Gastronomía',
+          'Clínicas y consultorios',
+          'Profesionales que agendan turnos',
+          'Gimnasios e inmobiliarias',
+        ],
+        necesitamos:
+          'La información de tu negocio y el número de WhatsApp Business.',
         incluye: [
           'Contesta al toque, aunque sea la 1 de la mañana',
           'Sabe tu negocio a fondo: precios, stock, envíos',

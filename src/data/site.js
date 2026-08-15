@@ -28,6 +28,7 @@ export const mensajes = {
   propuesta: 'Hola Lara, tengo una duda sobre la propuesta.',
   arrancar: 'Hola Lara, quiero arrancar. ¿Coordinamos la fecha de inicio?',
   webs: 'Hola Lara, quiero hacer una página web. ¿Lo charlamos?',
+  vendedor: 'Hola Lara, me interesa el asistente que contesta las 24 horas.',
 };
 
 // ─────────────────────────────────────────────────────────────
