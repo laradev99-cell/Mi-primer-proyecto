@@ -1,46 +1,42 @@
 ---
 import { whatsapp } from '../data/site.js';
 
-// El foco de esta página es el manejo de redes. El análisis arranca el
-// servicio, el contenido es el ciclo mensual y el vendedor 24 horas se
-// le suma aparte. Los tres grupos existen porque son tres momentos
-// distintos, no un listado suelto.
+// Dos secciones distintas y separadas: qué hacemos con tus redes, y qué
+// se le puede sumar aparte. Antes convivían en la misma tarjeta y no se
+// entendía dónde terminaba el servicio y dónde empezaba el agregado.
 const arranque = {
   titulo: 'Análisis y estrategia',
   texto:
     'Entendemos tu marca, tu público y tu competencia. De ahí sale el plan que guía todo el trabajo.',
 };
 
-// Sin lista mensual: lo que sale cada mes depende del plan, así que
-// prometerlo acá contradice la propuesta.
-//
-// Tres agregados: los dos primeros se resuelven acá mismo, el último
-// abre la sección que sigue.
+const trabajo = [
+  'Ideas y plan de contenido',
+  'Diseño y edición de cada pieza',
+  'Textos escritos para vender',
+  'Publicamos por vos',
+  'Te decimos qué grabar',
+];
+
+// Los que llevan `enlace` se resuelven en la página de webs: así el
+// sitio deja de repetir la sección entera de páginas web.
 const extras = [
   {
     titulo: 'El vendedor que nunca duerme',
     texto:
-      'Contesta precios, stock y envíos en Instagram y WhatsApp las 24 horas.',
+      'Contesta precios, stock y envíos en tus redes las 24 horas.',
+    enlace: '/webs',
   },
   {
     titulo: 'Publicidad en Meta Ads',
     texto:
-      'Armamos y gestionamos tus campañas. La pauta la pagás vos directo a Meta; nosotros nos ocupamos de que esa plata rinda.',
+      'Armamos y gestionamos tus campañas. La pauta la pagás vos directo a Meta.',
   },
   {
     titulo: 'Páginas web',
-    texto: 'Si además necesitás dónde vender, lo programamos nosotros.',
-  },
-];
-
-const webs = [
-  {
-    titulo: 'Tienda sobre plataforma',
-    texto: 'En Tienda Nube o Shopify, o mejoramos la que ya tenés.',
-  },
-  {
-    titulo: 'Desarrollo a medida',
-    texto: 'Programada desde cero, con código propio y a tu nombre.',
+    texto:
+      'Tiendas online, landings y desarrollo a medida, con programadores propios.',
+    enlace: '/webs',
   },
 ];
 ---
@@ -52,13 +48,12 @@ const webs = [
       <h2 class="titulo" data-revelar style="--retraso: 80ms">Qué hacemos</h2>
     </div>
 
-    <!-- El servicio central -->
     <article class="principal" data-revelar>
       <div class="principal-intro">
         <h3 class="principal-titulo">Manejo de redes sociales</h3>
         <p class="cuerpo">
-          Nos hacemos cargo de tu Instagram y tu Facebook enteros: qué se dice,
-          cómo se ve y cuándo sale.
+          Nos hacemos cargo de tus redes: qué se dice, cómo se ve y cuándo
+          sale.
         </p>
       </div>
 
@@ -69,22 +64,14 @@ const webs = [
           <p class="grupo-texto">{arranque.texto}</p>
         </div>
 
-        {
-          extras.map((e) => (
-            <div class="grupo">
-              <p class="grupo-titulo">Se le puede sumar</p>
-              <p class="grupo-destacado">{e.titulo}</p>
-              {
-                e.texto
-                  .split('\n\n')
-                  .map((parrafo) => <p class="grupo-texto">{parrafo}</p>)
-              }
-            </div>
-          ))
-        }
+        <div class="grupo">
+          <p class="grupo-titulo">Y después</p>
+          <ul class="items">
+            {trabajo.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
       </div>
 
-      <!-- El botón cierra la tarjeta: se llega a él después de leer todo -->
       <div class="principal-pie">
         <a
           class="boton boton-acento"
@@ -99,35 +86,36 @@ const webs = [
         </a>
       </div>
     </article>
+  </div>
+</section>
 
-    <!-- El servicio que se le agrega -->
-    <div class="webs">
-      <p class="etiqueta" data-revelar>Y si además necesitás web</p>
-      <h3 class="webs-titulo" data-revelar style="--retraso: 70ms">
-        Páginas web, por dos caminos
-      </h3>
+<!-- Sección propia: son agregados, no parte del servicio de redes -->
+<section class="seccion lavanda sumables">
+  <div class="contenedor">
+    <div class="encabezado">
+      <p class="etiqueta" data-revelar>Aparte</p>
+      <h2 class="titulo" data-revelar style="--retraso: 80ms">
+        Se le puede sumar
+      </h2>
+    </div>
 
-      <div class="webs-grilla">
-        {
-          webs.map((w, i) => (
-            <div class="web" data-revelar style={`--retraso: ${i * 100}ms`}>
-              <h4>{w.titulo}</h4>
-              <p class="cuerpo">{w.texto}</p>
-            </div>
-          ))
-        }
-      </div>
-
-      <!-- Las webs tienen su propia página: acá solo se abre la puerta -->
-      <div class="webs-pie" data-revelar>
-        <a class="boton boton-linea-oscura" href="/webs">
-          Ver todo lo de páginas web
-          <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <p class="webs-nota">Precios, tiempos y todo lo que programamos.</p>
-      </div>
+    <div class="sumables-grilla">
+      {
+        extras.map((e, i) => (
+          <div class="sumable" data-revelar style={`--retraso: ${i * 90}ms`}>
+            <h3>{e.titulo}</h3>
+            <p class="cuerpo">{e.texto}</p>
+            {e.enlace && (
+              <a class="sumable-enlace" href={e.enlace}>
+                Ver precios
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            )}
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -148,9 +136,7 @@ const webs = [
     border-radius: var(--radio);
     padding: clamp(2rem, 5vw, 3.5rem);
     display: grid;
-    /* 60px: la bajada tiene que despegarse del primer bloque */
     gap: 3.75rem;
-    margin-bottom: clamp(4rem, 10vw, 6.5rem);
   }
 
   .principal-titulo {
@@ -184,8 +170,6 @@ const webs = [
     background: #bd9bff;
   }
 
-  /* 50px entre bloques: cada grupo tiene que leerse como una unidad
-     aparte, no como párrafos de una misma lista */
   .principal-detalle {
     display: grid;
     gap: 3.125rem;
@@ -196,7 +180,6 @@ const webs = [
     border-top: 1px solid rgba(255, 255, 255, 0.16);
   }
 
-  /* Versaleta en todos: marca momento o contenido especial */
   .grupo-titulo {
     font-size: 0.95rem;
     font-weight: 800;
@@ -210,7 +193,6 @@ const webs = [
     font-size: 1.15rem;
     font-weight: 600;
     letter-spacing: -0.015em;
-    text-transform: none;
     color: var(--blanco);
     margin-bottom: 0.8rem;
   }
@@ -219,72 +201,77 @@ const webs = [
     font-weight: 300;
     font-size: 1rem;
     line-height: 1.75;
-    text-transform: none;
     color: var(--texto-claro);
     max-width: 46ch;
   }
 
-  .grupo-texto + .grupo-texto {
-    margin-top: 1rem;
-  }
-
-  /* ── Las webs: sin tarjetas, para que se lean como un agregado ── */
-  .webs .etiqueta {
-    margin-bottom: 1.1rem;
-  }
-
-  .webs-titulo {
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    color: var(--violeta-900);
-    margin-bottom: clamp(2rem, 5vw, 3rem);
-    text-wrap: balance;
-  }
-
-  .webs-grilla {
+  .items {
+    list-style: none;
     display: grid;
-    gap: clamp(2rem, 5vw, 3.5rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+    gap: 0.9rem 2.5rem;
   }
 
-  .web {
+  .items li {
+    position: relative;
+    padding-left: 1.6rem;
+    font-weight: 300;
+    font-size: 1rem;
+    color: var(--texto-claro);
+    line-height: 1.5;
+  }
+
+  .items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 10px;
+    height: 1.5px;
+    background: #a87cff;
+  }
+
+  /* ── Los agregados ── */
+  .sumables-grilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: clamp(2rem, 4.5vw, 3rem);
+  }
+
+  .sumable {
     padding-top: clamp(1.2rem, 3vw, 1.6rem);
     border-top: 2px solid var(--violeta-900);
   }
 
-  .web h4 {
+  .sumable h3 {
     font-size: clamp(1.15rem, 2.6vw, 1.4rem);
     font-weight: 600;
     letter-spacing: -0.02em;
     color: var(--violeta-900);
     margin-bottom: 0.8rem;
+    text-wrap: balance;
   }
 
-  .webs-pie {
-    margin-top: clamp(2.2rem, 5vw, 3rem);
-    display: flex;
-    flex-wrap: wrap;
+  .sumable .cuerpo {
+    font-size: 0.95rem;
+  }
+
+  .sumable-enlace {
+    display: inline-flex;
     align-items: center;
-    gap: 0.9rem 1.4rem;
-  }
-
-  /* Sobre fondo claro el botón de línea necesita su propio contorno */
-  .boton-linea-oscura {
-    background: transparent;
-    color: var(--violeta-900);
-    border: 1.5px solid var(--violeta-900);
-  }
-
-  .boton-linea-oscura:hover {
-    background: var(--violeta-900);
-    color: var(--blanco);
-  }
-
-  .webs-nota {
+    gap: 0.4rem;
+    margin-top: 1.1rem;
     font-size: 0.9rem;
-    font-weight: 300;
-    color: var(--texto-medio);
+    font-weight: 600;
+    color: var(--violeta-600);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--violeta-200);
+    padding-bottom: 0.1rem;
+    transition: border-color var(--transicion);
+  }
+
+  .sumable-enlace:hover {
+    border-bottom-color: var(--violeta-600);
   }
 
   @media (min-width: 880px) {
@@ -293,17 +280,8 @@ const webs = [
       align-items: start;
     }
 
-    .principal-detalle {
-      grid-template-columns: 1fr;
-    }
-
-    /* El botón cruza las dos columnas, al pie de todo */
     .principal-pie {
       grid-column: 1 / -1;
-    }
-
-    .webs-grilla {
-      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>
