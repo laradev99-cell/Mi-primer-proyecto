@@ -118,7 +118,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
           tiendaOnline.opciones.map((o) => (
             <div class="fila">
               <dt>{o.nombre}</dt>
-              <dd>{pesos(o.precio)}</dd>
+              <dd>{o.precioUsd ? `USD ${o.precioUsd}` : pesos(o.precio)}</dd>
             </div>
           ))
         }
@@ -163,21 +163,16 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
         <aside class="caja-precio" data-revelar style="--retraso: 120ms">
           <p class="mini-etiqueta">Instalación</p>
           <p class="precio">
+            {pesos(respuestasAutomaticas.lanzamiento ?? respuestasAutomaticas.instalacion)}
             {
-              respuestasAutomaticas.instalacion
-                ? pesos(respuestasAutomaticas.instalacion)
-                : 'A definir'
+              respuestasAutomaticas.lanzamiento && (
+                <span class="precio-tachado">{pesos(respuestasAutomaticas.instalacion)}</span>
+              )
             }
           </p>
           <hr />
-          <p class="mini-etiqueta">Mantenimiento</p>
-          <p class="precio">
-            {
-              respuestasAutomaticas.mantenimiento
-                ? pesos(respuestasAutomaticas.mantenimiento)
-                : 'A definir'
-            }
-          </p>
+          <p class="mini-etiqueta">Mantenimiento · por pedido</p>
+          <p class="precio">{pesos(respuestasAutomaticas.mantenimiento)}</p>
           {
             respuestasAutomaticas.aclaracion && (
               <p class="nota">{respuestasAutomaticas.aclaracion}</p>
@@ -394,6 +389,16 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
     letter-spacing: 0.16em;
     color: var(--violeta-600);
     margin-bottom: 0.5rem;
+  }
+
+  .precio-tachado {
+    margin-left: 0.6rem;
+    font-size: 0.45em;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--texto-medio);
+    text-decoration: line-through;
+    text-decoration-color: var(--violeta-200);
   }
 
   .nota {

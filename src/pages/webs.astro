@@ -16,7 +16,12 @@ const pesos = (n) =>
 // desarrollador aparte del resto de los servicios, que van en pesos.
 const dolares = (n) => `USD ${new Intl.NumberFormat('es-AR').format(n)}`;
 
-const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
+// Un servicio a medida puede tener precio cerrado o piso: cuando
+// `precioUsd` es null, el precio arranca en `desde`.
+const precioMedida = (s) =>
+  s.precioUsd === null ? `desde ${dolares(s.desde)}` : dolares(s.precioUsd);
+
+const { tiendaNube, tiendas, medida, automatizacion, bajada } =
   precios.paginasWeb;
 ---
 
@@ -101,40 +106,12 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
     <div class="contenedor">
       <p class="etiqueta" data-revelar>Tiendas online</p>
       <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
-        Otros caminos
+        Otros caminos sobre plataforma
       </h2>
 
       <div class="tarjetas">
         {
           tiendas.map((s, i) => (
-            <article class="tarjeta" data-revelar style={`--retraso: ${i * 90}ms`}>
-              <h3>{s.nombre}</h3>
-              <p class="cuerpo">{s.descripcion}</p>
-              <ul class="lista-check chica">
-                {s.incluye.map((item) => <li>{item}</li>)}
-              </ul>
-              <div class="tarjeta-pie">
-                <p class="tarjeta-precio">{pesos(s.precio)}</p>
-                <p class="tarjeta-tiempo">{s.tiempo}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── WEBS ─── -->
-  <section class="seccion clara">
-    <div class="contenedor">
-      <p class="etiqueta" data-revelar>Webs</p>
-      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
-        Si todavía no vendés online
-      </h2>
-
-      <div class="tarjetas">
-        {
-          webs.map((s, i) => (
             <article class="tarjeta" data-revelar style={`--retraso: ${i * 90}ms`}>
               <h3>{s.nombre}</h3>
               <p class="cuerpo">{s.descripcion}</p>
@@ -185,8 +162,11 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
             {
               medida.webYTiendas.map((s) => (
                 <div class="fila">
-                  <dt>{s.nombre}</dt>
-                  <dd>{dolares(s.precioUsd)}</dd>
+                  <dt>
+                    {s.nombre}
+                    {s.nota && <span class="fila-nota"> · {s.nota}</span>}
+                  </dt>
+                  <dd>{precioMedida(s)}</dd>
                 </div>
               ))
             }
@@ -203,12 +183,11 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
                     {s.nombre}
                     {s.descripcion && <span class="fila-nota"> · {s.descripcion}</span>}
                   </dt>
-                  <dd>{dolares(s.precioUsd)}</dd>
+                  <dd>{precioMedida(s)}</dd>
                 </div>
               ))
             }
           </dl>
-          <p class="aclaracion aclaracion-oscura">{medida.notaExclusividad}</p>
         </div>
       </div>
 
@@ -236,15 +215,30 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
               <div class="tarjeta-pie doble">
                 <div>
                   <p class="mini-etiqueta fuerte">Instalación</p>
-                  <p class="tarjeta-precio">{pesos(s.instalacion)}</p>
+                  {
+                    s.lanzamiento ? (
+                      <p class="tarjeta-precio">
+                        {pesos(s.lanzamiento)}
+                        <span class="tachado">{pesos(s.instalacion)}</span>
+                      </p>
+                    ) : (
+                      <p class="tarjeta-precio">{pesos(s.instalacion)}</p>
+                    )
+                  }
                 </div>
                 <div>
                   <p class="mini-etiqueta fuerte">Mantenimiento</p>
                   <p class="tarjeta-precio chico">
-                    {pesos(s.mantenimiento)}<span class="por-mes">/mes</span>
+                    {pesos(s.mantenimiento)}<span class="por-mes">por pedido</span>
                   </p>
                 </div>
               </div>
+
+              {
+                s.lanzamientoNota && (
+                  <p class="lanzamiento-nota">{s.lanzamientoNota}</p>
+                )
+              }
             </article>
           ))
         }
@@ -554,10 +548,33 @@ const { tiendaNube, tiendas, webs, medida, automatizacion, bajada } =
   }
 
   .por-mes {
-    font-size: 0.7em;
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.62em;
     font-weight: 300;
     letter-spacing: 0;
     color: var(--texto-medio);
+  }
+
+  /* El precio viejo al lado del de lanzamiento: chico, para que el
+     que manda siga siendo el nuevo */
+  .tachado {
+    margin-left: 0.5rem;
+    font-size: 0.55em;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--texto-medio);
+    text-decoration: line-through;
+    text-decoration-color: var(--violeta-200);
+  }
+
+  .lanzamiento-nota {
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--violeta-200);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--violeta-600);
   }
 
   .tarjeta-tiempo {

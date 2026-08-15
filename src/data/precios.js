@@ -68,10 +68,10 @@ export const precios = {
     opciones: [
       { nombre: 'Tienda Nube · hasta 30 productos', precio: 390000 },
       { nombre: 'Shopify', precio: 320000 },
-      { nombre: 'Mejorar o migrar tu tienda', precio: 140000 },
-      { nombre: 'Página web personalizada', precio: 300000 },
+      { nombre: 'Mejorar tu tienda', precio: 300000 },
+      { nombre: 'Landing page', precioUsd: 200 },
     ],
-    nota: 'La plataforma y el dominio los paga el cliente directo al proveedor.',
+    nota: 'La plataforma y el dominio los paga el cliente directo al proveedor. El desarrollo a medida se cotiza en dólares.',
   },
 
   // No se vende como "IA" o "automatización" — eso es la tecnología
@@ -81,10 +81,11 @@ export const precios = {
     nombre: 'El vendedor que nunca duerme',
     descripcion:
       'La mayoría de los mensajes que recibe una tienda son siempre los mismos: precio, stock, envío, talle. Cada uno que tarda en responderse es una venta que se enfría — y a la 1 de la mañana, un domingo, o en medio de otra cosa, no siempre podés estar ahí.\n\nEsto sí. Conoce tu negocio a fondo y responde en Instagram y WhatsApp las 24 horas, con el mismo tono que usarías vos. Nadie nota que no sos vos. Y te deriva solo las consultas que valen tu tiempo.',
-    instalacion: 400000,
-    mantenimiento: 87500,
+    instalacion: 600000,
+    lanzamiento: 400000,
+    mantenimiento: 80000,
     aclaracion:
-      'La instalación se paga una vez. El mantenimiento es mensual y cubre los ajustes a medida que cambia tu negocio.',
+      'La instalación se paga una vez y queda un lugar al precio de lanzamiento. El mantenimiento no es mensual: se cobra solo cuando hay que actualizar algo.',
   },
 
   // ───────────────────────────────────────────────────────────
@@ -117,6 +118,8 @@ export const precios = {
       nota: 'La plataforma y el dominio los pagás vos directo al proveedor.',
     },
 
+    // Trabajo sobre plataforma: sigue en pesos porque se cotiza contra
+    // costos locales, no contra el dólar.
     tiendas: [
       {
         nombre: 'Shopify',
@@ -127,78 +130,57 @@ export const precios = {
         incluye: ['Tienda personalizada', 'Medios de pago', 'Envíos y gestión'],
       },
       {
-        nombre: 'Mejorar o migrar tu tienda',
+        nombre: 'Mejorar tu tienda',
         descripcion:
-          'Revisamos la tienda que ya tenés y le subimos la conversión: fichas, velocidad, medios de pago y orden.',
-        precio: 140000,
+          'Miramos todo el sitio y mejoramos lo que haga falta: rediseño, fichas de producto, velocidad, medios de pago y orden.',
+        precio: 300000,
         tiempo: '1 semana',
         incluye: [
-          'Revisión completa',
+          'Rediseño de la tienda',
           'Optimización de fichas',
-          'Mejora de conversión',
-        ],
-      },
-    ],
-
-    webs: [
-      {
-        nombre: 'Landing page',
-        descripcion:
-          'Una sola página enfocada en una oferta. Hecha para convertir, perfecta para acompañar publicidad.',
-        precio: 140000,
-        tiempo: '3 a 7 días',
-        incluye: [
-          'Diseño personalizado',
-          'Optimizada para convertir',
-          'Contacto integrado',
+          'Carga de 10 productos',
         ],
       },
       {
-        nombre: 'Web institucional',
+        nombre: 'Migrar tu tienda',
         descripcion:
-          'Sitio programado, no una plantilla. Rápido y con el diseño propio de tu marca.',
-        precio: 300000,
-        tiempo: '1 a 3 semanas',
-        incluye: ['Varias páginas', 'Rápida y optimizada', 'Diseño a medida'],
-      },
-      {
-        nombre: 'Catálogo con pedidos por WhatsApp',
-        descripcion:
-          'Tu cliente arma el pedido y te llega listo al WhatsApp del local. Ideal para gastronomía.',
-        precio: 240000,
+          'Pasamos una tienda que ya existe a otra plataforma, sin perder productos ni posicionamiento.',
+        precio: 450000,
         tiempo: '1 a 2 semanas',
         incluye: [
-          'Sistema de pedidos integrado',
-          'Conexión con WhatsApp',
-          'Gestión de catálogo',
+          'Traspaso completo del catálogo',
+          'Configuración desde cero',
+          'Revisión antes de salir',
         ],
       },
     ],
 
-    // En dólares a propósito: es el desarrollador que programa a medida,
-    // aparte del resto de servicios (que cotizan en pesos). Marca que es
-    // un servicio distinto, más premium.
+    // Un solo precio por servicio, lo programe quien lo programe.
+    // En dólares porque es desarrollo a medida, no trabajo sobre
+    // plataforma: precio null significa "desde", con la cifra en `desde`.
     medida: {
       nombre: 'Desarrollo a medida',
       bajada: 'Cuando una plataforma no alcanza. Programado desde cero, con código propio.',
       webYTiendas: [
         { nombre: 'Landing page', precioUsd: 200 },
         { nombre: 'Catálogo digital con pedidos', precioUsd: 260 },
-        { nombre: 'Web empresarial', precioUsd: 700 },
-        { nombre: 'Tienda ecommerce con carrito y pagos', precioUsd: 1200 },
+        { nombre: 'Web institucional', precioUsd: 700 },
+        {
+          nombre: 'Tienda ecommerce con carrito y pagos',
+          precioUsd: null,
+          desde: 500,
+          nota: 'Se cotiza según el catálogo, el panel de administración y las cuentas de usuario.',
+        },
       ],
       sistemasYApps: [
-        { nombre: 'Aplicación móvil (Android/iOS)', precioUsd: 1650 },
-        { nombre: 'Aplicación de escritorio', precioUsd: 2000 },
         {
           nombre: 'Sistema administrativo',
           descripcion: 'Stock, clientes, turnos, reportes',
           precioUsd: 2250,
         },
+        { nombre: 'Aplicación móvil (Android/iOS)', precioUsd: 1650 },
+        { nombre: 'Aplicación de escritorio', precioUsd: 2000 },
       ],
-      // Este segmento lo cotiza en exclusiva el desarrollador que lo arma:
-      // no lo ofrece nadie más del equipo.
-      notaExclusividad: 'Este segmento no lo ofrece nadie más en el equipo — es exclusivo de este desarrollador.',
       nota: 'El hosting, el dominio y las cuentas de desarrollador (Google Play, App Store) los paga el cliente directamente al proveedor.',
     },
 
@@ -207,8 +189,14 @@ export const precios = {
         nombre: 'El vendedor que nunca duerme',
         descripcion:
           'Cada mensaje que tarda en responderse es una venta que se enfría. Esto contesta por vos al instante, sea la hora que sea, con el mismo tono que usarías vos — nadie nota la diferencia.',
-        instalacion: 400000,
-        mantenimiento: 87500,
+        instalacion: 600000,
+        // Precio de lanzamiento: queda un lugar. Sacar `lanzamiento`
+        // cuando se ocupe y la página se acomoda sola.
+        lanzamiento: 400000,
+        lanzamientoNota: 'Queda un lugar a este precio. Del siguiente en adelante, $600.000.',
+        // Dejó de ser mensual: se cobra solo cuando hay que tocar algo.
+        mantenimiento: 80000,
+        mantenimientoNota: 'Por pedido, cuando necesites una actualización o un cambio.',
         tiempo: '1 a 2 semanas',
         incluye: [
           'Contesta al toque, aunque sea la 1 de la mañana',
