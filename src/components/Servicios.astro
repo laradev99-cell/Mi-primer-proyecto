@@ -11,46 +11,36 @@ const arranque = {
     'Entendemos tu marca, tu público y tu competencia. De ahí sale el plan que guía todo el trabajo.',
 };
 
-const mensual = [
-  'Ideas y plan de contenido',
-  'Diseño y edición de cada pieza',
-  'Textos escritos para vender',
-  'Publicación en Instagram y Facebook',
-  'Te decimos qué grabar',
-  'Reporte y reunión mensual',
-];
-
+// Sin lista mensual: lo que sale cada mes depende del plan, así que
+// prometerlo acá contradice la propuesta.
+//
 // Tres agregados: los dos primeros se resuelven acá mismo, el último
-// abre la sección que sigue. Por eso ese se escribe como pie, no como
-// cierre.
+// abre la sección que sigue.
 const extras = [
   {
     titulo: 'El vendedor que nunca duerme',
     texto:
-      'Contesta precios, stock y envíos en Instagram y WhatsApp las 24 horas, con el mismo tono que usarías vos.',
+      'Contesta precios, stock y envíos en Instagram y WhatsApp las 24 horas.',
   },
   {
     titulo: 'Publicidad en Meta Ads',
     texto:
-      'Si ya tenés el contenido funcionando, el siguiente paso es la publicidad. Configuramos y gestionamos tus campañas en Instagram y Facebook: definimos a quién le mostramos cada anuncio, probamos distintas versiones para ver cuál funciona mejor, y ajustamos el presupuesto según los resultados.\n\nLa inversión en pauta la pagás vos directamente a Meta. Nosotros nos encargamos de que esa plata se use bien.',
+      'Armamos y gestionamos tus campañas. La pauta la pagás vos directo a Meta; nosotros nos ocupamos de que esa plata rinda.',
   },
   {
     titulo: 'Páginas web',
-    texto:
-      'Si además necesitás dónde vender, lo programamos nosotros. Te lo contamos acá abajo.',
+    texto: 'Si además necesitás dónde vender, lo programamos nosotros.',
   },
 ];
 
 const webs = [
   {
     titulo: 'Tienda sobre plataforma',
-    texto:
-      'Armamos tu tienda en Tienda Nube o Shopify, o mejoramos la que ya tenés. Para salir a vender rápido, sobre algo probado.',
+    texto: 'En Tienda Nube o Shopify, o mejoramos la que ya tenés.',
   },
   {
     titulo: 'Desarrollo a medida',
-    texto:
-      'Programada desde cero, con código propio. El diseño no depende de una plantilla y el código queda a tu nombre.',
+    texto: 'Programada desde cero, con código propio y a tu nombre.',
   },
 ];
 ---
@@ -77,13 +67,6 @@ const webs = [
           <p class="grupo-titulo">Arranca con</p>
           <p class="grupo-destacado">{arranque.titulo}</p>
           <p class="grupo-texto">{arranque.texto}</p>
-        </div>
-
-        <div class="grupo">
-          <p class="grupo-titulo">Todos los meses</p>
-          <ul class="items">
-            {mensual.map((item) => <li>{item}</li>)}
-          </ul>
         </div>
 
         {
@@ -243,35 +226,6 @@ const webs = [
 
   .grupo-texto + .grupo-texto {
     margin-top: 1rem;
-  }
-
-  /* Dos columnas y renglones sueltos: comprimidos se leían como un
-     bloque de texto en lugar de seis cosas distintas */
-  .items {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-    gap: 1.15rem 2.5rem;
-  }
-
-  .items li {
-    position: relative;
-    padding-left: 1.6rem;
-    font-weight: 300;
-    font-size: 1rem;
-    text-transform: none;
-    color: var(--texto-claro);
-    line-height: 1.6;
-  }
-
-  .items li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.68em;
-    width: 10px;
-    height: 1.5px;
-    background: #a87cff;
   }
 
   /* ── Las webs: sin tarjetas, para que se lean como un agregado ── */
