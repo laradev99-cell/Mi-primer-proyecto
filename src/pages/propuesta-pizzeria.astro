@@ -1,0 +1,428 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Pie from '../components/Pie.astro';
+import { whatsapp, mensajes } from '../data/site.js';
+
+const pesos = (n) =>
+  new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(n);
+
+const nombrePizzeria = 'la pizzería';
+const precioAnalisis = 110000;
+const precioManejo = 700000;
+const condiciones = {
+  pago: '100% por adelantado al inicio de cada mes.',
+  duracion:
+    'El trabajo se contrata por 3 meses. Es el tiempo mínimo para que una estrategia muestre resultados reales. Cumplido ese plazo, seguimos mes a mes.',
+  ajuste:
+    '10% cada 3 meses, avisado con 30 días. Pagando 3 meses adelantados congelás el precio y obtenés 5% de descuento.',
+  revisiones: 'Dos rondas de ajustes por pieza, sin cargo.',
+};
+
+const loQueNecesitamos = {
+  items: [
+    'Grabar el material que te pedimos y mandarlo en tiempo y forma',
+    'Aprobar el plan de contenido dentro de las 48 horas',
+    'Avisarnos lanzamientos o promos al comienzo de cada mes',
+    'Darnos acceso a tus redes',
+    'Estar en la reunión mensual',
+  ],
+  nota: 'Si vos cumplís esto, nosotros nos hacemos cargo de todo lo demás.',
+};
+---
+
+<Layout
+  titulo="Tu propuesta"
+  descripcion="Propuesta personalizada de trabajo de Naimid.Agency"
+  noindex={true}
+>
+  <!-- ─── PORTADA ─── -->
+  <header class="portada oscura grano" id="contenido">
+    <div class="orbe orbe-portada"></div>
+    <div class="contenedor interior">
+      <p class="etiqueta" data-revelar>Naimid.Agency</p>
+      <h1 class="display" data-revelar style="--retraso: 90ms">Tu propuesta</h1>
+      <p class="bajada" data-revelar style="--retraso: 180ms">
+        Armada para {nombrePizzeria}. Si algo no te cierra, escribime y lo vemos.
+      </p>
+    </div>
+  </header>
+
+  <!-- ─── ANÁLISIS INICIAL ─── -->
+  <section class="seccion clara">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Paso 01</p>
+      <h2 class="titulo" data-revelar style="--retraso: 70ms">
+        Análisis inicial de marca
+      </h2>
+      <p class="cuerpo bajo-titulo" data-revelar style="--retraso: 120ms">
+        Antes de publicar, entendemos tu negocio a fondo. Hacemos un análisis profundo de tu marca, competencia y estrategia actual para armar un plan que funcione.
+      </p>
+
+      <div class="dos-columnas">
+        <ul class="lista-check" data-revelar>
+          <li>Briefing y diagnóstico de tu marca</li>
+          <li>Análisis de lo que veniste haciendo</li>
+          <li>Definición de tus pilares de contenido</li>
+          <li>Plan estratégico a 3 meses</li>
+          <li>Reunión de presentación</li>
+        </ul>
+
+        <aside class="caja-precio" data-revelar style="--retraso: 120ms">
+          <p class="precio">{pesos(precioAnalisis)}</p>
+          <p class="nota">Pago único</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MANEJO DE REDES ─── -->
+  <section class="seccion lavanda">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Paso 02</p>
+      <h2 class="titulo" data-revelar style="--retraso: 70ms">
+        Manejo de redes
+      </h2>
+      <p class="cuerpo bajo-titulo" data-revelar style="--retraso: 120ms">
+        Una propuesta pensada para el arranque de la pizzería.
+      </p>
+
+      <div class="dos-columnas-lista">
+        <ul class="lista-check" data-revelar>
+          <li>4 posteos mensuales, reels o carruseles según la estrategia</li>
+          <li>10 historias mensuales</li>
+          <li>1 jornada de grabación de contenido en tu local</li>
+          <li>Estrategia de contenido mensual a cargo de nuestra Social Media Manager</li>
+          <li>Publicación y gestión diaria a cargo de nuestra Community Manager</li>
+          <li>Edición y diseño de cada pieza a cargo de nuestro equipo de contenido</li>
+        </ul>
+
+        <aside class="caja-precio" data-revelar style="--retraso: 120ms">
+          <p class="precio">{pesos(precioManejo)}</p>
+          <p class="nota">por mes</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONDICIONES ─── -->
+  <section class="seccion clara">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Condiciones</p>
+      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">Cómo funciona</h2>
+
+      <dl class="condiciones">
+        {
+          [
+            ['Pago', condiciones.pago],
+            ['Duración', condiciones.duracion],
+            ['Ajuste', condiciones.ajuste],
+            ['Revisiones', condiciones.revisiones],
+          ].map(([titulo, texto], i) => (
+            <div class="condicion" data-revelar style={`--retraso: ${i * 80}ms`}>
+              <dt>{titulo}</dt>
+              <dd class="cuerpo">{texto}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- ─── LO QUE NECESITAMOS ─── -->
+  <section class="seccion lavanda">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>De tu lado</p>
+      <h2 class="titulo" data-revelar style="--retraso: 70ms">
+        Lo que necesitamos de vos
+      </h2>
+      <p class="horas" data-revelar style="--retraso: 120ms">
+        Unas <span class="acento">3 horas</span> por semana.
+      </p>
+
+      <ul class="lista-check" data-revelar>
+        {loQueNecesitamos.items.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <p class="pacto" data-revelar>{loQueNecesitamos.nota}</p>
+    </div>
+  </section>
+
+  <!-- ─── CIERRE ─── -->
+  <section class="seccion oscura grano cierre">
+    <div class="orbe orbe-cierre"></div>
+    <div class="contenedor interior">
+      <h2 class="titulo" data-revelar>¿Arrancamos?</h2>
+      <p class="cuerpo" data-revelar style="--retraso: 90ms">
+        Escribime y coordinamos la fecha de inicio.
+      </p>
+      <a
+        class="boton boton-acento"
+        href={whatsapp(mensajes.arrancar)}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-revelar
+        style="--retraso: 160ms"
+      >
+        Quiero arrancar
+        <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <p class="duda" data-revelar style="--retraso: 220ms">
+        ¿Alguna duda antes?{' '}
+        <a
+          class="enlace"
+          href={whatsapp(mensajes.propuesta)}
+          target="_blank"
+          rel="noopener noreferrer">Escribime.</a
+        >
+      </p>
+    </div>
+  </section>
+
+  <Pie />
+</Layout>
+
+<style>
+  /* ── Portada ── */
+  .portada {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(6rem, 18vw, 11rem) clamp(4rem, 12vw, 7rem);
+  }
+
+  .orbe-portada {
+    width: min(60vw, 640px);
+    aspect-ratio: 1;
+    top: -25%;
+    right: -15%;
+    background: radial-gradient(circle, #6b2fd6 0%, transparent 68%);
+    opacity: 0.8;
+  }
+
+  .interior {
+    position: relative;
+    z-index: 1;
+  }
+
+  .portada .etiqueta {
+    color: var(--violeta-400);
+    margin-bottom: clamp(1.2rem, 3vw, 1.8rem);
+  }
+
+  .portada h1 {
+    margin-bottom: clamp(1.2rem, 3vw, 1.6rem);
+  }
+
+  /* ── Encabezados de sección ── */
+  .etiqueta {
+    margin-bottom: 1.1rem;
+  }
+
+  .bajo-titulo {
+    margin-top: 1rem;
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+    max-width: 46ch;
+  }
+
+  /* Título sin bajada: necesita su propio aire antes del contenido */
+  .titulo-suelto {
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  /* ── Listas con check ── */
+  .lista-check {
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .lista-check li {
+    position: relative;
+    padding-left: 1.9rem;
+    font-weight: 300;
+    color: var(--texto-medio);
+    line-height: 1.6;
+  }
+
+  .lista-check li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--acento);
+  }
+
+  /* ── Caja de precio ── */
+  .dos-columnas {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    align-items: start;
+  }
+
+  .dos-columnas-lista {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    align-items: start;
+  }
+
+  @media (min-width: 860px) {
+    .dos-columnas {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    }
+
+    .dos-columnas-lista {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    }
+  }
+
+  /* Violeta claro con borde, no el violeta-900 que leía como negro.
+     El precio se destaca por tamaño, no por invertir el fondo. */
+  .caja-precio {
+    background: var(--violeta-100);
+    border: 1px solid var(--violeta-200);
+    border-radius: var(--radio);
+    padding: clamp(1.8rem, 4vw, 2.4rem);
+  }
+
+  /* Sobre lavanda el violeta claro desaparece: ahí la caja va blanca */
+  .lavanda .caja-precio {
+    background: var(--blanco);
+  }
+
+  .caja-precio hr {
+    border: none;
+    border-top: 1px solid var(--violeta-200);
+    margin-block: 1.4rem;
+  }
+
+  .precio {
+    font-size: clamp(2rem, 5.5vw, 2.9rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--violeta-900);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mini-etiqueta {
+    font-size: var(--micro);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--violeta-600);
+    margin-bottom: 0.5rem;
+  }
+
+  .nota {
+    margin-top: 0.8rem;
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--texto-medio);
+  }
+
+  /* ── Condiciones ──
+     Lista de definiciones con reglas finas: es un documento
+     contractual, se lee como tal. */
+  .condiciones {
+    margin-top: clamp(2rem, 5vw, 3rem);
+    border-top: 2px solid var(--violeta-900);
+  }
+
+  .condicion {
+    display: grid;
+    gap: 0.5rem 3rem;
+    padding-block: clamp(1.3rem, 3.5vw, 1.8rem);
+    border-bottom: 1px solid var(--violeta-200);
+  }
+
+  .condicion dt {
+    font-size: var(--micro);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--violeta-600);
+    padding-top: 0.35em;
+  }
+
+  .condicion dd {
+    max-width: 58ch;
+  }
+
+  @media (min-width: 760px) {
+    .condicion {
+      grid-template-columns: minmax(0, 0.28fr) minmax(0, 1fr);
+    }
+  }
+
+  /* ── Lo que necesitamos ── */
+  .horas {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 200;
+    letter-spacing: -0.025em;
+    color: var(--violeta-900);
+    margin-block: 1.2rem clamp(2rem, 5vw, 2.8rem);
+  }
+
+  .horas .acento {
+    font-weight: 700;
+  }
+
+  .pacto {
+    margin-top: clamp(2rem, 5vw, 2.8rem);
+    padding: clamp(1.4rem, 4vw, 1.9rem);
+    background: var(--violeta-100);
+    border-radius: var(--radio);
+    font-weight: 400;
+    color: var(--violeta-900);
+    max-width: 52ch;
+  }
+
+  /* ── Cierre ── */
+  .cierre {
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--tinta) 0%, #240a54 100%);
+  }
+
+  .orbe-cierre {
+    width: min(70vw, 740px);
+    aspect-ratio: 1;
+    bottom: -35%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, #a87cff 0%, transparent 65%);
+    opacity: 0.3;
+  }
+
+  .cierre .interior {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cierre .cuerpo {
+    margin-bottom: 2rem;
+  }
+
+  .duda {
+    margin-top: 1.6rem;
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--texto-claro);
+  }
+
+  .duda .enlace {
+    color: var(--blanco);
+    font-weight: 500;
+  }
+</style>
