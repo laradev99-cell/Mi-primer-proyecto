@@ -519,6 +519,19 @@ const loQueNecesitamos = {
       display: none;
     }
 
+    /* La sombra difusa del botón es el otro efecto que el visor de PDF
+       no sabe vectorizar: la aplana y la pinta como un rectángulo lila
+       del ancho del botón. Sobre fondo oscuro se ve como una mancha. */
+    .boton {
+      box-shadow: none;
+    }
+
+    /* El grano se apoya en mix-blend-mode, que fuerza el mismo aplanado
+       de capas. En papel no se percibe: solo puede romper. */
+    .grano::after {
+      display: none;
+    }
+
     .cierre {
       background: var(--tinta);
     }
