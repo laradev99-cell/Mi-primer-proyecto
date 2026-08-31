@@ -426,4 +426,89 @@ const loQueNecesitamos = {
     color: var(--blanco);
     font-weight: 500;
   }
+
+  /* ── Impresión / PDF ──
+     Esta propuesta se manda en PDF, así que el papel es un destino real,
+     no un accidente. Dos cosas se rompían al exportar: el precio se
+     despegaba de lo que incluye, y las listas se cortaban al medio. */
+  @media print {
+    /* A4 entra a 794px y el layout de dos columnas recién arranca en
+       860px: sin esto el precio caía debajo de la lista y terminaba en
+       la hoja siguiente, separado de aquello que justifica. */
+    .dos-columnas,
+    .dos-columnas-lista {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+      gap: 1.5rem;
+    }
+
+    /* En una columna angosta el precio a 44px se desbordaba de su caja */
+    .caja-precio {
+      padding: 1.5rem;
+    }
+
+    .precio {
+      font-size: 2rem;
+    }
+
+    /* El aire que en pantalla da respiro, en papel solo empuja contenido
+       a la hoja siguiente. Ajustado para que la propuesta cierre en 3
+       hojas y el pie no se quede solo en una cuarta casi vacía. */
+    :global(:root) {
+      --seccion: 2.2rem;
+    }
+
+    .portada {
+      padding-block: 2.8rem 2.2rem;
+    }
+
+    /* El pie cierra grande en pantalla, pero en papel esa firma de 70px
+       se llevaba una hoja entera para ella sola. Lleva !important porque
+       Pie.astro la define con estilos de más especificidad que esta. */
+    :global(.pie) {
+      padding-block: 1.5rem 1.2rem !important;
+    }
+
+    :global(.pie .firma) {
+      font-size: 1.5rem !important;
+      margin-bottom: 0.75rem !important;
+    }
+
+    :global(.pie .enlaces) {
+      padding-bottom: 0.75rem !important;
+    }
+
+    :global(.pie .legal) {
+      margin-top: 0.75rem !important;
+    }
+
+    /* Unidades que no se parten: cada una se lee entera o pasa completa
+       a la hoja siguiente. */
+    .dos-columnas,
+    .dos-columnas-lista,
+    .lista-check,
+    .caja-precio,
+    .condicion,
+    .pacto,
+    :global(.pie) {
+      break-inside: avoid;
+    }
+
+    /* Un título nunca queda solo al pie de una hoja */
+    .etiqueta,
+    .titulo,
+    .bajo-titulo,
+    .horas {
+      break-after: avoid;
+    }
+
+    /* Y ningún párrafo se corta a mitad de frase: o entra entero, o baja
+       completo junto al título que lo encabeza. */
+    .bajo-titulo,
+    .cuerpo,
+    .parrafo,
+    .horas,
+    .bajada {
+      break-inside: avoid;
+    }
+  }
 </style>
