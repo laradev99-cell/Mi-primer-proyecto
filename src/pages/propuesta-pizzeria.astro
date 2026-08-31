@@ -510,5 +510,17 @@ const loQueNecesitamos = {
     .bajada {
       break-inside: avoid;
     }
+
+    /* Los orbes son resplandores hechos con filter: blur(90px). El blur
+       no se puede vectorizar, así que el visor de PDF aplana la capa y
+       la pinta como un rectángulo lila macizo detrás del botón. En papel
+       el resplandor no aporta nada: se va y el fondo queda parejo. */
+    .orbe {
+      display: none;
+    }
+
+    .cierre {
+      background: var(--tinta);
+    }
   }
 </style>
