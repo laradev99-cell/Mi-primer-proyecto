@@ -26,18 +26,24 @@ export const precios = {
   // La estrategia no se repite acá: se cobra aparte en analisisEstrategia.
   //
   // ── Cómo se fijan estos precios ──
-  // Regla: el costo del equipo nunca pasa el 40% del precio al cliente.
-  // Precio mínimo = costo del equipo ÷ 0,40.
+  // No se usa un porcentaje fijo: se parte de cuánto tiene que quedar
+  // en la mano y se le suma el costo del equipo. La prioridad hoy es
+  // que el servicio se venda, no maximizar el margen — por eso el
+  // porcentaje baja a medida que sube el plan.
   //
-  // Costo del equipo por plan (jornada de grabación a $50.000):
-  //   Esencial     $341.500  →  $860.000    (39,7%)
-  //   Presencia    $587.500  →  $1.500.000  (39,2%)
-  //   Crecimiento  $853.000  →  $2.150.000  (39,7%)
+  //   Plan         Costo      Queda      Precio      % costo
+  //   Esencial     $341.500   $518.500   $860.000     39,7%
+  //   Presencia    $587.500   $682.500   $1.270.000   46,3%
+  //   Crecimiento  $853.000   $827.000   $1.680.000   50,8%
   //
   // Tarifas con las que se calculó: Sol $5.000 por idea y $30.000 el
   // reporte; Renata $5.000 el posteo y $4.500 la historia; Santi
   // $22.000 el reel, $20.000 el carrusel, $9.000 la historia video y
-  // $5.500 la de foto. Si alguna cambia, recalcular los tres.
+  // $5.500 la de foto; jornada de grabación $50.000.
+  //
+  // Ojo al recalcular: Sol tiene paquetes por volumen, Renata y Santi
+  // cobran por pieza sin descuento. Por eso el costo de los planes
+  // grandes crece en línea recta y el margen se achica arriba.
   manejoRedes: {
     nombre: 'Manejo de redes',
     bajada: 'Tres formas de trabajar. Cambia cuánto contenido sale y cuánto seguimiento tenés.',
@@ -57,7 +63,7 @@ export const precios = {
       {
         nombre: 'PRESENCIA',
         promesa: 'Tu marca ocupa lugar todo el mes',
-        precio: 1500000,
+        precio: 1270000,
         incluye: [
           'Todas las ideas del mes, pensadas para tu marca',
           'Diseño y edición de cada posteo e historia',
@@ -69,7 +75,7 @@ export const precios = {
       {
         nombre: 'CRECIMIENTO',
         promesa: 'Todo lo que podemos hacer por tu marca',
-        precio: 2150000,
+        precio: 1680000,
         destacado: true,
         incluye: [
           'Todas las ideas del mes, pensadas para tu marca',
