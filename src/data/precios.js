@@ -24,6 +24,20 @@ export const precios = {
   // entender una. El volumen va al pie, que era lo único que se leía.
   //
   // La estrategia no se repite acá: se cobra aparte en analisisEstrategia.
+  //
+  // ── Cómo se fijan estos precios ──
+  // Regla: el costo del equipo nunca pasa el 40% del precio al cliente.
+  // Precio mínimo = costo del equipo ÷ 0,40.
+  //
+  // Costo del equipo por plan (jornada de grabación a $50.000):
+  //   Esencial     $341.500  →  $860.000    (39,7%)
+  //   Presencia    $587.500  →  $1.500.000  (39,2%)
+  //   Crecimiento  $853.000  →  $2.150.000  (39,7%)
+  //
+  // Tarifas con las que se calculó: Sol $5.000 por idea y $30.000 el
+  // reporte; Renata $5.000 el posteo y $4.500 la historia; Santi
+  // $22.000 el reel, $20.000 el carrusel, $9.000 la historia video y
+  // $5.500 la de foto. Si alguna cambia, recalcular los tres.
   manejoRedes: {
     nombre: 'Manejo de redes',
     bajada: 'Tres formas de trabajar. Cambia cuánto contenido sale y cuánto seguimiento tenés.',
@@ -31,7 +45,7 @@ export const precios = {
       {
         nombre: 'ESENCIAL',
         promesa: 'Tu marca deja de estar quieta',
-        precio: 800000,
+        precio: 860000,
         incluye: [
           'Todas las ideas del mes, pensadas para tu marca',
           'Diseño y edición de cada posteo e historia',
@@ -43,7 +57,7 @@ export const precios = {
       {
         nombre: 'PRESENCIA',
         promesa: 'Tu marca ocupa lugar todo el mes',
-        precio: 1030000,
+        precio: 1500000,
         incluye: [
           'Todas las ideas del mes, pensadas para tu marca',
           'Diseño y edición de cada posteo e historia',
@@ -55,7 +69,7 @@ export const precios = {
       {
         nombre: 'CRECIMIENTO',
         promesa: 'Todo lo que podemos hacer por tu marca',
-        precio: 1400000,
+        precio: 2150000,
         destacado: true,
         incluye: [
           'Todas las ideas del mes, pensadas para tu marca',
