@@ -34,7 +34,7 @@ export const precios = {
   //   Plan         Costo      Queda      Precio      % costo
   //   Esencial     $341.500   $518.500   $860.000     39,7%
   //   Presencia    $597.500   $672.500   $1.270.000   47,0%
-  //   Crecimiento  $853.000   $827.000   $1.680.000   50,8%
+  //   Crecimiento  $915.000   $885.000   $1.800.000   50,8%
   //
   // Tarifas con las que se calculó: Sol $5.000 por idea y $30.000 el
   // reporte; Renata $5.000 el posteo y $4.500 la historia; Santi
@@ -46,6 +46,13 @@ export const precios = {
   // edición la absorbe la casa. Son $10.000 de margen a cambio de que
   // el plan del medio — el que lleva el sello "el más elegido" — no se
   // vea corto al lado de Crecimiento.
+  //
+  // Crecimiento después pasó de 8 a 10 posteos y de $1.680.000 a
+  // $1.800.000. Los dos posteos extra sí se editan afuera: $10.000 de
+  // ideas, $10.000 de publicación y $42.000 de edición (promedio entre
+  // reel y carrusel) son $62.000 de costo contra $120.000 de precio.
+  // Con eso el escalón queda parejo — 4, 7 y 10 posteos — y el margen
+  // del plan grande sube $58.000 sin moverse del 50,8 % de siempre.
   //
   // Ojo al recalcular: Sol tiene paquetes por volumen, Renata y Santi
   // cobran por pieza sin descuento. Por eso el costo de los planes
@@ -88,7 +95,7 @@ export const precios = {
       {
         nombre: 'CRECIMIENTO',
         promesa: 'Tu marca crece y sabés por qué',
-        precio: 1680000,
+        precio: 1800000,
         incluye: [
           'Pensamos todas las ideas del mes para tu marca',
           'Vamos a grabar a tu local <strong>tres veces</strong> al mes',
@@ -97,7 +104,7 @@ export const precios = {
           'Reporte mensual: qué funcionó y qué no',
           '15 % de descuento en páginas web y en el vendedor que nunca duerme',
         ],
-        volumen: 'Hasta 8 posteos y 26 historias',
+        volumen: 'Hasta 10 posteos y 26 historias',
       },
     ],
   },
