@@ -91,7 +91,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
               </div>
 
               <ul class="plan-items">
-                {plan.incluye.map((item) => <li>{item}</li>)}
+                {plan.incluye.map((item) => <li set:html={item} />)}
               </ul>
 
               <div class="plan-pie">
@@ -475,6 +475,13 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
     height: 8px;
     border-radius: 50%;
     border: 1.5px solid var(--acento);
+  }
+
+  /* Contra el peso 300 de la línea, el número de jornadas salta a la
+     vista: es lo que más cambia de un plan a otro. */
+  .plan-items li strong {
+    font-weight: 600;
+    color: var(--violeta-900);
   }
 
   /* El pie junta las dos condiciones del plan: cuántos lugares hay y

@@ -33,13 +33,19 @@ export const precios = {
   //
   //   Plan         Costo      Queda      Precio      % costo
   //   Esencial     $341.500   $518.500   $860.000     39,7%
-  //   Presencia    $587.500   $682.500   $1.270.000   46,3%
+  //   Presencia    $597.500   $672.500   $1.270.000   47,0%
   //   Crecimiento  $853.000   $827.000   $1.680.000   50,8%
   //
   // Tarifas con las que se calculó: Sol $5.000 por idea y $30.000 el
   // reporte; Renata $5.000 el posteo y $4.500 la historia; Santi
   // $22.000 el reel, $20.000 el carrusel, $9.000 la historia video y
   // $5.500 la de foto; jornada de grabación $50.000.
+  //
+  // Presencia subió de 6 a 7 posteos sin tocar el precio: el posteo
+  // número 7 cuesta $5.000 la idea más $5.000 la publicación, y la
+  // edición la absorbe la casa. Son $10.000 de margen a cambio de que
+  // el plan del medio — el que lleva el sello "el más elegido" — no se
+  // vea corto al lado de Crecimiento.
   //
   // Ojo al recalcular: Sol tiene paquetes por volumen, Renata y Santi
   // cobran por pieza sin descuento. Por eso el costo de los planes
@@ -55,9 +61,12 @@ export const precios = {
         // Los ítems siguen el ciclo real del trabajo — pensamos,
         // grabamos, editamos, publicamos — para que se lea como un
         // servicio completo y no como una lista de tareas sueltas.
+        //
+        // Se renderizan con set:html para poder destacar el número de
+        // jornadas, que es lo que más cambia de un plan a otro.
         incluye: [
           'Pensamos todas las ideas del mes para tu marca',
-          'Vamos a grabar a tu local una vez al mes',
+          'Vamos a grabar a tu local <strong>una vez</strong> al mes',
           'Diseñamos y editamos cada pieza',
           'Publicamos por vos en Instagram',
         ],
@@ -67,22 +76,22 @@ export const precios = {
         nombre: 'PRESENCIA',
         promesa: 'Tu marca aparece todas las semanas',
         precio: 1270000,
+        destacado: true,
         incluye: [
           'Pensamos todas las ideas del mes para tu marca',
-          'Vamos a grabar a tu local dos veces al mes',
+          'Vamos a grabar a tu local <strong>dos veces</strong> al mes',
           'Diseñamos y editamos cada pieza',
           'Publicamos por vos en Instagram',
         ],
-        volumen: 'Hasta 6 posteos y 18 historias',
+        volumen: 'Hasta 7 posteos y 18 historias',
       },
       {
         nombre: 'CRECIMIENTO',
         promesa: 'Tu marca crece y sabés por qué',
         precio: 1680000,
-        destacado: true,
         incluye: [
           'Pensamos todas las ideas del mes para tu marca',
-          'Vamos a grabar a tu local tres veces al mes',
+          'Vamos a grabar a tu local <strong>tres veces</strong> al mes',
           'Diseñamos y editamos cada pieza',
           'Publicamos por vos en Instagram y Facebook',
           'Reporte mensual: qué funcionó y qué no',
