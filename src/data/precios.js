@@ -38,7 +38,6 @@ export const precios = {
           'Publicamos por vos en Instagram',
           '1 jornada de grabación en tu local',
         ],
-        condicion: 'Mes a mes',
         volumen: 'Hasta 4 posteos y 10 historias',
       },
       {
@@ -49,8 +48,7 @@ export const precios = {
           'Todas las ideas del mes, pensadas para tu marca',
           'Diseño y edición de cada posteo e historia',
           'Publicamos por vos en Instagram',
-          '1 jornada de grabación en tu local',
-          'Reporte mensual: qué funcionó y qué no',
+          '2 jornadas de grabación en tu local',
         ],
         volumen: 'Hasta 6 posteos y 18 historias',
       },
@@ -63,9 +61,8 @@ export const precios = {
           'Todas las ideas del mes, pensadas para tu marca',
           'Diseño y edición de cada posteo e historia',
           'Publicamos por vos en Instagram y Facebook',
-          '1 jornada de grabación en tu local',
+          '3 jornadas de grabación en tu local',
           'Reporte mensual: qué funcionó y qué no',
-          'Reunión mensual conmigo para leer los números y decidir el mes siguiente',
           '15 % de descuento en páginas web y en el vendedor que nunca duerme',
         ],
         volumen: 'Hasta 8 posteos y 26 historias',
@@ -258,7 +255,7 @@ export const precios = {
   condiciones: {
     pago: '100% por adelantado al inicio de cada mes.',
     duracion:
-      'Presencia y Crecimiento se contratan por 3 meses: es el tiempo mínimo para que una estrategia muestre resultados reales. Cumplido ese plazo, seguimos mes a mes. Esencial va mes a mes desde el primer día.',
+      'Recomendamos arrancar con 3 meses en cualquiera de los planes: es el tiempo mínimo para que una estrategia muestre resultados reales. No es obligatorio, se puede ir mes a mes.',
     ajuste:
       '10% cada 3 meses, avisado con 30 días. Pagando 3 meses adelantados congelás el precio y obtenés 5% de descuento.',
     revisiones: 'Dos rondas de ajustes por pieza, sin cargo.',
@@ -266,7 +263,6 @@ export const precios = {
 
   loQueNecesitamos: {
     items: [
-      'Grabar el material que te pedimos y mandarlo en tiempo y forma',
       'Aprobar el plan de contenido dentro de las 48 horas',
       'Avisarnos lanzamientos o promos al comienzo de cada mes',
       'Darnos acceso a tus redes',
