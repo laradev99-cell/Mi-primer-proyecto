@@ -50,5 +50,5 @@ export const redes = {
 export const marca = {
   nombre: 'Naimid.Agency',
   descripcion:
-    'Estrategia, contenido y desarrollo web para marcas que venden online.',
+    'Estrategia, contenido y desarrollo web para marcas que quieren crecer.',
 };

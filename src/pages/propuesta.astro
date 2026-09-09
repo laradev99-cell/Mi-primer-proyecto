@@ -97,7 +97,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
               </ul>
 
               <div class="plan-pie">
-                {plan.cupo && <p class="plan-cupo">{plan.cupo}</p>}
+                {plan.condicion && <p class="plan-condicion">{plan.condicion}</p>}
                 <p class="plan-volumen">{plan.volumen}</p>
               </div>
             </article>
@@ -395,10 +395,12 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
   }
 
   /* ── Planes ── */
+  /* Con cuatro planes las columnas se angostan: bajamos el mínimo para
+     que entren en una fila en escritorio y de a dos en tablet */
   .planes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-    gap: clamp(0.85rem, 2vw, 1.1rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 215px), 1fr));
+    gap: clamp(0.85rem, 1.6vw, 1rem);
   }
 
   .plan {
@@ -408,7 +410,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
     background: var(--blanco);
     border: 1px solid var(--violeta-200);
     border-radius: var(--radio);
-    padding: clamp(1.6rem, 4vw, 2.2rem);
+    padding: clamp(1.5rem, 3vw, 1.9rem);
     transition: transform var(--transicion), box-shadow var(--transicion);
   }
 
@@ -507,7 +509,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
     gap: 0.4rem;
   }
 
-  .plan-cupo {
+  .plan-condicion {
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--acento);

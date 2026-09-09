@@ -20,7 +20,7 @@ export const precios = {
     frecuencia: 'Pago único. Se repite cada 3 meses para recalibrar el rumbo.',
   },
 
-  // Los tres planes hacen el mismo trabajo: lo que cambia es cuánto
+  // Los planes hacen el mismo trabajo: lo que cambia es cuánto
   // sale y cuánto seguimiento tenés. Por eso cada uno se presenta por
   // lo que conseguís, y el volumen baja al pie — que era lo único que
   // se leía antes.
@@ -29,16 +29,31 @@ export const precios = {
   // sobre el anterior. El primero lleva la base completa.
   manejoRedes: {
     nombre: 'Manejo de redes',
-    bajada: 'Tres formas de trabajar. Cambia cuánto contenido sale y cuánto seguimiento tenés.',
+    bajada: 'Cuatro formas de trabajar. Cambia cuánto contenido sale y cuánto seguimiento tenés.',
     planes: [
+      {
+        nombre: 'ESENCIAL',
+        promesa: 'Tu marca deja de estar quieta',
+        precio: 800000,
+        incluye: [
+          'Estrategia y plan de contenido mensual',
+          'Diseño y edición de cada pieza',
+          'Publicación en Instagram',
+          '1 jornada de grabación en tu local',
+        ],
+        // El único sin permanencia: es la puerta de entrada, y pedir
+        // tres meses de arranque espanta justo al que está probando.
+        condicion: 'Mes a mes, sin permanencia',
+        volumen: 'Hasta 4 posteos y 10 historias',
+      },
       {
         nombre: 'PRESENCIA',
         promesa: 'Ordenamos tu marca',
         precio: 1100000,
+        hereda: 'Esencial',
         incluye: [
-          'Estrategia a 3 meses y plan de contenido mensual',
-          'Diseño, edición y textos de cada pieza',
-          'Publicación en Instagram',
+          'Estrategia a 3 meses, no solo del mes',
+          'Textos escritos para vender',
           'Te decimos qué grabar cada mes',
         ],
         volumen: 'Hasta 6 posteos y 18 historias',
@@ -70,7 +85,7 @@ export const precios = {
         ],
         // El cupo es real: la media hora mensual la doy yo, así que el
         // plan no escala. Actualizar cuando se ocupen los lugares.
-        cupo: 'Solo 3 marcas en este plan',
+        condicion: 'Solo 3 marcas en este plan',
         volumen: 'Hasta 10 posteos y 34 historias',
       },
     ],
@@ -261,7 +276,7 @@ export const precios = {
   condiciones: {
     pago: '100% por adelantado al inicio de cada mes.',
     duracion:
-      'El trabajo se contrata por 3 meses. Es el tiempo mínimo para que una estrategia muestre resultados reales. Cumplido ese plazo, seguimos mes a mes.',
+      'Presencia, Crecimiento y Expansión se contratan por 3 meses: es el tiempo mínimo para que una estrategia muestre resultados reales. Cumplido ese plazo, seguimos mes a mes. Esencial va mes a mes desde el primer día.',
     ajuste:
       '10% cada 3 meses, avisado con 30 días. Pagando 3 meses adelantados congelás el precio y obtenés 5% de descuento.',
     revisiones: 'Dos rondas de ajustes por pieza, sin cargo.',
