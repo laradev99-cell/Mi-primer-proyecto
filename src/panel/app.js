@@ -38,6 +38,12 @@ function vistaActual() {
 
 const raiz = document.querySelector('#panel');
 
+// La clase la pone el layout de Astro, pero el panel también se
+// empaqueta suelto en un solo HTML (ver inline.cjs) y ahí el <body>
+// llega pelado. Ponerla acá hace que el fondo y el scroll anden en
+// los dos casos.
+document.body.classList.add('panel-body');
+
 function dibujar() {
   const e = cargar();
   const vista = vistaActual();
@@ -152,7 +158,9 @@ sincronizarMeses();
 dibujar();
 
 // La app instalada en el celular: se guarda para andar sin señal.
-if ('serviceWorker' in navigator) {
+// Solo cuando corre en su dirección real: empaquetado suelto no hay
+// service worker que registrar.
+if ('serviceWorker' in navigator && location.pathname.startsWith('/panel')) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').catch(() => {
       // Sin service worker el panel funciona igual, solo que

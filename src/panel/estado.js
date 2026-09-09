@@ -152,14 +152,38 @@ export function pesosDe(mov, ajustes) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// PLANES — de acá salen las entregas del mes
-// Los volúmenes son los de la propuesta comercial.
+// PLANES — de acá salen las entregas del mes y el precio
+// sugerido. Los volúmenes y los precios son los del documento
+// de costos de septiembre 2026.
+//
+// El escalón de posteos es parejo a propósito: 4 → 7 → 10.
 // ═══════════════════════════════════════════════════════════
 
 export const PLANES = {
-  PRESENCIA: { posteos: 6, historias: 18, reporte: false, reunion: false },
-  CRECIMIENTO: { posteos: 8, historias: 26, reporte: true, reunion: true },
-  EXPANSIÓN: { posteos: 10, historias: 34, reporte: true, reunion: true, media: true },
+  ESENCIAL: {
+    precio: 860000,
+    posteos: 4,
+    historias: 10,
+    jornadas: 1,
+    reporte: false,
+    facebook: false,
+  },
+  PRESENCIA: {
+    precio: 1270000,
+    posteos: 7,
+    historias: 18,
+    jornadas: 2,
+    reporte: false,
+    facebook: false,
+  },
+  CRECIMIENTO: {
+    precio: 1780000,
+    posteos: 10,
+    historias: 26,
+    jornadas: 3,
+    reporte: true,
+    facebook: true,
+  },
 };
 
 export const SERVICIOS = [
@@ -182,17 +206,15 @@ function plantillaEntregas(cliente) {
       { clave: 'entrega', texto: 'Entregado al cliente', tipo: 'check' },
     ];
   }
-  const plan = PLANES[cliente.plan] || PLANES.PRESENCIA;
+  const plan = PLANES[cliente.plan] || PLANES.ESENCIAL;
   const items = [
-    { clave: 'plan', texto: 'Plan de contenido aprobado', tipo: 'check' },
-    { clave: 'kit', texto: 'Le dijimos qué grabar', tipo: 'check' },
-    { clave: 'material', texto: 'Mandó el material', tipo: 'check' },
+    { clave: 'ideas', texto: 'Ideas de contenido aprobadas', tipo: 'check' },
+    { clave: 'jornadas', texto: 'Jornadas de grabación', tipo: 'cuenta', meta: plan.jornadas },
     { clave: 'posteos', texto: 'Posteos', tipo: 'cuenta', meta: plan.posteos },
     { clave: 'historias', texto: 'Historias', tipo: 'cuenta', meta: plan.historias },
   ];
-  if (plan.reporte) items.push({ clave: 'reporte', texto: 'Reporte de resultados', tipo: 'check' });
-  if (plan.reunion) items.push({ clave: 'reunion', texto: 'Reunión mensual', tipo: 'check' });
-  if (plan.media) items.push({ clave: 'media', texto: 'Media hora de asesoramiento', tipo: 'check' });
+  if (plan.facebook) items.push({ clave: 'facebook', texto: 'Publicado también en Facebook', tipo: 'check' });
+  if (plan.reporte) items.push({ clave: 'reporte', texto: 'Reporte mensual', tipo: 'check' });
   return items;
 }
 

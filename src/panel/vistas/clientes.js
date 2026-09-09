@@ -132,8 +132,14 @@ function campos() {
       clave: 'plan',
       etiqueta: 'Plan (solo si es manejo de redes)',
       tipo: 'opciones',
-      opciones: [{ valor: '', nombre: '— ninguno —' }, ...Object.keys(PLANES).map((p) => ({ valor: p, nombre: p }))],
-      ayuda: 'De acá salen las entregas del mes: cuántos posteos, cuántas historias, si va reporte y reunión.',
+      opciones: [
+        { valor: '', nombre: '— ninguno —' },
+        ...Object.entries(PLANES).map(([nombre, p]) => ({
+          valor: nombre,
+          nombre: `${nombre} · ${p.posteos} posteos, ${p.historias} historias`,
+        })),
+      ],
+      ayuda: 'De acá salen las entregas del mes: posteos, historias, jornadas de grabación y reporte.',
     },
     {
       clave: 'tipo', etiqueta: 'Cómo te paga', tipo: 'opciones',
