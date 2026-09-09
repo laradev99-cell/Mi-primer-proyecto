@@ -14,79 +14,61 @@ export const precios = {
       'Análisis de lo que veniste haciendo',
       'Definición de tus pilares de contenido',
       'Plan estratégico a 3 meses',
-      'Tu Kit de Grabación personalizado',
       'Reunión de presentación',
     ],
     frecuencia: 'Pago único. Se repite cada 3 meses para recalibrar el rumbo.',
   },
 
-  // Los planes hacen el mismo trabajo: lo que cambia es cuánto
-  // sale y cuánto seguimiento tenés. Por eso cada uno se presenta por
-  // lo que conseguís, y el volumen baja al pie — que era lo único que
-  // se leía antes.
+  // Cada plan lista todo lo que incluye, no solo lo que suma sobre el
+  // anterior: el "todo lo de X, más" obligaba a leer tres tarjetas para
+  // entender una. El volumen va al pie, que era lo único que se leía.
   //
-  // Los planes son acumulativos: `incluye` lista solo lo que agrega
-  // sobre el anterior. El primero lleva la base completa.
+  // La estrategia no se repite acá: se cobra aparte en analisisEstrategia.
   manejoRedes: {
     nombre: 'Manejo de redes',
-    bajada: 'Cuatro formas de trabajar. Cambia cuánto contenido sale y cuánto seguimiento tenés.',
+    bajada: 'Tres formas de trabajar. Cambia cuánto contenido sale y cuánto seguimiento tenés.',
     planes: [
       {
         nombre: 'ESENCIAL',
         promesa: 'Tu marca deja de estar quieta',
         precio: 800000,
         incluye: [
-          'Estrategia y plan de contenido mensual',
-          'Diseño y edición de cada pieza',
-          'Publicación en Instagram',
+          'Todas las ideas del mes, pensadas para tu marca',
+          'Diseño y edición de cada posteo e historia',
+          'Publicamos por vos en Instagram',
           '1 jornada de grabación en tu local',
         ],
-        // El único sin permanencia: es la puerta de entrada, y pedir
-        // tres meses de arranque espanta justo al que está probando.
-        condicion: 'Mes a mes, sin permanencia',
+        condicion: 'Mes a mes',
         volumen: 'Hasta 4 posteos y 10 historias',
       },
       {
         nombre: 'PRESENCIA',
-        promesa: 'Ordenamos tu marca',
-        precio: 1100000,
-        hereda: 'Esencial',
+        promesa: 'Tu marca ocupa lugar todo el mes',
+        precio: 1030000,
         incluye: [
-          'Estrategia a 3 meses, no solo del mes',
-          'Textos escritos para vender',
-          'Te decimos qué grabar cada mes',
+          'Todas las ideas del mes, pensadas para tu marca',
+          'Diseño y edición de cada posteo e historia',
+          'Publicamos por vos en Instagram',
+          '1 jornada de grabación en tu local',
+          'Reporte mensual: qué funcionó y qué no',
         ],
         volumen: 'Hasta 6 posteos y 18 historias',
       },
       {
         nombre: 'CRECIMIENTO',
-        promesa: 'Sabés qué está funcionando y qué no',
+        promesa: 'Todo lo que podemos hacer por tu marca',
         precio: 1400000,
-        // El del medio es el que queremos que se elija: salto chico
-        // desde el primero y el grueso del seguimiento.
         destacado: true,
-        hereda: 'Presencia',
         incluye: [
-          'Reporte mensual de resultados',
-          'Reunión mensual para decidir el mes siguiente',
-          'Prioridad en las respuestas',
-        ],
-        volumen: 'Hasta 8 posteos y 26 historias',
-      },
-      {
-        nombre: 'EXPANSIÓN',
-        promesa: 'Más contenido, y alguien con quien pensarlo',
-        precio: 1999000,
-        hereda: 'Crecimiento',
-        incluye: [
-          'Publicación también en Facebook',
-          'Media hora por mes conmigo para pensar tu marca: tu contenido, tu forma de vender, tu próximo paso. Lo que te esté trabando',
+          'Todas las ideas del mes, pensadas para tu marca',
+          'Diseño y edición de cada posteo e historia',
+          'Publicamos por vos en Instagram y Facebook',
+          '1 jornada de grabación en tu local',
+          'Reporte mensual: qué funcionó y qué no',
+          'Reunión mensual conmigo para leer los números y decidir el mes siguiente',
           '15 % de descuento en páginas web y en el vendedor que nunca duerme',
         ],
-        // El cupo es real: la media hora mensual la doy yo, así que el
-        // plan no escala. Actualizar cuando se ocupen los lugares.
-        condicion: 'Solo 3 marcas en este plan',
-        volumen: 'Hasta 10 posteos y 34 historias',
+        volumen: 'Hasta 8 posteos y 26 historias',
       },
     ],
   },
@@ -276,7 +258,7 @@ export const precios = {
   condiciones: {
     pago: '100% por adelantado al inicio de cada mes.',
     duracion:
-      'Presencia, Crecimiento y Expansión se contratan por 3 meses: es el tiempo mínimo para que una estrategia muestre resultados reales. Cumplido ese plazo, seguimos mes a mes. Esencial va mes a mes desde el primer día.',
+      'Presencia y Crecimiento se contratan por 3 meses: es el tiempo mínimo para que una estrategia muestre resultados reales. Cumplido ese plazo, seguimos mes a mes. Esencial va mes a mes desde el primer día.',
     ajuste:
       '10% cada 3 meses, avisado con 30 días. Pagando 3 meses adelantados congelás el precio y obtenés 5% de descuento.',
     revisiones: 'Dos rondas de ajustes por pieza, sin cargo.',

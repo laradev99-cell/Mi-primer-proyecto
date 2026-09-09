@@ -27,10 +27,12 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
     <div class="orbe orbe-portada"></div>
     <div class="contenedor interior">
       <p class="etiqueta" data-revelar>Naimid.Agency</p>
-      <h1 class="display" data-revelar style="--retraso: 90ms">Tu propuesta</h1>
+      <h1 class="display" data-revelar style="--retraso: 90ms">
+        Propuesta para crecer en redes
+      </h1>
       <p class="bajada" data-revelar style="--retraso: 180ms">
-        Todo lo que hablamos, ordenado. Si algo no te cierra, escribime y lo
-        vemos.
+        Qué hacemos con tu marca todos los meses, cuánto sale y qué necesitamos
+        de vos para que funcione.
       </p>
     </div>
   </header>
@@ -88,10 +90,6 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
                 <p class="plan-periodo">por mes</p>
               </div>
 
-              {plan.hereda && (
-                <p class="plan-hereda">Todo lo de {plan.hereda}, más:</p>
-              )}
-
               <ul class="plan-items">
                 {plan.incluye.map((item) => <li>{item}</li>)}
               </ul>
@@ -107,48 +105,8 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
     </div>
   </section>
 
-  <!-- ─── EL VENDEDOR QUE NUNCA DUERME ─── -->
-  <section class="seccion clara">
-    <div class="contenedor">
-      <p class="etiqueta" data-revelar>Para cuando no podés contestar</p>
-      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
-        {respuestasAutomaticas.nombre}
-      </h2>
-
-      <div class="dos-columnas">
-        <div data-revelar>
-          {
-            respuestasAutomaticas.descripcion
-              .split('\n\n')
-              .map((p) => <p class="cuerpo parrafo">{p}</p>)
-          }
-        </div>
-
-        <aside class="caja-precio" data-revelar style="--retraso: 120ms">
-          <p class="mini-etiqueta">Instalación</p>
-          <p class="precio">
-            {pesos(respuestasAutomaticas.lanzamiento ?? respuestasAutomaticas.instalacion)}
-            {
-              respuestasAutomaticas.lanzamiento && (
-                <span class="precio-tachado">{pesos(respuestasAutomaticas.instalacion)}</span>
-              )
-            }
-          </p>
-          <hr />
-          <p class="mini-etiqueta">Mantenimiento · por pedido</p>
-          <p class="precio">{pesos(respuestasAutomaticas.mantenimiento)}</p>
-          {
-            respuestasAutomaticas.aclaracion && (
-              <p class="nota">{respuestasAutomaticas.aclaracion}</p>
-            )
-          }
-        </aside>
-      </div>
-    </div>
-  </section>
-
   <!-- ─── CONDICIONES ─── -->
-  <section class="seccion lavanda">
+  <section class="seccion clara">
     <div class="contenedor">
       <p class="etiqueta" data-revelar>Condiciones</p>
       <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">Cómo funciona</h2>
@@ -172,7 +130,7 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
   </section>
 
   <!-- ─── LO QUE NECESITAMOS ─── -->
-  <section class="seccion clara">
+  <section class="seccion lavanda">
     <div class="contenedor">
       <p class="etiqueta" data-revelar>De tu lado</p>
       <h2 class="titulo" data-revelar style="--retraso: 70ms">
@@ -187,6 +145,32 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
       </ul>
 
       <p class="pacto" data-revelar>{loQueNecesitamos.nota}</p>
+    </div>
+  </section>
+
+  <!-- ─── EL VENDEDOR QUE NUNCA DUERME ───
+       Igual que las webs: acá solo se abre la puerta, el detalle y el
+       precio viven en /vendedor. -->
+  <section class="seccion clara">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Si querés que te contesten por vos</p>
+      <h2 class="titulo" data-revelar style="--retraso: 70ms">
+        {respuestasAutomaticas.nombre}
+      </h2>
+      <p class="cuerpo bajo-titulo" data-revelar style="--retraso: 120ms">
+        Un asistente que conoce tu negocio y contesta precios, stock y envíos
+        por WhatsApp las 24 horas. En Instagram deja respuestas automáticas que
+        llevan la charla a WhatsApp.
+      </p>
+
+      <div class="ver-mas ver-mas-suelto" data-revelar>
+        <a class="boton boton-linea-oscura" href="/vendedor">
+          Ver cómo funciona y cuánto sale
+          <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -463,13 +447,6 @@ const { analisisEstrategia, manejoRedes, tiendaOnline, respuestasAutomaticas, co
     padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--violeta-200);
-  }
-
-  .plan-hereda {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--violeta-600);
-    margin-bottom: 1rem;
   }
 
   .plan-items {
