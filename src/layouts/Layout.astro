@@ -16,12 +16,16 @@ interface Props {
   titulo: string;
   descripcion?: string;
   noindex?: boolean;
+  /* Clase extra en el <body>. El panel la usa para cambiar el
+     fondo y bloquear el scroll del documento. */
+  clase?: string;
 }
 
 const {
   titulo,
   descripcion = marca.descripcion,
   noindex = false,
+  clase = '',
 } = Astro.props;
 ---
 
@@ -32,6 +36,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={descripcion} />
     <meta name="theme-color" content="#12042E" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <title>{titulo} | {marca.nombre}</title>
@@ -40,9 +45,11 @@ const {
     <meta property="og:title" content={`${titulo} | ${marca.nombre}`} />
     <meta property="og:description" content={descripcion} />
     <meta property="og:locale" content="es_AR" />
+
+    <slot name="cabeza" />
   </head>
 
-  <body>
+  <body class={clase}>
     <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
     <slot />
 

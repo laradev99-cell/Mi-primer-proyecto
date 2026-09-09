@@ -1,0 +1,17 @@
+{
+  "name": "Panel Naimid",
+  "short_name": "Naimid",
+  "description": "El panel del negocio: clientes, plata, equipo y entregas.",
+  "start_url": "/panel/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#12042E",
+  "theme_color": "#12042E",
+  "lang": "es-AR",
+  "icons": [
+    { "src": "/icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icono-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icono-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

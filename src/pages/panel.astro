@@ -1,0 +1,49 @@
+---
+/*
+ * EL PANEL DE LARA
+ *
+ * Todo lo que se ve acá se arma en el navegador con los datos
+ * que ella carga: la página que Astro genera es apenas el
+ * cascarón. No hay servidor, no hay base de datos, no hay
+ * cuenta que crear.
+ *
+ * Es privada: `noindex` para que no la levante Google. La
+ * dirección no se linkea desde ningún lado del sitio público.
+ */
+import Layout from '../layouts/Layout.astro';
+import '../styles/panel.css';
+---
+
+<Layout
+  titulo="Panel"
+  descripcion="El panel interno de Naimid.Agency."
+  noindex={true}
+  clase="panel-body"
+>
+  <Fragment slot="cabeza">
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icono-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Naimid" />
+  </Fragment>
+
+  <div id="panel">
+    <!-- Lo que se ve mientras carga el JavaScript. Dura un parpadeo. -->
+    <p class="cargando">Abriendo tu panel…</p>
+  </div>
+
+  <script>
+    import '../panel/app.js';
+  </script>
+</Layout>
+
+<style>
+  .cargando {
+    display: grid;
+    place-items: center;
+    height: 100dvh;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+  }
+</style>
