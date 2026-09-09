@@ -52,36 +52,39 @@ export const precios = {
         nombre: 'ESENCIAL',
         promesa: 'Tu marca deja de estar quieta',
         precio: 860000,
+        // Los ítems siguen el ciclo real del trabajo — pensamos,
+        // grabamos, editamos, publicamos — para que se lea como un
+        // servicio completo y no como una lista de tareas sueltas.
         incluye: [
-          'Todas las ideas del mes, pensadas para tu marca',
-          'Diseño y edición de cada posteo e historia',
+          'Pensamos todas las ideas del mes para tu marca',
+          'Vamos a grabar a tu local una vez al mes',
+          'Diseñamos y editamos cada pieza',
           'Publicamos por vos en Instagram',
-          '1 jornada de grabación en tu local',
         ],
         volumen: 'Hasta 4 posteos y 10 historias',
       },
       {
         nombre: 'PRESENCIA',
-        promesa: 'Tu marca ocupa lugar todo el mes',
+        promesa: 'Tu marca aparece todas las semanas',
         precio: 1270000,
         incluye: [
-          'Todas las ideas del mes, pensadas para tu marca',
-          'Diseño y edición de cada posteo e historia',
+          'Pensamos todas las ideas del mes para tu marca',
+          'Vamos a grabar a tu local dos veces al mes',
+          'Diseñamos y editamos cada pieza',
           'Publicamos por vos en Instagram',
-          '2 jornadas de grabación en tu local',
         ],
         volumen: 'Hasta 6 posteos y 18 historias',
       },
       {
         nombre: 'CRECIMIENTO',
-        promesa: 'Todo lo que podemos hacer por tu marca',
+        promesa: 'Tu marca crece y sabés por qué',
         precio: 1680000,
         destacado: true,
         incluye: [
-          'Todas las ideas del mes, pensadas para tu marca',
-          'Diseño y edición de cada posteo e historia',
+          'Pensamos todas las ideas del mes para tu marca',
+          'Vamos a grabar a tu local tres veces al mes',
+          'Diseñamos y editamos cada pieza',
           'Publicamos por vos en Instagram y Facebook',
-          '3 jornadas de grabación en tu local',
           'Reporte mensual: qué funcionó y qué no',
           '15 % de descuento en páginas web y en el vendedor que nunca duerme',
         ],
@@ -281,13 +284,16 @@ export const precios = {
     revisiones: 'Dos rondas de ajustes por pieza, sin cargo.',
   },
 
+  // Desde que la grabación entra en todos los planes, el cliente ya no
+  // tiene que producir nada. Esta sección pasó de ser una lista de
+  // obligaciones a ser argumento de venta: lo que le pedimos es poco.
   loQueNecesitamos: {
     items: [
-      'Aprobar el plan de contenido dentro de las 48 horas',
-      'Avisarnos lanzamientos o promos al comienzo de cada mes',
-      'Darnos acceso a tus redes',
-      'Estar en la reunión mensual',
+      'Estar el día que vamos a grabar a tu local',
+      'Aprobar el plan de contenido: son 10 minutos, una vez al mes',
+      'Contarnos si tenés una promo o un lanzamiento',
+      'Darnos acceso a tus redes, una sola vez',
     ],
-    nota: 'Si vos cumplís esto, nosotros nos hacemos cargo de todo lo demás.',
+    nota: 'De ahí en adelante no tenés que hacer nada más: pensamos, grabamos, editamos y publicamos nosotros.',
   },
 };
