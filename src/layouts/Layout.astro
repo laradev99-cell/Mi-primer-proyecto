@@ -19,6 +19,9 @@ interface Props {
   /* Clase extra en el <body>. El panel la usa para cambiar el
      fondo y bloquear el scroll del documento. */
   clase?: string;
+  /* Color de la barra del navegador en el celular. El panel es
+     claro, el sitio público oscuro. */
+  colorTema?: string;
 }
 
 const {
@@ -26,6 +29,7 @@ const {
   descripcion = marca.descripcion,
   noindex = false,
   clase = '',
+  colorTema = '#12042E',
 } = Astro.props;
 ---
 
@@ -35,7 +39,7 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={descripcion} />
-    <meta name="theme-color" content="#12042E" />
+    <meta name="theme-color" content={colorTema} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 

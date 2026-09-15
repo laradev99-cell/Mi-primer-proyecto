@@ -5,26 +5,50 @@
    que entrar de una mirada, así que todo es más chico, más
    junto y más contrastado. Se piensa primero en el celular:
    la navegación va abajo, donde llega el pulgar.
+
+   Fondo claro a propósito. Esto se mira muchas horas seguidas
+   y con luz de día: el violeta queda para lo que importa —el
+   dato, el botón, la sección donde estás parada— y nada más.
+   Si todo grita, no se entiende nada.
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  --p-fondo: #12042e;
-  --p-superficie: #1c0842;
-  --p-superficie-alta: #26105a;
-  --p-borde: rgba(217, 199, 255, 0.16);
-  --p-borde-fuerte: rgba(217, 199, 255, 0.32);
+  /* Tres niveles de fondo: la página, la tarjeta y lo que va
+     adentro de la tarjeta. Apenas se distinguen, y alcanza. */
+  --p-fondo: #f6f5f9;
+  --p-superficie: #ffffff;
+  --p-superficie-alta: #faf9fc;
 
-  --p-texto: #ffffff;
-  --p-texto-medio: rgba(255, 255, 255, 0.72);
-  --p-texto-tenue: rgba(255, 255, 255, 0.48);
+  --p-borde: #e6e3ee;
+  --p-borde-fuerte: #cec8dd;
 
-  --p-acento: #a87cff;
+  /* Negro con una gota de violeta: acompaña a la marca sin
+     ponerse a competir con el acento. */
+  --p-texto: #1a1327;
+  --p-texto-medio: #574c6b;
+  --p-texto-tenue: #7d7391;
+
+  /* El violeta fuerte de la marca. Sobre blanco llega a 7:1;
+     el violeta claro del sitio público no llegaría ni a la mitad. */
+  --p-acento: #6b2fd6;
+  --p-acento-hover: #5a25b8;
+  --p-acento-suave: #f3eeff;
 
   /* Colores de estado. Nunca van solos: siempre con una palabra
-     al lado, para quien no distingue bien los colores. */
-  --p-bien: #6fe0a6;
-  --p-aviso: #ffc266;
-  --p-mal: #ff8f8f;
+     al lado, para quien no distingue bien los colores. Todos
+     pasan 4,5:1 sobre blanco. */
+  --p-bien: #0a7048;
+  --p-aviso: #9a5300;
+  --p-mal: #b42318;
+
+  --p-bien-suave: #e8f6ef;
+  --p-aviso-suave: #fdf3e5;
+  --p-mal-suave: #fdeceb;
+
+  /* En claro, un borde marcado en todo da sensación de
+     formulario viejo: separa mejor una sombra apenas visible. */
+  --p-sombra: 0 1px 2px rgba(26, 19, 39, 0.04), 0 1px 3px rgba(26, 19, 39, 0.06);
+  --p-sombra-alta: 0 12px 32px -8px rgba(26, 19, 39, 0.18);
 
   --p-radio: 14px;
   --p-radio-sm: 9px;
@@ -85,7 +109,6 @@ body.panel-body {
   height: 9px;
   border-radius: 50%;
   background: var(--p-acento);
-  box-shadow: 0 0 14px 1px rgba(168, 124, 255, 0.75);
 }
 
 .selector-mes {
@@ -110,7 +133,7 @@ body.panel-body {
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
   border-top: 1px solid var(--p-borde);
-  background: rgba(18, 4, 46, 0.96);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(12px);
   padding-bottom: env(safe-area-inset-bottom);
   overflow-x: auto;
@@ -188,7 +211,7 @@ body.panel-body {
   }
 
   .nav-item.activo {
-    background: var(--p-superficie);
+    background: var(--p-acento-suave);
   }
 }
 
@@ -200,6 +223,7 @@ body.panel-body {
   background: var(--p-superficie);
   border: 1px solid var(--p-borde);
   border-radius: var(--p-radio);
+  box-shadow: var(--p-sombra);
   padding: 1rem;
 }
 
@@ -356,9 +380,11 @@ body.panel-body {
   background: var(--p-texto-tenue);
 }
 
-.aviso.mal { border-color: rgba(255, 143, 143, 0.42); }
+.aviso.mal { background: var(--p-mal-suave); border-color: #f2cfcc; }
 .aviso.mal .aviso-punto { background: var(--p-mal); }
+.aviso.atencion { background: var(--p-aviso-suave); border-color: #eedcbe; }
 .aviso.atencion .aviso-punto { background: var(--p-aviso); }
+.aviso.bien { background: var(--p-bien-suave); border-color: #c7e4d6; }
 .aviso.bien .aviso-punto { background: var(--p-bien); }
 
 /* ═══════════════════════════════════════════════════════════
@@ -583,15 +609,15 @@ body.panel-body {
 
 .btn-lleno {
   background: var(--p-acento);
-  color: var(--p-fondo);
+  color: #ffffff;
 }
 
 .btn-lleno:hover {
-  background: #bd9bff;
+  background: var(--p-acento-hover);
 }
 
 .btn-fantasma {
-  background: transparent;
+  background: var(--p-superficie);
   border-color: var(--p-borde-fuerte);
   color: var(--p-texto-medio);
 }
@@ -608,12 +634,12 @@ body.panel-body {
 
 .btn.peligro {
   color: var(--p-mal);
-  border-color: rgba(255, 143, 143, 0.35);
+  border-color: #eccdca;
 }
 
 .btn.peligro:hover {
   border-color: var(--p-mal);
-  background: rgba(255, 143, 143, 0.1);
+  background: var(--p-mal-suave);
 }
 
 .botonera {
@@ -672,7 +698,7 @@ body.panel-body {
 .tilde.marcada {
   background: var(--p-bien);
   border-color: var(--p-bien);
-  color: var(--p-fondo);
+  color: #ffffff;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -708,7 +734,7 @@ body.panel-body {
 .filtro.activo {
   background: var(--p-acento);
   border-color: var(--p-acento);
-  color: var(--p-fondo);
+  color: #ffffff;
 }
 
 .chip {
@@ -723,12 +749,13 @@ body.panel-body {
   white-space: nowrap;
 }
 
-.chip.bien { color: var(--p-bien); border-color: rgba(111, 224, 166, 0.45); }
-.chip.aviso { color: var(--p-aviso); border-color: rgba(255, 194, 102, 0.45); }
-.chip.mal { color: var(--p-mal); border-color: rgba(255, 143, 143, 0.45); }
+.chip.bien { color: var(--p-bien); background: var(--p-bien-suave); border-color: #c7e4d6; }
+.chip.aviso,
+.chip.atencion { color: var(--p-aviso); background: var(--p-aviso-suave); border-color: #eedcbe; }
+.chip.mal { color: var(--p-mal); background: var(--p-mal-suave); border-color: #f2cfcc; }
 
 .mini-select {
-  background: var(--p-superficie);
+  background: var(--p-superficie-alta);
   color: var(--p-texto-medio);
   border: 1px solid var(--p-borde);
   border-radius: var(--p-radio-sm);
@@ -754,7 +781,8 @@ body.panel-body {
 }
 
 .etapa-titulo span {
-  background: var(--p-superficie-alta);
+  background: var(--p-acento-suave);
+  color: var(--p-acento);
   border-radius: 999px;
   padding: 0.05rem 0.45rem;
   letter-spacing: 0;
@@ -767,7 +795,7 @@ body.panel-body {
 .progreso {
   height: 5px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.09);
+  background: var(--p-borde);
   overflow: hidden;
 }
 
@@ -850,7 +878,7 @@ body.panel-body {
 }
 
 .muestra.hueca {
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--p-borde);
 }
 
 .muestra.llena {
@@ -908,7 +936,7 @@ body.panel-body {
 }
 
 .barra-total {
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--p-borde);
 }
 
 /* El anillo del color de la superficie separa las dos capas
@@ -979,8 +1007,8 @@ body.panel-body {
   position: fixed;
   inset: 0;
   z-index: 90;
-  background: rgba(6, 1, 16, 0.72);
-  backdrop-filter: blur(5px);
+  background: rgba(26, 19, 39, 0.45);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -996,7 +1024,8 @@ body.panel-body {
 
 .ventana {
   background: var(--p-superficie);
-  border: 1px solid var(--p-borde-fuerte);
+  border: 1px solid var(--p-borde);
+  box-shadow: var(--p-sombra-alta);
   border-radius: var(--p-radio) var(--p-radio) 0 0;
   width: 100%;
   max-width: 480px;
@@ -1104,8 +1133,8 @@ body.panel-body {
 .campo select,
 .campo textarea {
   width: 100%;
-  background: var(--p-fondo);
-  border: 1px solid var(--p-borde);
+  background: var(--p-superficie);
+  border: 1px solid var(--p-borde-fuerte);
   border-radius: var(--p-radio-sm);
   padding: 0.65rem 0.75rem;
   color: var(--p-texto);
@@ -1139,7 +1168,7 @@ body.panel-body {
 }
 
 ::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--p-texto-tenue);
 }
 
 /* ═══════════════════════════════════════════════════════════
