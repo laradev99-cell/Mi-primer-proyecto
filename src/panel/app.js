@@ -5,7 +5,8 @@
    ═══════════════════════════════════════════════════════════ */
 
 import {
-  cargar, alCambiar, sincronizarMeses, mesDeHoy, mesLargo, correrMes, distanciaMeses,
+  cargar, iniciar, errorDeConexion, alCambiar, sincronizarMeses,
+  mesDeHoy, mesLargo, correrMes, distanciaMeses,
 } from './estado.js';
 
 import resumen from './vistas/resumen.js';
@@ -45,6 +46,12 @@ const raiz = document.querySelector('#panel');
 document.body.classList.add('panel-body');
 
 function dibujar() {
+  const problema = errorDeConexion();
+  if (problema) {
+    raiz.innerHTML = avisoDeConexion(problema);
+    return;
+  }
+
   const e = cargar();
   const vista = vistaActual();
 
@@ -57,6 +64,30 @@ function dibujar() {
     ${navegacion(vista)}
   `;
   raiz.querySelector('.contenido').scrollTop = 0;
+}
+
+// Sin conexión con la base no hay nada seguro que mostrar: mejor
+// avisar claro que dejar que cargue datos y arriesgarse a que no
+// se guarde nada de lo que ella escriba.
+const MENSAJE_ERROR = {
+  'sin-base': 'Este panel necesita abrirse desde tu link de Claude. Si lo abriste desde ahí, esperá unos segundos — se está por conectar solo.',
+  revoked: 'Se perdió el acceso a tus datos. Cerrá esta pestaña y volvé a abrir el panel desde tu link.',
+  not_granted: 'No se pudo conectar con tus datos. Cerrá esta pestaña y volvé a abrir el panel desde tu link.',
+};
+
+function avisoDeConexion(codigo) {
+  const mensaje =
+    MENSAJE_ERROR[codigo] ||
+    'No se pudo conectar con la nube en este momento. Esperá un momento y volvé a intentar.';
+
+  return `<div class="pantalla-error">
+    <div class="pantalla-error-caja">
+      <span class="barra-punto"></span>
+      <h1>No se pudo conectar</h1>
+      <p>${mensaje}</p>
+      <button class="btn btn-lleno" onclick="location.reload()">Reintentar</button>
+    </div>
+  </div>`;
 }
 
 function barraSuperior(e, vista) {
@@ -147,24 +178,22 @@ document.addEventListener('change', (ev) => {
 });
 
 window.addEventListener('hashchange', dibujar);
-alCambiar(() => {});
+
+// De acá en más, cualquier cambio en la base —el tuyo desde otra
+// pestaña, o el de otro aparato con este mismo panel abierto—
+// redibuja la pantalla sola.
+alCambiar(dibujar);
 
 // ═══════════════════════════════════════════════════════════
 // ARRANQUE
+//
+// Primero se conecta con la base y espera la foto real de tus
+// datos. Recién ahí corre el armado del mes: si lo hiciera antes,
+// trabajaría sobre una foto vacía que la foto real, al llegar,
+// pisaría entera.
 // ═══════════════════════════════════════════════════════════
 
-cargar();
-sincronizarMeses();
-dibujar();
-
-// La app instalada en el celular: se guarda para andar sin señal.
-// Solo cuando corre en su dirección real: empaquetado suelto no hay
-// service worker que registrar.
-if ('serviceWorker' in navigator && location.pathname.startsWith('/panel')) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {
-      // Sin service worker el panel funciona igual, solo que
-      // necesita conexión la primera vez de cada día.
-    });
-  });
-}
+iniciar().then(() => {
+  if (!errorDeConexion()) sincronizarMeses();
+  dibujar();
+});

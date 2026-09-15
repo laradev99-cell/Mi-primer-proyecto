@@ -1180,3 +1180,37 @@ body.panel-body {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SIN CONEXIÓN — cuando no se puede hablar con la base. Ocupa
+   toda la pantalla a propósito: no hay nada seguro que mostrar
+   por debajo mientras esto dure.
+   ═══════════════════════════════════════════════════════════ */
+
+.pantalla-error {
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.pantalla-error-caja {
+  max-width: 32ch;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.pantalla-error-caja h1 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.pantalla-error-caja p {
+  font-size: 0.86rem;
+  color: var(--p-texto-medio);
+  line-height: 1.55;
+}

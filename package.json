@@ -8,8 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "revisar-panel": "node scripts/revisar-panel.mjs",
-    "iconos": "node scripts/armar-iconos.mjs"
+    "revisar-panel": "node scripts/revisar-panel.mjs"
   },
   "dependencies": {
     "@fontsource/poppins": "^5.3.0",

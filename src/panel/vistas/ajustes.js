@@ -1,10 +1,11 @@
 /* ═══════════════════════════════════════════════════════════
    AJUSTES — el dólar, los gastos que pagás todos los meses
-   pase lo que pase, y la copia de seguridad.
+   pase lo que pase, y una copia de respaldo.
 
-   Lo de la copia no es un detalle: los datos viven en este
-   aparato. Bajar la copia cada tanto es lo que hace que no se
-   pierdan y lo que permite pasarlos de la compu al celular.
+   Los datos ya se guardan solos, en la nube, apenas los cargás
+   — no hace falta bajar nada para que no se pierdan. La copia
+   de acá es un extra: un archivo tuyo, aparte, por si alguna vez
+   lo necesitás fuera del panel.
    ═══════════════════════════════════════════════════════════ */
 
 import {
@@ -59,11 +60,11 @@ export default {
       </section>
 
       <section class="bloque">
-        <div class="bloque-cabeza"><h2 class="bloque-titulo">Tu copia de seguridad</h2></div>
+        <div class="bloque-cabeza"><h2 class="bloque-titulo">Copia de respaldo</h2></div>
         <p class="cuerpo-panel">
-          Los datos de este panel viven en este aparato, no en internet. Nadie más los ve — pero si borrás el navegador, se van.
-          Bajá la copia una vez por mes y guardala donde guardes las cosas importantes.
-          Ese mismo archivo es el que subís en el celular para tener todo igual en los dos lados.
+          Esto ya se guarda solo, en la nube: no hace falta bajar nada para que no se pierda.
+          "Bajar copia" es un extra, por si alguna vez querés tener un archivo aparte con todo lo cargado.
+          "Subir copia" reemplaza todo lo que tenés ahora por lo que traiga ese archivo — usalo solo si sabés lo que estás haciendo.
         </p>
         <div class="botonera">
           <button class="btn btn-lleno" data-accion="bajar-copia">Bajar copia</button>
@@ -71,7 +72,7 @@ export default {
           <button class="btn btn-fantasma peligro" data-accion="borrar-todo">Borrar todo</button>
         </div>
         <p class="cuerpo-panel chico">
-          Última copia: ${e.ajustes.ultimaCopia ? texto(e.ajustes.ultimaCopia) : 'nunca bajaste una'}.
+          Última copia bajada: ${e.ajustes.ultimaCopia ? texto(e.ajustes.ultimaCopia) : 'nunca bajaste una'}.
         </p>
       </section>
 
@@ -152,18 +153,30 @@ function borrarGasto(gastoId) {
   });
 }
 
-// ── Copia de seguridad ───────────────────────────────────────
-function bajarCopia() {
+// ── Copia de respaldo ─────────────────────────────────────────
+// El panel corre adentro del visor de Claude, que no deja bajar
+// archivos por la vía común (un link con `download`): hay que
+// pedírselo a la capacidad `downloads` y esperar a que ella
+// confirme. Si no está disponible, se avisa en vez de fallar en
+// silencio.
+async function bajarCopia() {
+  const claude = typeof window !== 'undefined' ? window.claude : null;
+  const downloads = claude ? await claude.use('downloads') : null;
+  if (!downloads) {
+    window.alert('No se pudo bajar la copia desde acá en este momento.');
+    return;
+  }
+
   const e = cargar();
   const nombre = `naimid-panel-${new Date().toISOString().slice(0, 10)}.json`;
-  const blob = new Blob([JSON.stringify(e, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
 
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = nombre;
-  a.click();
-  URL.revokeObjectURL(url);
+  try {
+    await downloads.save({ filename: nombre, data: JSON.stringify(e, null, 2) });
+  } catch (err) {
+    if (err && err.code === 'declined') return; // decidió no bajarla, no es un error
+    window.alert('No se pudo bajar la copia. Probá de nuevo en un momento.');
+    return;
+  }
 
   mutar((s) => {
     s.ajustes.ultimaCopia = new Date().toLocaleDateString('es-AR');

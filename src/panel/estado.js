@@ -1,14 +1,21 @@
 /* ═══════════════════════════════════════════════════════════
    EL ESTADO — todo lo que el panel sabe de tu negocio.
 
-   Los datos viven en el navegador (localStorage). No hay
-   servidor ni cuenta: lo que cargás queda en el aparato donde
-   lo cargaste. Por eso Ajustes tiene "Bajar copia" y "Subir
-   copia" — esa es la forma de moverlos de la compu al celular
-   y de no perderlos nunca.
+   Los datos viven en la nube, en la base propia de este panel —
+   no en este navegador ni en este aparato. Por eso da lo mismo
+   abrirlo desde el celular o desde la compu: es el mismo lugar,
+   siempre al día. Solo vos podés leerlo o escribirlo: el panel
+   se publica con el acceso restringido al dueño de la cuenta
+   (ver las `rules` al declarar la capacidad `db`).
    ═══════════════════════════════════════════════════════════ */
 
-const CLAVE = 'naimid.panel.v1';
+// Toda la información vive en un único documento. Alcanza de
+// sobra para un negocio de este tamaño — hasta varios miles de
+// movimientos entran cómodos en el límite de 256 KB por
+// documento. Si algún día se acerca a ese límite, el camino es
+// partir `movimientos` y `entregas` en un documento por año;
+// ninguna pantalla tendría que cambiar para eso, solo esta capa.
+const RUTA = 'negocio/datos';
 
 // ── Forma de los datos ───────────────────────────────────────
 // clientes[]    quién te paga, cuánto y desde cuándo
@@ -88,38 +95,92 @@ export function fechaEnMes(mes, dia) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// GUARDAR Y LEER
+// GUARDAR Y LEER — la base del panel (capacidad `db`)
+//
+// `cargar()` es siempre sincrónica: devuelve la última foto
+// conocida, sin esperar a nadie. La conexión con la base corre
+// aparte, en `iniciar()`, y va actualizando esa foto sola.
 // ═══════════════════════════════════════════════════════════
 
-let estado = null;
+let bd = null; // el espacio de la base una vez conectado, o null si no hay
+let estado = estadoVacio();
+let listo = false; // ya llegó la primera foto real (o se confirmó que no hay base)
+let error = null; // null, 'sin-base', o el código de error de la base
 const oyentes = new Set();
 
+/** Rellena lo que un documento viejo no traiga todavía, sin
+    perder lo que sí trae — así una sección nueva del panel no
+    rompe la lectura de datos guardados antes de que existiera. */
+function completar(datos) {
+  const base = estadoVacio();
+  return {
+    ...base,
+    ...datos,
+    ajustes: { ...base.ajustes, ...(datos.ajustes || {}) },
+  };
+}
+
+/** Conecta con la base y espera la primera foto. Se llama una
+    sola vez, al arrancar el panel. De ahí en más, cualquier
+    cambio —tuyo o de otro aparato con este mismo panel abierto—
+    llega solo y avisa a `alCambiar`. */
+export function iniciar() {
+  return new Promise((resolver) => {
+    (async () => {
+      const claude = typeof window !== 'undefined' ? window.claude : null;
+      bd = claude ? await claude.use('db') : null;
+
+      if (!bd) {
+        error = 'sin-base';
+        listo = true;
+        resolver();
+        return;
+      }
+
+      let primera = true;
+      bd.doc(RUTA).onSnapshot(
+        (foto) => {
+          error = null;
+          estado = foto.exists ? completar(foto.data()) : estadoVacio();
+          listo = true;
+          if (primera) {
+            primera = false;
+            resolver();
+          } else {
+            notificar();
+          }
+        },
+        (err) => {
+          error = err.code;
+          listo = true;
+          if (primera) {
+            primera = false;
+            resolver();
+          } else {
+            notificar();
+          }
+        }
+      );
+    })();
+  });
+}
+
 export function cargar() {
-  if (estado) return estado;
-  try {
-    const crudo = localStorage.getItem(CLAVE);
-    estado = crudo ? { ...estadoVacio(), ...JSON.parse(crudo) } : estadoVacio();
-  } catch {
-    // Navegador en modo privado o datos corruptos: arrancamos limpio
-    // en memoria en vez de romper la pantalla.
-    estado = estadoVacio();
-  }
   return estado;
 }
 
-function guardar() {
-  try {
-    localStorage.setItem(CLAVE, JSON.stringify(estado));
-  } catch {
-    // Sin espacio o sin permiso. Los datos siguen en memoria
-    // hasta que se cierre la pestaña; Ajustes avisa cómo respaldar.
-  }
+export function estaListo() {
+  return listo;
 }
 
-/** Cambia los datos y avisa a la pantalla. Todo pasa por acá. */
-export function mutar(cambio) {
-  cambio(cargar());
-  guardar();
+/** null si está todo bien; si no, el motivo por el que el panel
+    no puede guardar — para mostrarlo en pantalla en vez de dejar
+    que ella seleccione y no se guarde nada. */
+export function errorDeConexion() {
+  return error;
+}
+
+function notificar() {
   oyentes.forEach((fn) => fn(estado));
 }
 
@@ -128,10 +189,39 @@ export function alCambiar(fn) {
   return () => oyentes.delete(fn);
 }
 
+// Las escrituras a un mismo documento van de a una: si dos
+// acciones mutan casi juntas, la segunda espera a que la base
+// termine de guardar la primera antes de mandar la suya.
+let colaEscritura = Promise.resolve();
+
+function guardar(copia) {
+  if (!bd) return;
+  colaEscritura = colaEscritura
+    .catch(() => {})
+    .then(() => bd.doc(RUTA).set(JSON.parse(JSON.stringify(copia))))
+    .catch(() => {
+      // Se reintenta sola: la próxima mutación manda el estado
+      // completo de nuevo, así que no hace falta guardar cuál
+      // escritura puntual falló.
+    });
+}
+
+/** Cambia los datos y avisa a la pantalla. Todo pasa por acá.
+    La pantalla se actualiza al toque; la base se pone al día en
+    segundo plano, sin que las vistas tengan que esperarla. */
+export function mutar(cambio) {
+  const copia = JSON.parse(JSON.stringify(estado));
+  cambio(copia);
+  estado = copia;
+  notificar();
+  guardar(copia);
+}
+
 export function reemplazarTodo(nuevo) {
-  estado = { ...estadoVacio(), ...nuevo };
-  guardar();
-  oyentes.forEach((fn) => fn(estado));
+  mutar((s) => {
+    Object.keys(s).forEach((clave) => delete s[clave]);
+    Object.assign(s, estadoVacio(), nuevo);
+  });
 }
 
 export function id() {

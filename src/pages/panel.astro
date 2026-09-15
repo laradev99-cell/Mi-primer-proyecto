@@ -1,14 +1,20 @@
 ---
 /*
- * EL PANEL DE LARA
+ * EL PANEL DE LARA — cascarón de compilación, no una página del
+ * sitio.
  *
- * Todo lo que se ve acá se arma en el navegador con los datos
- * que ella carga: la página que Astro genera es apenas el
- * cascarón. No hay servidor, no hay base de datos, no hay
- * cuenta que crear.
+ * El panel real no vive acá ni en naimid.com.ar: se publica como
+ * un Artifact privado de Claude, con acceso restringido a Lara y
+ * los datos guardados en su base propia (ver src/panel/estado.js).
+ * Esta página de Astro solo existe para que `astro build` genere
+ * el CSS y el JS ya empaquetados, que después `inline.cjs` junta
+ * en un solo archivo HTML listo para publicar. Ver PANEL.md.
  *
- * Es privada: `noindex` para que no la levante Google. La
- * dirección no se linkea desde ningún lado del sitio público.
+ * Si alguien entra a /panel en el sitio en vivo, ve esta misma
+ * pantalla pero sin datos: no tiene forma de conectarse a la base
+ * (esa conexión solo existe dentro del visor de Claude), así que
+ * muestra el aviso de "no se pudo conectar" y nada más. No pasa
+ * nada si queda así — no se linkea desde ningún lado del sitio.
  */
 import Layout from '../layouts/Layout.astro';
 import '../styles/panel.css';
@@ -21,14 +27,6 @@ import '../styles/panel.css';
   clase="panel-body"
   colorTema="#f6f5f9"
 >
-  <Fragment slot="cabeza">
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="/icono-192.png" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Naimid" />
-  </Fragment>
-
   <div id="panel">
     <!-- Lo que se ve mientras carga el JavaScript. Dura un parpadeo. -->
     <p class="cargando">Abriendo tu panel…</p>
