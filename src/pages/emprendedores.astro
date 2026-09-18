@@ -1,0 +1,483 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Pie from '../components/Pie.astro';
+import { emprendedores, lugaresBadge, lugaresTexto } from '../data/emprendedores.js';
+import { whatsapp, mensajes } from '../data/site.js';
+
+const pesos = (n) =>
+  new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(n);
+
+// Página aparte a propósito: no se linkea desde ningún lado del sitio
+// y va con noindex para que no aparezca en Google. Los precios de acá
+// son más bajos que los del resto y no tienen que cruzarse.
+const { hero, paraQuien, servicios, comoTrabajamos, cierre } = emprendedores;
+
+const badge = lugaresBadge();
+const disponibilidad = lugaresTexto();
+---
+
+<Layout
+  titulo="Para marcas que recién arrancan"
+  descripcion="Tres servicios para emprendedores que quieren empezar a mostrarse bien."
+  noindex={true}
+>
+  <!-- ─── PORTADA ─── -->
+  <header class="portada oscura grano" id="contenido">
+    <div class="orbe orbe-portada"></div>
+    <div class="contenedor interior">
+      <p class="etiqueta" data-revelar>{hero.kicker}</p>
+      <h1 class="display" data-revelar style="--retraso: 90ms">
+        {hero.titulo}
+      </h1>
+      <p class="bajada" data-revelar style="--retraso: 180ms">{hero.bajada}</p>
+
+      {
+        badge && (
+          <p class="badge" data-revelar style="--retraso: 260ms">
+            {badge}
+          </p>
+        )
+      }
+    </div>
+  </header>
+
+  <!-- ─── PARA QUIÉN ES ─── -->
+  <section class="seccion clara">
+    <div class="contenedor">
+      <div class="caja-barra" data-revelar>
+        <h2 class="subtitulo">{paraQuien.titulo}</h2>
+        <p class="cuerpo">{paraQuien.texto}</p>
+        <p class="cuerpo disponibilidad">{disponibilidad}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── LOS SERVICIOS ─── -->
+  <section class="seccion lavanda">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Los servicios</p>
+      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
+        Tres formas de empezar
+      </h2>
+
+      <div class="servicios">
+        {
+          servicios.map((s, i) => (
+            <article
+              class:list={['servicio', 'caja-barra', { principal: s.principal }]}
+              data-revelar
+              style={`--retraso: ${i * 80}ms`}
+            >
+              <p class="mini-etiqueta">{s.kicker}</p>
+              <h3 class="servicio-titulo">{s.titulo}</h3>
+              <p class="cuerpo">{s.texto}</p>
+
+              {s.incluye && (
+                <ul class="lista-check">
+                  {s.incluye.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              )}
+
+              {s.destacado && <p class="destacado">{s.destacado}</p>}
+
+              {s.filas && (
+                <dl class="filas">
+                  {s.filas.map((fila) => (
+                    <div class="fila">
+                      <dt>
+                        {fila.nombre}
+                        {fila.detalle && <span class="fila-detalle">{fila.detalle}</span>}
+                      </dt>
+                      <dd>{pesos(fila.precio)}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+
+              {s.precio && (
+                <p class="precio">{pesos(s.precio)}</p>
+              )}
+
+              {s.adicional && (
+                <div class="adicional">
+                  <p class="adicional-texto">{s.adicional.texto}</p>
+                  <p class="adicional-precio">+{pesos(s.adicional.precio)}</p>
+                </div>
+              )}
+
+              {s.nota && <p class="nota">{s.nota}</p>}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CÓMO TRABAJAMOS ─── -->
+  <section class="seccion clara">
+    <div class="contenedor">
+      <p class="etiqueta" data-revelar>Cómo trabajamos</p>
+      <h2 class="titulo titulo-suelto" data-revelar style="--retraso: 70ms">
+        Las reglas, cortitas
+      </h2>
+
+      <dl class="condiciones">
+        {
+          comoTrabajamos.map(([titulo, texto], i) => (
+            <div class="condicion" data-revelar style={`--retraso: ${i * 80}ms`}>
+              <dt>{titulo}</dt>
+              <dd class="cuerpo">{texto}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- ─── CIERRE ─── -->
+  <section class="seccion oscura grano cierre">
+    <div class="orbe orbe-cierre"></div>
+    <div class="contenedor interior">
+      <h2 class="titulo" data-revelar>{cierre.titulo}</h2>
+      <p class="cuerpo" data-revelar style="--retraso: 90ms">{cierre.texto}</p>
+      <a
+        class="boton boton-acento"
+        href={whatsapp(mensajes.emprendedores)}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-revelar
+        style="--retraso: 160ms"
+      >
+        WhatsApp
+        <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M2 8h11m0 0-4.2-4.2M13 8l-4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <Pie />
+</Layout>
+
+<style>
+  /* ── Portada ── */
+  .portada {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(6rem, 18vw, 11rem) clamp(4rem, 12vw, 7rem);
+  }
+
+  .orbe-portada {
+    width: min(60vw, 640px);
+    aspect-ratio: 1;
+    top: -25%;
+    right: -15%;
+    background: radial-gradient(circle, #6b2fd6 0%, transparent 68%);
+    opacity: 0.8;
+  }
+
+  .interior {
+    position: relative;
+    z-index: 1;
+  }
+
+  .portada .etiqueta {
+    color: var(--violeta-400);
+    margin-bottom: clamp(1.2rem, 3vw, 1.8rem);
+  }
+
+  .portada h1 {
+    margin-bottom: clamp(1.2rem, 3vw, 1.6rem);
+    max-width: 16ch;
+  }
+
+  /* El badge de lugares: es la urgencia de la página, va suelto y
+     en violeta claro para que sea lo único que compite con el título. */
+  .badge {
+    display: inline-block;
+    margin-top: clamp(1.8rem, 4vw, 2.4rem);
+    padding: 0.55rem 1.2rem;
+    border: 1px solid var(--violeta-400);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--violeta-400);
+  }
+
+  /* ── Encabezados de sección ── */
+  .etiqueta {
+    margin-bottom: 1.1rem;
+  }
+
+  .titulo-suelto {
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  /* ── Caja con barra violeta ──
+     Es el molde de toda la página: fondo lavanda y una barra al
+     costado que marca dónde empieza cada bloque. */
+  .caja-barra {
+    background: var(--violeta-100);
+    border-left: 5px solid var(--violeta-600);
+    border-radius: 0 var(--radio) var(--radio) 0;
+    padding: clamp(1.6rem, 4vw, 2.4rem);
+  }
+
+  /* Sobre lavanda el violeta claro desaparece: ahí la caja va blanca */
+  .lavanda .caja-barra {
+    background: var(--blanco);
+  }
+
+  .caja-barra .subtitulo {
+    color: var(--violeta-900);
+    margin-bottom: 1rem;
+  }
+
+  .caja-barra .cuerpo + .cuerpo {
+    margin-top: 1rem;
+  }
+
+  /* La frase de los lugares se lee como aviso, no como párrafo */
+  .disponibilidad {
+    font-weight: 500;
+    color: var(--violeta-600) !important;
+  }
+
+  /* ── Servicios ── */
+  .servicios {
+    display: grid;
+    gap: clamp(1rem, 2.5vw, 1.4rem);
+  }
+
+  .servicio {
+    border: 1px solid var(--violeta-200);
+    border-left: 5px solid var(--violeta-600);
+  }
+
+  /* El tercero es el principal: barra más gruesa y sombra propia */
+  .servicio.principal {
+    border: 1px solid var(--violeta-600);
+    border-left: 10px solid var(--violeta-600);
+    box-shadow: 0 22px 48px -30px rgba(45, 10, 107, 0.5);
+  }
+
+  .mini-etiqueta {
+    font-size: var(--micro);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--violeta-600);
+    margin-bottom: 0.7rem;
+  }
+
+  .servicio-titulo {
+    font-size: clamp(1.4rem, 3.4vw, 1.9rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: var(--violeta-900);
+    margin-bottom: 0.9rem;
+  }
+
+  .servicio .cuerpo {
+    color: var(--texto-medio);
+    max-width: 62ch;
+  }
+
+  /* ── Lista de lo que incluye ── */
+  .lista-check {
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+    margin-top: clamp(1.4rem, 3vw, 1.8rem);
+  }
+
+  .lista-check li {
+    position: relative;
+    padding-left: 1.9rem;
+    font-weight: 300;
+    color: var(--texto-medio);
+    line-height: 1.6;
+  }
+
+  .lista-check li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--violeta-600);
+  }
+
+  /* ── Lo que va después de la charla: se destaca porque es lo que
+     queda en la mano cuando el servicio terminó ── */
+  .destacado {
+    margin-top: clamp(1.4rem, 3vw, 1.8rem);
+    padding: clamp(1.1rem, 3vw, 1.4rem);
+    background: var(--violeta-100);
+    border-radius: var(--radio-sm);
+    font-weight: 400;
+    color: var(--violeta-900);
+    max-width: 58ch;
+  }
+
+  .servicio .destacado {
+    background: var(--violeta-100);
+  }
+
+  /* ── Filas de precios ── */
+  .filas {
+    margin-top: clamp(1.6rem, 3.5vw, 2rem);
+    border-top: 1px solid var(--violeta-200);
+  }
+
+  .fila {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.4rem 1.5rem;
+    padding-block: clamp(0.9rem, 2.5vw, 1.2rem);
+    border-bottom: 1px solid var(--violeta-200);
+  }
+
+  .fila dt {
+    font-weight: 600;
+    color: var(--violeta-900);
+  }
+
+  .fila-detalle {
+    display: block;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: var(--texto-medio);
+  }
+
+  .fila dd {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--violeta-600);
+    font-size: 1.05rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Precio suelto (asesoramiento) ── */
+  .precio {
+    margin-top: clamp(1.6rem, 3.5vw, 2rem);
+    font-size: clamp(2rem, 5.5vw, 2.7rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--violeta-900);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Adicional de la jornada de grabación ── */
+  .adicional {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem 1.5rem;
+    margin-top: clamp(1.4rem, 3vw, 1.8rem);
+    padding: clamp(1.1rem, 3vw, 1.4rem);
+    background: var(--violeta-900);
+    border-radius: var(--radio-sm);
+  }
+
+  .adicional-texto {
+    flex: 1 1 22ch;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .adicional-precio {
+    font-size: clamp(1.3rem, 3.5vw, 1.6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--violeta-400);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .nota {
+    margin-top: 1rem;
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--texto-medio);
+  }
+
+  /* ── Cómo trabajamos ── */
+  .condiciones {
+    border-top: 2px solid var(--violeta-900);
+  }
+
+  .condicion {
+    display: grid;
+    gap: 0.4rem 3rem;
+    padding-block: clamp(1.1rem, 3vw, 1.5rem);
+    border-bottom: 1px solid var(--violeta-200);
+  }
+
+  .condicion dt {
+    font-size: var(--micro);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--violeta-600);
+    padding-top: 0.35em;
+  }
+
+  .condicion dd {
+    max-width: 58ch;
+  }
+
+  @media (min-width: 760px) {
+    .condicion {
+      grid-template-columns: minmax(0, 0.28fr) minmax(0, 1fr);
+    }
+  }
+
+  /* ── Cierre ── */
+  .cierre {
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--tinta) 0%, #240a54 100%);
+  }
+
+  .orbe-cierre {
+    width: min(70vw, 740px);
+    aspect-ratio: 1;
+    bottom: -35%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, #a87cff 0%, transparent 65%);
+    opacity: 0.3;
+  }
+
+  .cierre .interior {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cierre h2 {
+    margin-bottom: 1.2rem;
+  }
+
+  .cierre .cuerpo {
+    margin-bottom: 2rem;
+  }
+</style>
