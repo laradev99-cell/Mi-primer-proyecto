@@ -62,11 +62,12 @@ export const emprendedores = {
       ],
       // Las dos reglas que evitan que el servicio se estire: el guion
       // no entra, y el material se recibe una sola vez. Si los videos
-      // llegan de a uno, el trabajo se parte en tres y el plazo no se
-      // puede sostener.
+      // llegan de a uno, el trabajo se parte en tres y los 5 días
+      // hábiles no se sostienen. Por eso va como condición y no como
+      // pedido.
       aclaraciones: [
         'La idea la pensás vos: qué decir, qué mostrar y cómo. Yo me encargo de editar, no de armar el contenido.',
-        'Mandame los 3 videos juntos. Desde que los recibo, en 4 días hábiles los tenés editados.',
+        'Los 3 videos me los tenés que mandar juntos, sí o sí. Desde que los tengo, en 5 días hábiles te los devuelvo editados.',
       ],
       // Se vende el pack entero, no el video suelto: el precio por
       // unidad invitaba a pedir uno solo.
