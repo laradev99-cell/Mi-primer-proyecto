@@ -53,12 +53,20 @@ export const emprendedores = {
       kicker: 'Servicio 01',
       titulo: 'Edición de videos',
       texto:
-        'Vos grabás, yo te los edito. Subtítulos, transiciones, música y todos los recursos que el video necesite para que se mire hasta el final.',
+        'Vos grabás, yo te los edito. Es una edición simple y prolija, para que el video se mire hasta el final.',
       incluye: [
         'Subtítulos completos',
         'Transiciones y ritmo',
         'Música y efectos de sonido',
         'Entrega por Drive, listo para publicar',
+      ],
+      // Las dos reglas que evitan que el servicio se estire: el guion
+      // no entra, y el material se recibe una sola vez. Si los videos
+      // llegan de a uno, el trabajo se parte en tres y el plazo no se
+      // puede sostener.
+      aclaraciones: [
+        'La idea la pensás vos: qué decir, qué mostrar y cómo. Yo me encargo de editar, no de armar el contenido.',
+        'Mandame los 3 videos juntos. Desde que los recibo, en 4 días hábiles los tenés editados.',
       ],
       // Se vende el pack entero, no el video suelto: el precio por
       // unidad invitaba a pedir uno solo.
@@ -75,25 +83,22 @@ export const emprendedores = {
       kicker: 'Servicio 02',
       titulo: 'Ideas de contenido',
       texto:
-        'Te armo qué publicar, semana por semana, para que no tengas que sentarte a pensarlo cada vez. Cada idea viene con el concepto, qué grabar o mostrar, y el texto sugerido.',
-      // Se cuenta por semana porque el mes entero de una sola vez
-      // abruma. El total va abajo para que no queden dudas de
-      // cuántas ideas son en total.
+        'Te armo qué publicar todo el mes, para que no tengas que sentarte a pensarlo cada vez. Cada idea viene con el concepto, qué grabar o mostrar, y el texto sugerido.',
       filas: [
         {
           nombre: 'Básico',
-          detalle: '1 idea de posteo y 3 de historia por semana',
-          total: 'Al mes: 4 posteos y 12 historias',
-          precio: 60000,
+          detalle: '4 ideas de posteo y 12 de historia',
+          apunte: 'Repartidas en las 4 semanas del mes',
+          precio: 50000,
         },
         {
           nombre: 'Completo',
-          detalle: '2 ideas de posteo y 5 de historia por semana',
-          total: 'Al mes: 8 posteos y 20 historias',
-          precio: 100000,
+          detalle: '8 ideas de posteo y 20 de historia',
+          apunte: 'Repartidas en las 4 semanas del mes',
+          precio: 90000,
         },
       ],
-      nota: 'Te las mando cada semana, no todas juntas. Incluye una ronda de cambios.',
+      nota: 'Te las mando todas juntas, listas para todo el mes. Incluye una ronda de cambios.',
     },
 
     {
@@ -119,9 +124,9 @@ export const emprendedores = {
 
   comoTrabajamos: [
     ['Pago', '100% por adelantado'],
-    ['Entrega', 'Hasta 5 días hábiles desde que recibo el material'],
+    ['Entrega', 'Hasta 5 días hábiles desde que recibo todo el material'],
     ['Ajustes', 'Una ronda de cambios incluida'],
-    ['Los videos', 'Los grabás vos, salvo que sumes la jornada'],
+    ['Los videos', 'Los grabás vos y me los mandás juntos, salvo que sumes la jornada'],
   ],
 
   cierre: {

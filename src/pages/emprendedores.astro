@@ -85,6 +85,17 @@ const disponibilidad = lugaresTexto();
                 </ul>
               )}
 
+              {s.aclaraciones && (
+                <div class="aclara">
+                  <p class="mini-etiqueta">Para que salga bien</p>
+                  <ul>
+                    {s.aclaraciones.map((linea) => (
+                      <li>{linea}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {s.destacado && <p class="destacado">{s.destacado}</p>}
 
               {s.filas && (
@@ -94,7 +105,7 @@ const disponibilidad = lugaresTexto();
                       <dt>
                         {fila.nombre}
                         {fila.detalle && <span class="fila-detalle">{fila.detalle}</span>}
-                        {fila.total && <span class="fila-total">{fila.total}</span>}
+                        {fila.apunte && <span class="fila-apunte">{fila.apunte}</span>}
                       </dt>
                       <dd>{pesos(fila.precio)}</dd>
                     </div>
@@ -341,6 +352,43 @@ const disponibilidad = lugaresTexto();
     background: var(--violeta-100);
   }
 
+  /* ── Aclaraciones ──
+     Marcan el límite del servicio, así que se leen como regla: caja
+     con borde y sin relleno, para no confundirlas con un beneficio. */
+  .aclara {
+    margin-top: clamp(1.4rem, 3vw, 1.8rem);
+    padding: clamp(1.1rem, 3vw, 1.4rem);
+    border: 1px solid var(--violeta-200);
+    border-radius: var(--radio-sm);
+  }
+
+  .aclara ul {
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .aclara li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-size: 0.92rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--texto-medio);
+    max-width: 62ch;
+  }
+
+  .aclara li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--violeta-400);
+  }
+
   /* ── Filas de precios ── */
   .filas {
     margin-top: clamp(1.6rem, 3.5vw, 2rem);
@@ -377,8 +425,8 @@ const disponibilidad = lugaresTexto();
     font-variant-numeric: tabular-nums;
   }
 
-  /* El total del mes, para que el "por semana" no deje dudas */
-  .fila-total {
+  /* La línea que ordena cómo vienen repartidas las ideas */
+  .fila-apunte {
     display: block;
     font-weight: 400;
     font-size: 0.82rem;
