@@ -94,6 +94,7 @@ const disponibilidad = lugaresTexto();
                       <dt>
                         {fila.nombre}
                         {fila.detalle && <span class="fila-detalle">{fila.detalle}</span>}
+                        {fila.total && <span class="fila-total">{fila.total}</span>}
                       </dt>
                       <dd>{pesos(fila.precio)}</dd>
                     </div>
@@ -102,7 +103,12 @@ const disponibilidad = lugaresTexto();
               )}
 
               {s.precio && (
-                <p class="precio">{pesos(s.precio)}</p>
+                <div class="precio-bloque">
+                  {s.precioEtiqueta && (
+                    <p class="precio-etiqueta">{s.precioEtiqueta}</p>
+                  )}
+                  <p class="precio">{pesos(s.precio)}</p>
+                </div>
               )}
 
               {s.adicional && (
@@ -371,9 +377,29 @@ const disponibilidad = lugaresTexto();
     font-variant-numeric: tabular-nums;
   }
 
-  /* ── Precio suelto (asesoramiento) ── */
-  .precio {
+  /* El total del mes, para que el "por semana" no deje dudas */
+  .fila-total {
+    display: block;
+    font-weight: 400;
+    font-size: 0.82rem;
+    color: var(--violeta-600);
+  }
+
+  /* ── Precio suelto ── */
+  .precio-bloque {
     margin-top: clamp(1.6rem, 3.5vw, 2rem);
+  }
+
+  .precio-etiqueta {
+    font-size: var(--micro);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--violeta-600);
+    margin-bottom: 0.4rem;
+  }
+
+  .precio {
     font-size: clamp(2rem, 5.5vw, 2.7rem);
     font-weight: 800;
     letter-spacing: -0.04em;

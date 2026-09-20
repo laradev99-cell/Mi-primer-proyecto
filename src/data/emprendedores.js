@@ -60,14 +60,14 @@ export const emprendedores = {
         'Música y efectos de sonido',
         'Entrega por Drive, listo para publicar',
       ],
-      filas: [
-        { nombre: '1 video', precio: 30000 },
-        { nombre: 'Pack de 5 videos', precio: 150000 },
-      ],
+      // Se vende el pack entero, no el video suelto: el precio por
+      // unidad invitaba a pedir uno solo.
+      precioEtiqueta: 'Los 3 videos editados',
+      precio: 90000,
       adicional: {
         texto:
-          '¿No sabés grabar o no tenés tiempo? Voy yo y grabamos los 5 videos en una sola jornada.',
-        precio: 50000,
+          '¿No sabés grabar o no tenés tiempo? Voy yo y grabamos los 3 videos en una sola jornada.',
+        precio: 30000,
       },
     },
 
@@ -75,20 +75,25 @@ export const emprendedores = {
       kicker: 'Servicio 02',
       titulo: 'Ideas de contenido',
       texto:
-        'Te armo qué publicar todo el mes, para que no tengas que sentarte a pensarlo cada vez. Cada idea viene con el concepto, qué grabar o mostrar, y el texto sugerido.',
+        'Te armo qué publicar, semana por semana, para que no tengas que sentarte a pensarlo cada vez. Cada idea viene con el concepto, qué grabar o mostrar, y el texto sugerido.',
+      // Se cuenta por semana porque el mes entero de una sola vez
+      // abruma. El total va abajo para que no queden dudas de
+      // cuántas ideas son en total.
       filas: [
         {
           nombre: 'Básico',
-          detalle: '4 ideas de posteo + 10 de historia',
+          detalle: '1 idea de posteo y 3 de historia por semana',
+          total: 'Al mes: 4 posteos y 12 historias',
           precio: 60000,
         },
         {
           nombre: 'Completo',
-          detalle: '6 ideas de posteo + 20 de historia',
+          detalle: '2 ideas de posteo y 5 de historia por semana',
+          total: 'Al mes: 8 posteos y 20 historias',
           precio: 100000,
         },
       ],
-      nota: 'Incluye una ronda de cambios.',
+      nota: 'Te las mando cada semana, no todas juntas. Incluye una ronda de cambios.',
     },
 
     {
