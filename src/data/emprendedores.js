@@ -72,11 +72,11 @@ export const emprendedores = {
       // Se vende el pack entero, no el video suelto: el precio por
       // unidad invitaba a pedir uno solo.
       precioEtiqueta: 'Los 3 videos editados',
-      precio: 90000,
+      precio: 114000,
       adicional: {
         texto:
           '¿No sabés grabar o no tenés tiempo? Voy yo y grabamos los 3 videos en una sola jornada.',
-        precio: 30000,
+        precio: 50000,
       },
     },
 
@@ -90,7 +90,7 @@ export const emprendedores = {
           nombre: 'Básico',
           detalle: '4 ideas de posteo y 12 de historia',
           apunte: 'Repartidas en las 4 semanas del mes',
-          precio: 50000,
+          precio: 60000,
         },
         {
           nombre: 'Completo',
@@ -99,7 +99,7 @@ export const emprendedores = {
           precio: 90000,
         },
       ],
-      nota: 'Te las mando todas juntas, listas para todo el mes. Incluye una ronda de cambios.',
+      nota: 'Te las mando todas juntas, listas para todo el mes. Incluye solo una ronda de cambios.',
     },
 
     {
@@ -126,7 +126,7 @@ export const emprendedores = {
   comoTrabajamos: [
     ['Pago', '100% por adelantado'],
     ['Entrega', 'Hasta 5 días hábiles desde que recibo todo el material'],
-    ['Ajustes', 'Una ronda de cambios incluida'],
+    ['Ajustes', 'Solo una ronda de cambios incluida'],
     ['Los videos', 'Los grabás vos y me los mandás juntos, salvo que sumes la jornada'],
   ],
 
