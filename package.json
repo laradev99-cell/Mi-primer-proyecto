@@ -7,8 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "revisar-panel": "node scripts/revisar-panel.mjs"
+    "astro": "astro"
   },
   "dependencies": {
     "@fontsource/poppins": "^5.3.0",
