@@ -1,0 +1,767 @@
+<title>El Mirador de Naimid</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --fondo: #f6f5f9;
+  --superficie: #ffffff;
+  --superficie-alta: #faf9fc;
+  --borde: #e6e3ee;
+  --borde-fuerte: #cec8dd;
+
+  --texto: #1a1327;
+  --texto-medio: #574c6b;
+  --texto-tenue: #7d7391;
+
+  --acento: #6b2fd6;
+  --acento-hover: #5a25b8;
+  --acento-suave: #f3eeff;
+
+  --bien: #0a7048;
+  --bien-suave: #e8f6ef;
+  --aviso: #9a5300;
+  --aviso-suave: #fdf3e5;
+  --mal: #b42318;
+  --mal-suave: #fdeceb;
+
+  --sombra: 0 1px 2px rgba(26, 19, 39, 0.04), 0 1px 3px rgba(26, 19, 39, 0.06);
+  --radio: 14px;
+  --radio-sm: 9px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.contenedor {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 1.1rem 1.1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.4rem 0 0.2rem;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.punto {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--acento);
+  flex-shrink: 0;
+}
+
+.actualizado {
+  font-size: 0.74rem;
+  color: var(--texto-tenue);
+}
+
+.bloque {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 1.1rem;
+}
+
+.bloque-cabeza {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.bloque-titulo {
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.bloque-nota {
+  font-size: 0.78rem;
+  color: var(--texto-tenue);
+}
+
+.numeros {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+}
+@media (min-width: 640px) { .numeros { grid-template-columns: repeat(4, 1fr); } }
+
+.numero {
+  background: var(--superficie-alta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  padding: 0.75rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.numero-etiqueta {
+  font-size: 0.66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--texto-tenue);
+}
+.numero-valor {
+  font-size: clamp(1.25rem, 4vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.numero-detalle { font-size: 0.72rem; color: var(--texto-tenue); }
+.numero.bien .numero-valor { color: var(--bien); }
+.numero.mal .numero-valor { color: var(--mal); }
+
+/* ── Calendario ── */
+.cal-cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.7rem;
+}
+.cal-mes { font-weight: 700; font-size: 0.95rem; text-transform: capitalize; }
+.cal-flecha {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--borde);
+  background: var(--superficie);
+  color: var(--texto-medio);
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+.cal-flecha:hover { border-color: var(--acento); color: var(--acento); }
+.cal-aviso {
+  font-size: 0.74rem;
+  color: var(--texto-tenue);
+  background: var(--superficie-alta);
+  border-radius: var(--radio-sm);
+  padding: 0.6rem 0.7rem;
+  margin: 0 0 0.7rem;
+  line-height: 1.5;
+}
+.cal-grilla {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+.cal-dia-nombre {
+  text-align: center;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--texto-tenue);
+  padding-bottom: 0.3rem;
+  letter-spacing: 0.04em;
+}
+.cal-celda {
+  min-height: 58px;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--superficie-alta);
+  border: 1px solid var(--borde);
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  font-size: 0.64rem;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.cal-celda.fuera { visibility: hidden; cursor: default; }
+.cal-celda.hoy { border-color: var(--acento); border-width: 2px; }
+.cal-celda.abierto { background: var(--acento-suave); border-color: var(--acento); }
+.cal-celda:hover:not(.fuera) { border-color: var(--borde-fuerte); }
+.cal-num { font-weight: 600; font-size: 0.72rem; }
+.cal-tag {
+  max-width: 100%;
+  border-radius: 5px;
+  padding: 1px 4px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cal-mas { font-size: 0.58rem; color: var(--texto-tenue); font-weight: 600; padding-left: 2px; }
+.cal-tag.cobro { background: var(--acento-suave); color: var(--acento); }
+.cal-tag.cobro.pagado { background: var(--bien-suave); color: var(--bien); }
+.cal-tag.cobro.atrasado { background: var(--mal-suave); color: var(--mal); }
+.cal-tag.entrega { background: var(--aviso-suave); color: var(--aviso); }
+.cal-tag.recordatorio { background: var(--borde); color: var(--texto-medio); }
+
+.leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.1rem;
+  margin-top: 0.75rem;
+  font-size: 0.72rem;
+  color: var(--texto-medio);
+}
+.leyenda span { display: inline-flex; align-items: center; gap: 0.35rem; }
+.leyenda i { width: 9px; height: 9px; border-radius: 3px; display: inline-block; }
+.leyenda i.cobro { background: var(--acento-suave); border: 1.5px solid var(--acento); }
+.leyenda i.cobro.pagado { background: var(--bien-suave); border-color: var(--bien); }
+.leyenda i.cobro.atrasado { background: var(--mal-suave); border-color: var(--mal); }
+.leyenda i.entrega { background: var(--aviso-suave); border: 1.5px solid var(--aviso); }
+.leyenda i.recordatorio { background: var(--borde); border: 1.5px solid var(--texto-tenue); }
+
+/* ── Detalle del día tocado ── */
+.dia-detalle {
+  margin-top: 0.8rem;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-sm);
+  padding: 0.8rem;
+  background: var(--superficie-alta);
+}
+.dia-detalle-cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+  font-size: 0.86rem;
+}
+.cerrar-dia {
+  background: none;
+  border: none;
+  color: var(--texto-tenue);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+.dia-item {
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--borde);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.dia-item:first-child { border-top: none; padding-top: 0; }
+.dia-item-tipo {
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--texto-tenue);
+}
+.dia-item strong { font-size: 0.86rem; }
+.dia-item p { margin: 0; font-size: 0.78rem; color: var(--texto-medio); line-height: 1.5; }
+.dia-detalle-vacio { margin: 0; font-size: 0.8rem; color: var(--texto-tenue); }
+
+/* ── Listas y tarjetas ── */
+.lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--borde);
+  font-size: 0.85rem;
+}
+.fila:last-child { border-bottom: none; }
+.fila-texto { display: flex; flex-direction: column; gap: 0.1rem; flex: 1 1 13rem; min-width: 0; }
+.fila-texto strong { font-weight: 600; }
+.fila-texto span { font-size: 0.72rem; color: var(--texto-tenue); }
+.fila-fin { display: flex; align-items: center; gap: 0.5rem; margin-left: auto; }
+.fila-monto { font-variant-numeric: tabular-nums; font-weight: 700; letter-spacing: -0.02em; }
+.positivo { color: var(--bien); }
+.negativo { color: var(--mal); }
+
+.chip {
+  display: inline-block;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.chip.bien { color: var(--bien); background: var(--bien-suave); }
+.chip.aviso { color: var(--aviso); background: var(--aviso-suave); }
+.chip.mal { color: var(--mal); background: var(--mal-suave); }
+.chip.neutro { color: var(--texto-medio); background: var(--borde); }
+
+.tarjetas { display: grid; gap: 0.7rem; }
+@media (min-width: 680px) { .tarjetas { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); } }
+
+.dos-col { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 760px) { .dos-col { grid-template-columns: 1fr 1fr; align-items: start; } }
+.tarjeta {
+  background: var(--superficie-alta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.tarjeta-cabeza { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
+.tarjeta-cabeza h3 { margin: 0; font-size: 0.92rem; font-weight: 700; letter-spacing: -0.015em; }
+.tarjeta-bajada { font-size: 0.72rem; color: var(--texto-tenue); margin: 0; }
+.datos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem 0.7rem; }
+.datos dt { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texto-tenue); margin: 0; }
+.datos dd { font-size: 0.82rem; font-weight: 600; margin: 0; }
+
+.vacio { text-align: center; padding: 1.3rem 1rem; color: var(--texto-tenue); font-size: 0.82rem; }
+
+.estado-seccion {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem;
+  border-radius: var(--radio-sm);
+  background: var(--aviso-suave);
+  color: var(--aviso);
+  font-size: 0.8rem;
+}
+
+.pantalla-centro {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+.pantalla-centro-caja { max-width: 30ch; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+.pantalla-centro-caja h1 { font-size: 1.05rem; margin: 0; }
+.pantalla-centro-caja p { font-size: 0.84rem; color: var(--texto-medio); margin: 0; line-height: 1.55; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--acento);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover { background: var(--acento-hover); }
+
+::-webkit-scrollbar { display: none; }
+</style>
+
+<div id="app">
+  <div class="pantalla-centro"><div class="pantalla-centro-caja">
+    <span class="punto"></span>
+    <h1>Abriendo el mirador…</h1>
+    <p>Conectando con Eureka.</p>
+  </div></div>
+</div>
+
+<script>
+(function () {
+  const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const DIAS = ['L','M','X','J','V','S','D'];
+  const raiz = document.getElementById('app');
+
+  const PESOS = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 });
+  function plata(n) {
+    if (n === null || n === undefined) return '$0';
+    if (typeof n === 'string') return n.startsWith('$') ? n : n;
+    return PESOS.format(Math.round(n));
+  }
+  function texto(v) {
+    return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function numDe(valorPlata) {
+    if (typeof valorPlata === 'number') return valorPlata;
+    if (typeof valorPlata === 'string') return Number(valorPlata.replace(/[^\d-]/g, '')) || 0;
+    return 0;
+  }
+
+  // ── Estado: lo último que llegó de cada herramienta de Eureka ──
+  const estado = {
+    resumen: null, clientes: null, equipo: null, cobros: null,
+    pagos: null, entregas: null, recordatorios: null,
+  };
+  const errores = {}; // clave -> {code, message}
+  let sinMcp = false;
+
+  // Qué mes del calendario se está mirando (0 = este mes) y qué día
+  // está abierto para ver el detalle completo, sin recortar texto.
+  let offsetMes = 0;
+  let diaAbierto = null;
+
+  function notificar() { dibujar(); }
+
+  async function iniciar() {
+    const claude = typeof window !== 'undefined' ? window.claude : null;
+    const mcp = claude ? await claude.use('mcp') : null;
+    if (!mcp) { sinMcp = true; dibujar(); return; }
+
+    function observar(tool, input, clave) {
+      mcp.watchTool('Eureka', tool, input ?? null, (ev) => {
+        if (ev.type === 'data') {
+          estado[clave] = ev.result.payload;
+          delete errores[clave];
+        } else {
+          errores[clave] = ev.error;
+        }
+        notificar();
+      }, { refetchInterval: 60000 });
+    }
+
+    observar('donde_estoy_parada', null, 'resumen');
+    observar('ver_clientes', null, 'clientes');
+    observar('ver_equipo', null, 'equipo');
+    observar('ver_cobros', { estado: 'todos' }, 'cobros');
+    observar('ver_pagos', { estado: 'todos' }, 'pagos');
+    observar('ver_entregas', { dias: 45 }, 'entregas');
+    observar('ver_recordatorios', null, 'recordatorios');
+
+    dibujar();
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // DIBUJAR
+  // ═══════════════════════════════════════════════════════════
+
+  function dibujar() {
+    if (sinMcp) { raiz.innerHTML = pantallaSinMcp(); return; }
+
+    raiz.innerHTML = `
+      <div class="contenedor">
+        ${barra()}
+        ${bloqueResumen()}
+        ${bloqueCalendario()}
+        <div class="dos-col">
+          ${bloqueClientes()}
+          ${bloqueEquipo()}
+        </div>
+        ${bloqueRecordatorios()}
+      </div>
+    `;
+  }
+
+  function barra() {
+    return `<header class="barra">
+      <div class="marca"><span class="punto"></span><span>El mirador de Naimid</span></div>
+      <span class="actualizado">Lee en vivo de Eureka · se actualiza solo</span>
+    </header>`;
+  }
+
+  function avisoError(clave, etiqueta) {
+    const e = errores[clave];
+    if (!e) return '';
+    const MENSAJES = {
+      not_granted: 'Hace falta tu permiso para conectar con Eureka.',
+      consent_required: 'Falta aprobar la conexión con Eureka. Recargá la página y aceptá cuando te lo pida.',
+      needs_reauth: 'Eureka necesita reconectarse (claude.ai → Configuración → Conectores).',
+      server_not_connected: 'Eureka no está conectado a esta cuenta.',
+      server_unavailable: 'Eureka no contesta ahora mismo. Reintentando solo.',
+      blocked_by_policy: 'Esta sección está bloqueada por una política de la cuenta.',
+    };
+    const msg = MENSAJES[e.code] || 'No se pudo cargar esta parte ahora mismo.';
+    return `<div class="estado-seccion">⚠️ ${texto(etiqueta)}: ${texto(msg)}</div>`;
+  }
+
+  // ── Resumen ──
+  function bloqueResumen() {
+    const r = estado.resumen;
+    const err = avisoError('resumen', 'El resumen');
+    if (err) return `<section class="bloque">${err}</section>`;
+    if (!r) return `<section class="bloque">${cargando()}</section>`;
+
+    const queda = numDe(r.queda_hasta_hoy);
+    return `<section class="bloque">
+      <div class="bloque-cabeza">
+        <h2 class="bloque-titulo">Este mes</h2>
+        <span class="bloque-nota">${texto(mesLargoDe(r.mes))}</span>
+      </div>
+      <div class="numeros">
+        <div class="numero ${queda >= 0 ? 'bien' : 'mal'}">
+          <span class="numero-etiqueta">Te queda</span>
+          <strong class="numero-valor">${texto(r.queda_hasta_hoy)}</strong>
+          <span class="numero-detalle">cobrado menos pagado al equipo</span>
+        </div>
+        <div class="numero">
+          <span class="numero-etiqueta">Cobrado</span>
+          <strong class="numero-valor">${texto(r.cobrado)}</strong>
+        </div>
+        <div class="numero ${Number(r.cobros_atrasados) > 0 ? 'mal' : ''}">
+          <span class="numero-etiqueta">Falta cobrar</span>
+          <strong class="numero-valor">${texto(r.falta_cobrar)}</strong>
+          <span class="numero-detalle">${Number(r.cobros_atrasados) > 0 ? `${r.cobros_atrasados} atrasado(s)` : 'nada atrasado'}</span>
+        </div>
+        <div class="numero">
+          <span class="numero-etiqueta">Pagado al equipo</span>
+          <strong class="numero-valor">${texto(r.pagado_al_equipo)}</strong>
+          <span class="numero-detalle">${texto(r.falta_pagar)} falta pagar</span>
+        </div>
+      </div>
+    </section>`;
+  }
+
+  function mesLargoDe(mesIso) {
+    if (!mesIso) return '';
+    const [a, m] = mesIso.split('-').map(Number);
+    const n = MESES[m - 1] || '';
+    return `${n.charAt(0).toUpperCase()}${n.slice(1)} ${a}`;
+  }
+
+  // ── Calendario: navegable, con detalle completo al tocar un día ──
+  const ICONO = { cobro: '💰', entrega: '🎬', recordatorio: '⏰' };
+  const NOMBRE_TIPO = { cobro: 'Cobro', entrega: 'Entrega', recordatorio: 'Recordatorio' };
+
+  function bloqueCalendario() {
+    const err = avisoError('clientes', 'El calendario') || avisoError('entregas', 'El calendario') || avisoError('recordatorios', 'El calendario');
+    if (!estado.clientes && !estado.entregas && !estado.recordatorios && !err) {
+      return `<section class="bloque">${cargando()}</section>`;
+    }
+
+    const hoy = new Date();
+    const base = new Date(hoy.getFullYear(), hoy.getMonth() + offsetMes, 1);
+    const anio = base.getFullYear();
+    const mesIdx = base.getMonth(); // 0-based
+    const esMesActual = offsetMes === 0;
+    const primerDiaSemana = (new Date(anio, mesIdx, 1).getDay() + 6) % 7; // lunes=0
+    const diasEnMes = new Date(anio, mesIdx + 1, 0).getDate();
+    const mesIso = `${anio}-${String(mesIdx + 1).padStart(2, '0')}`;
+
+    // ── Juntamos qué pasa cada día del mes ──
+    const porDia = {}; // numeroDeDia -> [{tipo, titulo, detalle, tono}]
+    function agregar(dia, item) {
+      if (dia < 1 || dia > diasEnMes) return;
+      (porDia[dia] = porDia[dia] || []).push(item);
+    }
+
+    // Cobros: el día fijo de cada cliente se repite todos los meses — por
+    // eso esto funciona para cualquier mes, pasado o futuro. El estado
+    // (pagado/atrasado) solo lo sabemos para el mes que Eureka ya registró.
+    const cobrosDelMes = {}; // nombreCliente -> registro de ver_cobros para este mes
+    (estado.cobros?.cobros || []).forEach((c) => {
+      if (c.periodo === mesIso) cobrosDelMes[c.cliente] = c;
+    });
+    (estado.clientes?.clientes || []).forEach((c) => {
+      if (!c.dia_cobro) return;
+      const registro = cobrosDelMes[c.nombre];
+      const tono = registro ? (registro.estado === 'pagado' ? 'pagado' : (registro.atrasado ? 'atrasado' : '')) : '';
+      const detalle = registro
+        ? `${texto(c.monto)} · ${registro.estado === 'pagado' ? 'ya pagó' : (registro.atrasado ? 'atrasado' : 'pendiente')}`
+        : `${texto(c.monto)} · día habitual de cobro`;
+      agregar(c.dia_cobro, { tipo: 'cobro', titulo: c.nombre, detalle, tono });
+    });
+
+    // Entregas y recordatorios: Eureka solo devuelve los próximos, así que
+    // en meses lejanos esta parte puede aparecer vacía aunque el mes tenga
+    // trabajo — todavía no se cargó o está fuera del rango que Eureka trae.
+    (estado.entregas?.entregas || []).forEach((e) => {
+      const d = diaDelMesDesde(e.para, anio, mesIdx);
+      if (d) agregar(d, { tipo: 'entrega', titulo: e.cliente, detalle: e.descripcion || '' });
+    });
+    (estado.recordatorios?.recordatorios || []).forEach((r) => {
+      if (r.estado !== 'pendiente') return;
+      const d = diaDelMesDesde(r.cuando, anio, mesIdx);
+      if (d) agregar(d, { tipo: 'recordatorio', titulo: r.texto, detalle: '' });
+    });
+
+    const celdas = [];
+    for (let i = 0; i < primerDiaSemana; i++) celdas.push('<div class="cal-celda fuera"></div>');
+    for (let dia = 1; dia <= diasEnMes; dia++) {
+      const esHoy = esMesActual && dia === hoy.getDate();
+      const items = porDia[dia] || [];
+      const abierto = diaAbierto === dia;
+      celdas.push(`<button type="button" class="cal-celda${esHoy ? ' hoy' : ''}${abierto ? ' abierto' : ''}" data-dia="${dia}">
+        <span class="cal-num">${dia}</span>
+        ${items.slice(0, 3).map((it) => `<span class="cal-tag ${it.tipo} ${it.tono || ''}">${ICONO[it.tipo]} ${texto(it.titulo)}</span>`).join('')}
+        ${items.length > 3 ? `<span class="cal-mas">+${items.length - 3} más</span>` : ''}
+      </button>`);
+    }
+
+    return `<section class="bloque">
+      <div class="cal-cabeza">
+        <button type="button" class="cal-flecha" data-mes="atras" aria-label="Mes anterior">‹</button>
+        <span class="cal-mes">${texto(mesLargoDe(mesIso))}</span>
+        <button type="button" class="cal-flecha" data-mes="adelante" aria-label="Mes siguiente">›</button>
+      </div>
+      ${!esMesActual ? '<p class="cal-aviso">Los cobros se repiten todos los meses, así que ese día vale para éste también. Las entregas y recordatorios de meses lejanos pueden faltar: Eureka solo adelanta lo más próximo.</p>' : ''}
+      ${err}
+      <div class="cal-grilla">
+        ${DIAS.map((d) => `<div class="cal-dia-nombre">${d}</div>`).join('')}
+        ${celdas.join('')}
+      </div>
+      <div class="leyenda">
+        <span><i class="cobro"></i>💰 cobro pendiente</span>
+        <span><i class="cobro pagado"></i>💰 ya pagó</span>
+        <span><i class="cobro atrasado"></i>💰 atrasado</span>
+        <span><i class="entrega"></i>🎬 entrega de contenido</span>
+        <span><i class="recordatorio"></i>⏰ recordatorio tuyo</span>
+      </div>
+      ${panelDiaAbierto(porDia, mesIso)}
+    </section>`;
+  }
+
+  /** El detalle completo (sin recortar) de lo que cayó en el día tocado. */
+  function panelDiaAbierto(porDia, mesIso) {
+    if (!diaAbierto) return '';
+    const items = porDia[diaAbierto] || [];
+    const fechaTitulo = `${String(diaAbierto).padStart(2, '0')}/${mesIso.split('-')[1]}`;
+    return `<div class="dia-detalle">
+      <div class="dia-detalle-cabeza">
+        <strong>${fechaTitulo}</strong>
+        <button type="button" class="cerrar-dia" data-dia="${diaAbierto}" aria-label="Cerrar">✕</button>
+      </div>
+      ${items.length ? items.map((it) => `<div class="dia-item">
+        <span class="dia-item-tipo">${ICONO[it.tipo]} ${NOMBRE_TIPO[it.tipo]}</span>
+        <strong>${texto(it.titulo)}</strong>
+        ${it.detalle ? `<p>${texto(it.detalle)}</p>` : ''}
+      </div>`).join('') : '<p class="dia-detalle-vacio">Nada cargado para este día.</p>'}
+    </div>`;
+  }
+
+  /** De "DD/MM/AAAA" o "DD/MM/AAAA HH:MM", el día del mes si cae en anio/mesIdx (0-based). */
+  function diaDelMesDesde(fechaTexto, anio, mesIdx) {
+    if (!fechaTexto) return null;
+    const soloFecha = fechaTexto.split(' ')[0];
+    const partes = soloFecha.split('/');
+    if (partes.length !== 3) return null;
+    const [dd, mm, aaaa] = partes.map(Number);
+    if (Number(aaaa) !== anio || Number(mm) - 1 !== mesIdx) return null;
+    return dd;
+  }
+
+  // ── Clientes ──
+  function bloqueClientes() {
+    const err = avisoError('clientes', 'Clientes');
+    if (err) return `<section class="bloque">${err}</section>`;
+    if (!estado.clientes) return `<section class="bloque">${cargando()}</section>`;
+
+    const lista = estado.clientes.clientes || [];
+    if (!lista.length) return `<section class="bloque"><div class="vacio">No hay clientes activos cargados.</div></section>`;
+
+    return `<section class="bloque">
+      <div class="bloque-cabeza">
+        <h2 class="bloque-titulo">${lista.length} ${lista.length === 1 ? 'cliente' : 'clientes'}</h2>
+      </div>
+      <div class="tarjetas">
+        ${lista.map((c) => `<article class="tarjeta">
+          <div class="tarjeta-cabeza">
+            <div><h3>${texto(c.nombre)}</h3><p class="tarjeta-bajada">${texto(c.servicio || '')}</p></div>
+          </div>
+          <dl class="datos">
+            <div><dt>Paga</dt><dd>${texto(c.monto)}</dd></div>
+            <div><dt>Día de cobro</dt><dd>${c.dia_cobro ? `día ${c.dia_cobro}` : '—'}</dd></div>
+          </dl>
+          ${c.como_paga ? `<p class="tarjeta-bajada">${texto(c.como_paga)}</p>` : ''}
+        </article>`).join('')}
+      </div>
+    </section>`;
+  }
+
+  // ── Equipo ──
+  function bloqueEquipo() {
+    const err = avisoError('equipo', 'Equipo');
+    if (err) return `<section class="bloque">${err}</section>`;
+    if (!estado.equipo) return `<section class="bloque">${cargando()}</section>`;
+
+    const lista = estado.equipo.equipo || [];
+    if (!lista.length) return `<section class="bloque"><div class="vacio">No hay nadie cargado en el equipo.</div></section>`;
+
+    return `<section class="bloque">
+      <div class="bloque-cabeza"><h2 class="bloque-titulo">Tu equipo</h2></div>
+      <ul class="lista">
+        ${lista.map((p) => `<li class="fila">
+          <div class="fila-texto"><strong>${texto(p.nombre)}</strong><span>${texto(p.rol || '')}</span></div>
+          <div class="fila-fin">
+            <span class="fila-monto">${p.monto === 'sin monto' ? '—' : texto(p.monto)}</span>
+            ${p.dia_pago ? `<span class="chip neutro">día ${p.dia_pago}</span>` : ''}
+          </div>
+        </li>`).join('')}
+      </ul>
+    </section>`;
+  }
+
+  // ── Recordatorios pendientes ──
+  function bloqueRecordatorios() {
+    const err = avisoError('recordatorios', 'Recordatorios');
+    if (err) return `<section class="bloque">${err}</section>`;
+    if (!estado.recordatorios) return `<section class="bloque">${cargando()}</section>`;
+
+    const lista = (estado.recordatorios.recordatorios || []).filter((r) => r.estado === 'pendiente');
+    if (!lista.length) return `<section class="bloque"><div class="bloque-cabeza"><h2 class="bloque-titulo">Recordatorios</h2></div><div class="vacio">Nada pendiente.</div></section>`;
+
+    return `<section class="bloque">
+      <div class="bloque-cabeza"><h2 class="bloque-titulo">Recordatorios pendientes</h2></div>
+      <ul class="lista">
+        ${lista.map((r) => `<li class="fila">
+          <div class="fila-texto"><strong>${texto(r.texto)}</strong><span>${texto(r.cuando)}</span></div>
+        </li>`).join('')}
+      </ul>
+    </section>`;
+  }
+
+  function cargando() {
+    return `<div class="vacio">Cargando…</div>`;
+  }
+
+  function pantallaSinMcp() {
+    return `<div class="pantalla-centro"><div class="pantalla-centro-caja">
+      <span class="punto"></span>
+      <h1>No se pudo conectar</h1>
+      <p>Este mirador necesita abrirse desde tu link de Claude, con la conexión a Eureka permitida. Si lo abriste desde ahí, esperá unos segundos o recargá.</p>
+      <button class="btn" onclick="location.reload()">Reintentar</button>
+    </div></div>`;
+  }
+
+  // ── Clics: cambiar de mes, abrir/cerrar el detalle de un día ──
+  document.addEventListener('click', (ev) => {
+    const flecha = ev.target.closest('[data-mes]');
+    if (flecha) {
+      offsetMes += flecha.dataset.mes === 'atras' ? -1 : 1;
+      diaAbierto = null;
+      dibujar();
+      return;
+    }
+    const cerrar = ev.target.closest('.cerrar-dia');
+    if (cerrar) { diaAbierto = null; dibujar(); return; }
+
+    const celda = ev.target.closest('.cal-celda');
+    if (celda && celda.dataset.dia) {
+      const dia = Number(celda.dataset.dia);
+      diaAbierto = diaAbierto === dia ? null : dia;
+      dibujar();
+    }
+  });
+
+  dibujar();
+  iniciar();
+})();
+</script>

@@ -9,13 +9,18 @@ asistente de WhatsApp que ya tenía Lara (lo armó su hermano). Clientes,
 cobros, pagos al equipo, entregas y recordatorios se cargan ahí, hablando
 normal — no hay nada que mantener en este repositorio para eso.
 
-Lo único que vive afuera de Eureka es **El Mirador de Naimid**, un Artifact
-de Claude privado que lee esos mismos datos en vivo (vía la capacidad `mcp`,
+Lo único que vive afuera de Eureka es **El Mirador de Naimid**
+(`https://claude.ai/artifact/6cSYcasKNrH3eGHoaVxZuX`), un Artifact de Claude
+privado que lee esos mismos datos en vivo (vía la capacidad `mcp`,
 conectada al conector "Eureka") y los muestra visualmente: resumen del mes,
-un calendario con los días de cobro y entrega, la lista de clientes y del
-equipo. No guarda nada por su cuenta — es una ventana, no una base de datos
-aparte. Se publica y se actualiza con el tool `Artifact`, fuera de este
-repositorio de Astro (no hay build de Astro de por medio).
+un calendario con los días de cobro y entrega (navegable, con detalle
+completo al tocar un día), la lista de clientes y del equipo. No guarda
+nada por su cuenta — es una ventana, no una base de datos aparte.
+
+El código fuente vive en `mirador/mirador.html`, en este mismo
+repositorio, solo para tenerlo versionado — Astro no lo toca, no es una
+página del sitio. Para publicar un cambio: editar ese archivo y pasarlo al
+tool `Artifact` con la misma URL de arriba.
 
 ## Lo que quedó retirado
 
